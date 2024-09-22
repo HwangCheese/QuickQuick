@@ -1,3 +1,5 @@
+<br>
+
 ![soft](https://capsule-render.vercel.app/api?type=egg&height=197&color=gradient&text=Quick%20Quick&section=header&reversal=true)
 
 <br> 
@@ -26,7 +28,7 @@
 - **Database** : MySQL(8.0)
 - **Server**: express(4.19.2)
 - **Package Manager**: pub, npm(10.2.3)
-- **"Runtime Environment"**: `nodejs v20.15.1` `Dart v3.4.3`
+- **Runtime Environment**: `nodejs v20.15.1` `Dart v3.4.3`
 <br>
 
 ## 🔧 아키텍처
