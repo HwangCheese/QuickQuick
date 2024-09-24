@@ -1,0 +1,102 @@
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* 공통 버튼 스타일 */
+.floating-button {
+  width: 45px; /* 크기 조정 */
+  height: 45px; /* 크기 조정 */
+  border-radius: 50%; /* 원형 버튼 */
+  border: 2px solid black;
+  position: fixed;
+  bottom: 1px; /* 위치 조정 */
+  right: 1px; /* 위치 조정 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  overflow: hidden;
+  transition: width 0.3s ease, border-radius 0.3s ease;
+}
+
+/* 개별 버튼 스타일 */
+#main-floating-button {
+  border: none;
+  background: url('../media/quickquick-image.png') no-repeat;
+  background-size: 35px 27px; /* 크기 조정 */
+  background-position: center center;
+  background-color: transparent; /* 불투명 배경색 */
+  transition: opacity 0.3s ease; /* 부드러운 호버링 효과 */
+}
+
+/* 호버 상태 */
+#main-floating-button:hover {
+  opacity: 1; /* 호버 상태에서 불투명도를 1로 설정 (완전히 불투명) */
+}
+
+/* 개별 버튼 스타일 */
+#search-floating-button {
+  background: url('../media/magnifier.png') no-repeat;
+  background-size: 25px 25px; /* 크기 조정 */
+  background-position: center right 8px; /* 위치 조정 */
+  background-color: white;
+}
+
+/* 개별 버튼 스타일 */
+#home-floating-button {
+  background: url('../media/users.png') no-repeat;
+  background-size: 25px 25px; /* 크기 조정 */
+  background-position: center right 8px; /* 위치 조정 */
+  background-color: white;
+}
+
+/* 개별 버튼 스타일 */
+#calendar-floating-button {
+  background: url('../media/calendar.png') no-repeat;
+  background-size: 25px 25px; /* 크기 조정 */
+  background-position: center right 8px; /* 위치 조정 */
+  background-color: white;
+}
+
+/* 개별 버튼 스타일 */
+#write-floating-button {
+  background: url('../media/plus.png') no-repeat;
+  background-size: 25px 25px; /* 크기 조정 */
+  background-position: center right 8px; /* 위치 조정 */
+  background-color: white;
+}
+
+/* 호버 시 버튼 스타일 */
+#search-floating-button.hover {
+  width: 270px;
+  border-radius: 50px;
+}
+
+/* 호버 시 입력 필드 스타일 */
+#search-bar.expand {
+  width: 200px;
+  opacity: 1;
+}
+
+/* 클릭 시 버튼 스타일 */
+#search-floating-button.expand {
+  width: 270px;
+  border-radius: 50px;
+}
+
+/* 입력 필드 스타일 */
+#search-bar {
+  position: absolute;
+  width: 0;
+  height: 40px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  opacity: 0;
+  background-color: transparent;
+}

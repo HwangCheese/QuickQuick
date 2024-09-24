@@ -1,0 +1,83 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 170px;
+    margin: 10px auto;
+    background-color: #fff;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.memo-list {
+    max-height: 250px;
+    overflow-y: auto;
+    padding-left: 2px;
+}
+
+.memo-list::-webkit-scrollbar {
+    width: 3px;
+}
+
+.memo-list::-webkit-scrollbar-thumb {
+    background-color: #bbb;
+    border-radius: 10px;
+}
+
+@keyframes flashBackground {
+    0% {
+        background-color: #ffffff; /* 흰색 */
+    }
+    50% {
+        background-color: #007bff; /* 파란색 */
+    }
+    100% {
+        background-color: #ffffff; /* 다시 흰색 */
+    }
+}
+
+.memo-item {
+    width: 152px;
+    height: 15px;
+    padding: 10px;
+    margin-top: 2.5px;
+    margin-bottom: 2.5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    background-color: #f9f9f9; /* 기본 배경색 */
+}
+
+.unread-memo {
+    animation: flashBackground 2s infinite; /* 읽지 않은 메모에만 애니메이션 적용 */
+}
+
+.memo-item h2 {
+    margin: 0 0 5px;
+    font-size: 18px;
+    color: #007bff;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.memo-item p {
+    margin: 0;
+    font-size: 14px;
+    color: #555;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
