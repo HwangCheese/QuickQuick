@@ -497,7 +497,7 @@ async function startRecording() {
                 mediaRecorder.stop(); // 30초마다 변환을 위해 중지
                 mediaRecorder.start(); // 중지 후 다시 녹음 시작
             }
-        }, 10000); // 10초마다
+        }, 5000); // 10초마다
     } catch (err) {
         console.error('음성 녹음 중 오류 발생:', err);
     }
@@ -512,56 +512,56 @@ function stopRecording() {
 
 // Google Speech-to-Text로 오디오 파일 분석
 async function analyzeAudio(audioBlob) {
-    // const apiKey = 'AIzaSyBSV2SSGii3W13I4s7-Y5r-rHBZev1lt6Q';
-    // const url = `https://speech.googleapis.com/v1/speech:recognize?key=${apiKey}`;
+    const apiKey = 'AIzaSyBSV2SSGii3W13I4s7-Y5r-rHBZev1lt6Q';
+    const url = `https://speech.googleapis.com/v1/speech:recognize?key=${apiKey}`;
 
-    // try {
-    //     const reader = new FileReader();
-    //     reader.readAsArrayBuffer(audioBlob);
-    //     reader.onloadend = async function () {
-    //         const arrayBuffer = reader.result;
-    //         const base64Audio = btoa(
-    //             new Uint8Array(arrayBuffer).reduce(
-    //                 (data, byte) => data + String.fromCharCode(byte),
-    //                 ''
-    //             )
-    //         );
+    try {
+        const reader = new FileReader();
+        reader.readAsArrayBuffer(audioBlob);
+        reader.onloadend = async function () {
+            const arrayBuffer = reader.result;
+            const base64Audio = btoa(
+                new Uint8Array(arrayBuffer).reduce(
+                    (data, byte) => data + String.fromCharCode(byte),
+                    ''
+                )
+            );
 
-    //         const response = await fetch(url, {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //             },
-    //             body: JSON.stringify({
-    //                 config: {
-    //                     encoding: 'WEBM_OPUS',
-    //                     sampleRateHertz: 48000,
-    //                     languageCode: 'ko-KR',
-    //                 },
-    //                 audio: {
-    //                     content: base64Audio,
-    //                 },
-    //             }),
-    //         });
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    config: {
+                        encoding: 'WEBM_OPUS',
+                        sampleRateHertz: 48000,
+                        languageCode: 'ko-KR',
+                    },
+                    audio: {
+                        content: base64Audio,
+                    },
+                }),
+            });
 
-    //         const result = await response.json();
-    //         if (result.results && result.results.length > 0) {
-    //             const transcript = result.results[0].alternatives[0].transcript;
-    //             appendToTranscription(transcript);
+            const result = await response.json();
+            if (result.results && result.results.length > 0) {
+                const transcript = result.results[0].alternatives[0].transcript;
+                appendToTranscription(transcript);
 
-    //             socket.emit('transcription', {
-    //                 roomId: roomId,
-    //                 senderId: userId,
-    //                 senderName: username,
-    //                 transcript: transcript
-    //             });
-    //         } else {
-    //             console.log('텍스트 변환 실패');
-    //         }
-    //     };
-    // } catch (e) {
-    //     console.error('텍스트 변환 중 오류 발생:', e);
-    // }
+                socket.emit('transcription', {
+                    roomId: roomId,
+                    senderId: userId,
+                    senderName: username,
+                    transcript: transcript
+                });
+            } else {
+                console.log('텍스트 변환 실패');
+            }
+        };
+    } catch (e) {
+        console.error('텍스트 변환 중 오류 발생:', e);
+    }
 }
 
 // 탭 전환 로직
