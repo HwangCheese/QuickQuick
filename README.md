@@ -11,6 +11,7 @@
   
 - 파일 공유뿐 아니라 WebRTC를 통한 그룹 간 실시간 소통과, 상황에 맞춘 context-aware 기능으로 효율적인 정보 관리와 협업을 지원한다.
 
+<a href="https://github.com/HwangCheese/QuickQuick-mobile" style="text-decoration: none;">퀵퀵이 모바일</a>
 <br>
 
 ## 🧑‍🤝‍🧑 맴버구성
