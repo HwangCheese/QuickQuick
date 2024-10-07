@@ -8,7 +8,6 @@ const { v4: uuidv4 } = require('uuid');
 const multer = require('multer');
 // 암호화 관련 
 const crypto = require('crypto');
-const axios = require('axios');
 // 주기적으로 만료된 토큰 삭제
 const cron = require('node-cron');
 const cors = require('cors');
@@ -46,7 +45,7 @@ io.on('connection', (socket) => {
         const [userId, name, room] = user.split(';');
         const roomId = room;
     
-        console.log(`사용자 ${userId}(${name})가 방 ${roomId}에 참여했습니다.`);
+        //console.log(`사용자 ${userId}(${name})가 방 ${roomId}에 참여했습니다.`);
     
         // 사용자의 소켓 ID와 이름을 저장
         users[socket.id] = { userId, username: name };
