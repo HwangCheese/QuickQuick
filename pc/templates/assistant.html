@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메모 관리</title>
+    <link rel="stylesheet" href="../styles/assistantStyles.css">
+</head>
+
+<body>
+    <div class="title-button-container">
+        <button id="cancelButton">취소</button>
+        <span id="title">Quick Assistant</span>
+        <button id="confirmButton">확인</button>
+    </div>
+    <div id="loading-container">
+        <div id="loading"></div>
+    </div>
+    <div class="memo-container" id="memoContainer">
+        <!-- 메모 박스가 여기에 동적으로 추가됩니다. -->
+    </div>
+    <!-- 모달창 구조 -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="closeButton">&times;</span>
+            <p id="modalContent">모달 내용이 여기에 들어갑니다.</p>
+            <button id="modalConfirmButton">확인</button>
+        </div>
+    </div>
+    <script src="../renderer/assistant.js"></script>
+</body>
+
+</html>

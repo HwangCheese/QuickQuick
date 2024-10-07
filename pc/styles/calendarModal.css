@@ -1,0 +1,107 @@
+/* 모달 스타일 */
+.calendar-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* 모달 외부 어두워짐 효과 */
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    backdrop-filter: blur(5px); /* 배경 블러 효과 추가 */
+}
+
+/* 모달 콘텐츠 */
+.calendar-modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    height: 30%; /* 화면의 반만 차지하도록 설정 */
+    max-width: 600px; /* 최대 너비 */
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    transform: translate(-50%, -50%);
+    position: relative;
+    top: 50%;
+    left: 50%;
+    font-family: 'Helvetica', Arial, sans-serif;
+    -webkit-app-region: no-drag;
+}
+/* 닫기 버튼 */
+#calendar-modal-close-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: url('../media/close-icon.png') no-repeat center center;
+    background-size: 15px 15px;
+    width: 30px;
+    height: 30px;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.3s ease;
+}
+
+#calendar-modal-close-button:hover {
+    background-color: rgba(255, 0, 0, 0.7);
+}
+
+/* 질문 텍스트 스타일 */
+#question {
+    text-align: center;
+    font-size: 0.9rem;  /* 폰트 크기 줄임 */
+    font-weight: 700; /* 폰트 두께 조정 */
+    color: #333;
+    margin-bottom: 15px;
+    line-height: 1.4; /* 줄 간격 조정 */
+    font-family: 'Arial', sans-serif; /* 깔끔한 폰트 적용 */
+}
+
+/* 버튼 컨테이너 */
+.button-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+/* 예, 아니오 버튼 스타일 */
+#confirm-btn, #cancel-btn {
+    background-color: #8fccfb;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-size: 0.9rem; /* 버튼 글자 크기 조정 */
+    cursor: pointer;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#cancel-btn {
+    background-color: #999fa5;
+}
+
+#confirm-btn:hover, #cancel-btn:hover {
+    background-color: #54a6fd;
+    transform: translateY(-2px);
+}
+
+#cancel-btn:hover {
+    background-color: #7e8b94;
+}
+
+#confirm-btn:active, #cancel-btn:active {
+    transform: translateY(0);
+}
+
+/* 비활성화 버튼 */
+button:disabled {
+    cursor: not-allowed;
+    background-color: #dcdcdc;
+    color: #6c757d;
+}

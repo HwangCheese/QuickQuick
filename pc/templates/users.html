@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사용자 프로필</title>
+    <link rel="stylesheet" href="../styles/usersStyle.css">
+</head>
+<body>
+    <div class="profile-qr-container">
+        <!-- Close Button -->
+         <!-- 알림 창 -->
+        <div id="notificationArea"></div>
+        <button id="close-button" aria-label="닫기"></button>
+
+        <div class="profile-row">
+            <div class="avatar">
+                <img src="../media/avatar.png">
+            </div>
+            <span id="username"></span>
+            <button id="copy-button"></button>
+        </div>
+
+        <div class="qr-row">
+            <a href="#" id="qr-link">QR코드</a>로 모바일 퀵퀵이 앱에 로그인하기
+        </div>
+        <div id="qrCodeContainer" style="display: none;"></div>
+        <p id="timer" style="display: none;"></p>
+
+        <!-- 친구 목록 섹션 -->
+        <div class="friends-container">
+            <hr>
+
+            <div class="friends-header">
+                친구목록
+                <button id="toggle-friend-list">친구 목록 보기</button>
+                <button id="add-friend-button">친구추가</button>
+            </div>
+
+            <div id="friend-list-section" style="display: none;">
+                <input type="text" id="friend-search" placeholder="친구 검색">
+                <ul id="friends">
+                    <!-- 여기에 친구 목록을 동적으로 추가할 수 있음 -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 모달 팝업 구조 -->
+    <div id="friend-modal" style="display: none;">
+        <div class="friend-modal-content">
+            <button id="friend-modal-close-button" aria-label="모달 닫기"></button>
+            <h3>친구 추가</h3>
+            <input type="text" id="new-friend-name" placeholder="친구 이름 입력">
+            <div id="error-message" style="color: red; display: none; margin-top: 10px;"></div> <!-- 에러 메시지 영역 -->
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../renderer/config.js"></script>
+    <script src="../renderer/getFriendList.js"></script>
+    <script src="../renderer/users.js"></script>
+    <script src="../renderer/addFriendModal.js"></script>
+</body>
+
+</html>

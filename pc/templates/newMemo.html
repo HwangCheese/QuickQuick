@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electron Notepad</title>
+    <link rel="stylesheet" href="../styles/memoStyle.css"><!-- 외부 CSS 파일 추가 -->
+    <link rel="stylesheet" href="../styles/usersStyle.css">
+    <link rel="stylesheet" href="../styles/recordStyles.css">
+    <link rel="stylesheet" href="../styles/calendarModal.css">
+    <link rel="stylesheet" href="../styles/meetingModal.css">
+    <link rel="stylesheet" href="../styles/sendModal.css">
+    <link rel="stylesheet" href="../styles/urlSummaryModal.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
+        rel="stylesheet">
+    <script src="../renderer/config.js"></script>
+    <script src="../renderer/getFriendList.js"></script>
+    <script src="../renderer/transInMemo.js" defer></script>
+    <script src="../renderer/newMemoRenderer.js" defer></script>
+    <script src="../renderer/record.js" defer></script>
+    <script src="../renderer/calendarInMemo.js" defer></script>
+    <script src="../renderer/analysis.js" defer></script>
+    <script src="../renderer/meetingInMemo.js" defer></script>
+    <script src="../renderer/sendInMemo.js" defer></script>
+    <script src="../renderer/urlSummaryInMemo.js" defer></script>
+    <script src="../renderer/mapInMemo.js" defer></script>
+    <script src="../renderer/hoverbutton.js" defer></script>
+
+</head>
+
+<body>
+    <!--memo 테두리 디자인-->
+    <div class="drag-region left"></div>
+    <div class="drag-region right"></div>
+    <div class="drag-region bottom">
+    </div>
+    <div class="drag-region top">
+        <div class="transparent-part"> <!--상단 테두리의 오리 버튼들을 담는 컨테이너-->
+            <div class="button-container" style="display: flex; justify-content: space-around; align-items: center;">
+                <input id="send-button" class="hidden" type="image" src="../media/send-btn.png" alt="전송" width="70"
+                    height="60" draggable="false"
+                    style="user-select: none; -webkit-app-region: no-drag; pointer-events: auto;">
+                <input id="recorder-button" class="hidden" type="image" src="../media/mic-btn.png" alt="녹음" width="70"
+                    height="60" draggable="false"
+                    style="user-select: none; -webkit-app-region: no-drag; pointer-events: auto;">
+                <input id="call-button" class="hidden" type="image" src="../media/cam-btn.png" alt="통신" width="70"
+                    height="60" draggable="false"
+                    style="user-select: none; -webkit-app-region: no-drag; pointer-events: auto;">
+                <input id="delete-button" class="hidden" type="image" src="../media/delete-btn.png" alt="삭제" width="70"
+                    height="60" draggable="false"
+                    style="user-select: none; -webkit-app-region: no-drag; pointer-events: auto;">
+            </div>
+        </div>
+        <!-- 물결 모양을 투명 부분과 노란 부분 사이에 배치 -->
+        <div class="wave-container" style="position: relative; height: 20px; overflow: hidden;">
+            <svg id="wave-effect" class="hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"
+                preserveAspectRatio="none" style="width: 100%; height: 100%;">
+                <path
+                    d="M0,20 L120,20 L120,10 C110,20 100,0 90,10 C80,20 70,0 60,10 C50,20 40,0 30,10 C20,20 10,0 0,10 Z"
+                    fill="#ADDCFF" stroke="#ADDCFF" stroke-width="15" />
+            </svg>
+        </div>
+        <div class="yellow-part">
+            <!--<img src="../media/quickquick-image.png" alt="Top Image">-->
+        </div>
+    </div>
+
+    <!--메모 내의 구조 관련-->
+    <div id="container">
+        <div id="image-drop-zone">
+            <p>여기에 이미지들을 놓으세요...</p>
+        </div>
+        <div id="file-drop-zone">
+            <p>여기에 파일들을 놓으세요...</p>
+        </div>
+        <textarea id="editor" spellcheck="false" placeholder="메모를 입력하세요..." oninput="checkText()" onmouseup="checkText()"
+            onkeyup="checkText()"></textarea>
+        <div id="map-url-zone"></div>
+        <div id="result"></div>
+        <div id="buttons" style="display: flex; gap: 10px;"><!--container내의 연잎 버튼들-->
+            <input id="summary-button" class="hidden" type="image" src="../media/summarize-btn.png" alt="요약" width="60"
+                height="30" draggable="false" style="user-select: none;">
+            <input id="translate-button" class="hidden" type="image" src="../media/translate-btn.png" alt="번역"
+                width="60" height="30" draggable="false" style="user-select: none;">
+            <input id="analysis-button" class="hidden" type="image" src="../media/separate-btn.png" alt="분류" width="60" height="30"
+                draggable="false" style="user-select: none;">
+        </div>
+    </div>
+
+    <div class="background-div-left"></div>
+    <div class="background-div"></div>
+    <div class="background-div-right"></div>
+    <div class="background-div-left-right-bottom"></div>
+
+    <!--메모 상단의 메뉴 버튼-->
+    <div class="menu" id="menu">
+        <button id="add-btn"><img src="../media/add-icon.png" alt="Add"></button>
+        <button id="arrow-btn"><img src="../media/open-arrow-icon.png" alt="Menu"></button>
+        <button id="close-btn"><img src="../media/close-icon.png" alt="Close"></button>
+    </div>
+
+    <!--드롭 존의 컨텐츠 요소 컨테이너 내에 포함되는 다운로드 버튼 템플릿 구조-->
+    <template id="download-button-template">
+        <button class="download-btn">
+            <img src="../media/download-icon.png" alt="Download">
+        </button>
+    </template>
+
+    <!-- 모달 창 HTML 구조 -->
+    <div id="media-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="media-viewer"></div>
+        </div>
+    </div>
+
+    <!-- 친구 목록 모달창 구조 -->
+    <div id="friend-modal" style="display: none;">
+        <div class="friend-modal-content">
+            <button id="friend-modal-close-button" aria-label="모달 닫기"></button>
+            <div id="friend-list-section" style="display: none;">
+                <input type="text" id="friend-search" placeholder="친구 검색">
+                <ul id="friends">
+                    <!-- 여기에 친구 목록을 동적으로 추가할 수 있음 -->
+                </ul>
+            </div>
+            <button id="send-friends-button">전송</button>
+        </div>
+    </div>
+
+    <!-- 초대 목록 모달창 구조 -->
+    <div id="invite-modal" style="display: none;">
+        <div class="invite-modal-content">
+            <button id="invite-modal-close-button" aria-label="모달 닫기"></button>
+            <div id="invite-list-section" style="display: none;">
+                <input type="text" id="friend-search" placeholder="친구 검색">
+                <ul id="invites">
+                </ul>
+            </div>
+            <button id="invite-friends-button">초대</button>
+        </div>
+    </div>
+
+    <!--녹음 및 텍스트 모달 -->
+    <div id="recorder-modal" class="modal">
+        <div class="recorder-modal-content">
+            <button id="recorder-modal-close-button" aria-label="모달 닫기"></button>
+            <div class="button-container">
+                <button id="record-btn"></button>
+            </div>
+            <audio class="audio-player" controls></audio>
+            <div id="loading">분석 중...</div>
+            <div id="transcriptionContainer">
+                <textarea id="transcription" placeholder="결과를 수정하세요"></textarea>
+            </div>
+            <div class="action-buttons">
+                <button id="download-btn">다운로드</button>
+                <button id="export-btn">확인</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 로딩 화면 -->
+    <div id="loading-screen" style="display: none;">
+        <div class="loader"></div>
+        <p class="loading-text">Loading...</p>
+    </div>
+    <style>
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .loader {
+            border: 8px solid rgba(243, 243, 243, 0.7);
+            border-radius: 50%;
+            border-top: 8px solid #3498db;
+            width: 80px;
+            height: 80px;
+            animation: spin 1.5s ease-in-out infinite;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .loading-text {
+            margin-top: 20px;
+            font-family: 'Arial', sans-serif;
+            font-size: 18px;
+            color: #333;
+            font-weight: 400;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+
+    <!-- 캘린더 모달 -->
+    <div id="calendar-modal" class="modal">
+        <div class="calendar-modal-content">
+            <button id="calendar-modal-close-button" aria-label="모달 닫기"></button>
+
+            <!-- 질문 텍스트 -->
+            <p id="question">캘린더에 일정을 넣으시겠습니까?</p>
+
+            <!-- 예/아니오 버튼 -->
+            <div class="button-container">
+                <button id="confirm-btn">예</button>
+                <button id="cancel-btn">아니오</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 화상회의 모달 -->
+    <div id="meeting-modal" class="modal">
+        <div class="meeting-modal-content">
+            <button id="meeting-modal-close-button" aria-label="모달 닫기"></button>
+
+            <!-- 질문 텍스트 -->
+            <p id="meeting-question">화상회의를 시작하시겠습니까?</p>
+
+            <!-- 예/아니오 버튼 -->
+            <div class="button-container">
+                <button id="meeting-confirm-btn">예</button>
+                <button id="meeting-cancel-btn">아니오</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 전송 모달 -->
+    <div id="send-modal" class="modal">
+        <div class="send-modal-content">
+            <button id="send-modal-close-button" aria-label="모달 닫기"></button>
+
+            <!-- 질문 텍스트 -->
+            <p id="send-question">전송 하시겠습니까?</p>
+
+            <!-- 예/아니오 버튼 -->
+            <div class="button-container">
+                <button id="send-confirm-btn">예</button>
+                <button id="send-cancel-btn">아니오</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- url 요약 모달 -->
+    <div id="url-summary-modal" class="modal">
+        <div class="url-summary-modal-content">
+            <button id="url-summary-modal-close-button" aria-label="모달 닫기"></button>
+
+            <!-- 질문 텍스트 -->
+            <p id="question">url을 요약하시겠습니까?</p>
+
+            <!-- 예/아니오 버튼 -->
+            <div class="button-container">
+                <button id="confirm-url-summary-btn">예</button>
+                <button id="cancel-url-summary-btn">아니오</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,369 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    /*background-color: #f5f5f5;*/
+    background-color: #ADDCFF;
+    -webkit-app-region: drag;
+}
+
+/* 상단의 제목과 확인, 취소 버튼 */
+.title-button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    /* 컨테이너가 전체 너비를 차지하게 */
+    margin-bottom: 15px;
+}
+
+/* 상단 중앙의 Quick Assistant 글자*/
+#title {
+    font-style: italic;
+    font-size: 23px;
+    color: #ffffff;
+    text-shadow: 2px 2px #26a1fe;
+}
+
+/* 상단의 취소, 확인 버튼*/
+#cancelButton,
+#confirmButton {
+    background-color: #6fbcf7;
+    /* 버튼 배경색 */
+    color: #fff;
+    /* 버튼 텍스트 색상 */
+    border: none;
+    border-radius: 50px;
+    /* 타원형으로 만들기 */
+    padding: 5px 9px;
+    /* 버튼 내 여백 */
+    font-size: 12px;
+    /* 텍스트 크기 */
+    cursor: pointer;
+    /* 커서 모양 */
+    transition: background-color 0.3s ease;
+    /* 배경색 변화 애니메이션 */
+
+    -webkit-app-region: no-drag;
+}
+
+#confirmButton:hover,
+#cancelButton:hover {
+    background-color: #26a1fe;
+    /* 마우스 호버 시 색상 변경 */
+}
+
+/* 분류한 메모들을 나열할 컨테이너 */
+.memo-container {
+    display: flex;
+    flex-wrap: wrap;
+    /* 여러 줄로 배치 */
+    gap: 20px;
+    overflow: auto;
+}
+
+/*메모*/
+.memo {
+    background: #fff;
+    border: 1px solid #26a1fe;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    width: 200px;
+    /* 정사각형 모양 유지 */
+    height: 200px;
+    /* 정사각형 모양 유지 */
+    display: flex;
+    flex-direction: column;
+    -webkit-app-region: no-drag;
+}
+
+/* 메모 삭제 버튼*/
+#delete-memo-btn {
+    background: url('../media/close-icon.png') no-repeat center center;
+    background-size: 15px 18px;
+    border: none;
+
+    width: 12px;
+    height: 10px;
+    position: absolute;
+    top: 12px;
+    right: 10px;
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+#delete-memo-btn:hover {
+    opacity: 1;
+}
+
+/* 메모의 제목 */
+.memo-title {
+    height: 15%;
+    width: 90%;
+
+    border: none;
+    font-weight: bold;
+    font-size: medium;
+    background: #fff;
+    resize: none;
+    overflow: auto;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+/* 메모 안의 내용(텍스트) */
+.memo-content {
+    border: none;
+    background: #fff;
+    resize: none;
+    font-size: small;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    overflow: auto;
+    font-family: Arial, sans-serif;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+/* textarea(메모 제목, 메모 내용) 포커스 시 스타일 */
+textarea:focus {
+    border-color: #2b2d2f;
+    /* 포커스 시 테두리 색상 변경 */
+    outline: none;
+    /* 기본 포커스 아웃라인 제거 */
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+    /* 포커스 시 그림자 추가 */
+}
+
+/* 첨부 파일 리스트 */
+.file-list {
+    max-height: 30%;
+    font-size: small;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 첨부 파일 */
+.file-list-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* 첨부 파일 링크 */
+.file-list a {
+    color: #1a73e8;
+    text-decoration: none;
+}
+
+.file-list a:hover {
+    text-decoration: underline;
+}
+
+/* 미리보기가 불가능한 파일의 링크 스타일 */
+.file-list-item a.non-previewable:hover {
+    text-decoration: none;
+    /* 밑줄 제거 */
+}
+
+/* 파일 삭제 버튼 스타일 */
+#delete-file-btn {
+    background: url('./media/delete.png') no-repeat center center;
+    background-size: 12px 12px;
+    /* 버튼 크기 조정 */
+    margin-top: 3px;
+    border: none;
+    width: 10px;
+    height: 15px;
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+#delete-file-btn:hover {
+    opacity: 1;
+    /* 마우스 오버 시 투명도 변경 */
+}
+
+/* 파일 다운로드 버튼 스타일 */
+#download-btn {
+    background: url('./media/download-icon.png') no-repeat center center;
+    background-size: 15px 15px;
+    /* 버튼 크기 조정 */
+    margin-top: 3px;
+    border: none;
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+#download-btn:hover {
+    opacity: 1;
+    /* 마우스 오버 시 투명도 변경 */
+}
+
+/* 추가 메모 버튼 칸 스타일 */
+.add-memo-box {
+    display: flex;
+    font-size: 25px;
+    color: #26a1fe;
+    justify-content: center;
+    align-items: center;
+    border: 1.5px dashed #26a1fe;
+    border-radius: 8px;
+    width: 198px;
+    height: 198px;
+    cursor: pointer;
+    background-color: #ffffff00;
+}
+
+.add-memo-box:hover {
+    background-color: #ffffff;
+}
+
+
+/* 스크롤바 스타일 */
+
+/* 프레임 전체에 적용되는 스크롤바 스타일 */
+::-webkit-scrollbar {
+    width: 5px;
+    /* 스크롤바의 너비 설정 */
+}
+::-webkit-scrollbar-track {
+    background: #e6eef5;
+    /* 스크롤바 배경 색상 */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #a2a2a2;
+    /* 스크롤바의 색상 */
+    border-radius: 4px;
+    /* 스크롤바 모서리 둥글게 하기 */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    /* 스크롤바 위에 마우스 올리면 색상 변경 */
+}
+
+/* 메모 박스 내에서 적용되는 스크롤바 스타일*/
+.memo-container ::-webkit-scrollbar {
+    width: 2px;
+    /* 스크롤바의 너비 설정 */
+}
+.memo-container ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    /* 스크롤바 배경 색상 */
+}
+
+
+/* 모달창 스타일 */
+.modal {
+    display: none;
+    /* 기본적으로 숨기기 */
+    position: fixed;
+    /* 화면 전체에 고정 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* 어두운 반투명 배경 */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    /* 가장 위에 위치 */
+}
+
+.modal-content {
+    background-color: #fff;
+    /* 모달 창 배경색 */
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    /* 모달 창 너비 */
+    text-align: center;
+    position: relative;
+    /* 닫기 버튼 위치 조정 */
+}
+
+/* 모달 닫기 버튼*/
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+}
+
+/* 모달 내 취소, 확인 버튼*/
+#modalCancleButton,
+#modalConfirmButton {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 35px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 0 10px;
+    /* 버튼 간의 간격을 조정 */
+}
+
+#modalCancleButton {
+    background-color: #fff;
+    color: #007BFF;
+    border: 1.5px solid #007BFF;
+}
+
+#modalConfirmButton {
+    background-color: #007BFF;
+    color: #fff;
+}
+
+#modalCancleButton:hover {
+    background-color: #c9c9c9;
+}
+
+#modalConfirmButton:hover {
+    background-color: #0056b3;
+}
+
+/* 로딩 화면 */
+#loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+}
+
+#loading {
+    width: 40px;
+    height: 40px;
+    border: 6px solid rgba(0, 123, 255, 0.2);
+    border-radius: 50%;
+    border-top: 6px solid #1a73e8;
+    animation: spin 1s linear infinite;
+    margin-bottom: 10px;
+    /* 텍스트와 스피너 사이의 간격 */
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

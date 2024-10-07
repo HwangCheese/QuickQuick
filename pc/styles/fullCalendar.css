@@ -1,0 +1,75 @@
+/* 기본 스타일 */
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* 드래그 가능한 영역 */
+#title-bar-for-drag {
+    -webkit-app-region: drag;
+    /* 드래그 가능한 영역 설정 */
+    height: 50px;
+    /* 적절한 높이 설정 */
+    background-color: white;
+    /* 배경색 설정 */
+    color: gray;
+    /* 텍스트 색상 설정 */
+    font-size: 30px;
+    /* 텍스트 크기 설정 */
+    font-weight: bold;
+    /* 텍스트를 볼드체로 설정 */
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    cursor: grab;
+    /* 드래그 커서 */
+}
+
+#title-bar-for-drag:hover {
+    cursor: grabbing;
+    /* 드래그 중 커서 */
+}
+
+/* 닫기 버튼 스타일 */
+#close-btn {
+    -webkit-app-region: no-drag;
+    /* 버튼이 드래그 영역에 영향을 주지 않도록 설정 */
+    background: white;
+    color: gray;
+    font-size: 24px;
+    /* 텍스트 크기 설정 */
+    font-weight: bold;
+    /* 텍스트를 볼드체로 설정 */
+    border: none;
+    border-radius: 5px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: absolute;
+    right: 0px;
+    /* 버튼을 오른쪽으로 배치 */
+}
+
+/* 닫기 버튼 호버 스타일 */
+#close-btn:hover {
+    color: darkred;
+}
+
+/* 월(Month) 제목 패딩 조정 */
+.fc-header-toolbar {
+    padding-left: 20px;
+    /* 원하는 패딩 값으로 조정 */
+}
+
+/* 토요일 스타일 (파란색) */
+.fc-day-sat {
+    color: #3c6ffa !important;
+}
+
+/* 일요일 스타일 (빨간색) */
+.fc-day-sun {
+    color: #ed2a61 !important;
+}
