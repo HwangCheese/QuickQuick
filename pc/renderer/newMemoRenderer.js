@@ -327,6 +327,8 @@ container.addEventListener('drop', (event) => { // container 영역에 드롭했
 
             const fileReaders = []; // FileReader를 저장할 배열
 
+            const startTime = performance.now(); // 시작 시간 기록
+
             //for (const file of otherFiles) {// 기타 파일 목록 순회
             for (const file of getOtherFilesArr) {// 새로 드롭된 파일 목록 순회 ///////////////
                 otherFiles.push(file); // otherFiles 배열에 추가  //////////////////
@@ -343,6 +345,10 @@ container.addEventListener('drop', (event) => { // container 영역에 드롭했
 
             Promise.all(fileReaders).then((loadedFiles) => { // 모든 파일이 로드되면 처리
                 loadingScreen.style.display = 'none'; // 파일 불러오기 후 로딩 화면 제거
+
+                const endTime = performance.now(); // 끝 시간 기록
+                const uploadTime = endTime - startTime; // 업로드 시간 계산
+                console.log(`파일 업로드 시간: ${uploadTime.toFixed(2)} ms`); // 업로드 시간 출력
                 
                 loadedFiles.forEach(({ result, file }) => {
                     const fileContainer = document.createElement('div'); // 파일 정보를 담을 div 요소를 생성

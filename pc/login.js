@@ -1,6 +1,7 @@
 const { ipcMain } = require('electron');
 const crypto = require('crypto');
 const config = require('./config.js'); // Ensure this path is correct
+const { machineIdSync } = require('node-machine-id');
 let userId = '';
 let userName = '';
 
@@ -9,7 +10,7 @@ async function importFetch() {
     return (await import('node-fetch')).default;
 }
 
-const { machineIdSync } = require('node-machine-id');
+
 function generateUniqueId() {
     const id = machineIdSync({ original: true }); // 고유한 머신 ID를 얻음
     return id;

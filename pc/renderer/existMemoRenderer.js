@@ -64,6 +64,7 @@ let memo_ID;
 
 //파일 경로를 통해 파일 객체를 생성하는 메서드
 async function createFileObject(filePath) {
+    const startTime = performance.now(); // 시작 시간 기록
     try {
         loadingScreen.style.display = 'flex'; // 로딩 화면 표시
         const fileData = await window.electron.getFileObjByPath(filePath);
@@ -86,6 +87,9 @@ async function createFileObject(filePath) {
     }
     finally {
         loadingScreen.style.display = 'none'; // 파일 불러오기 후 로딩 화면 제거
+        const endTime = performance.now(); // 끝 시간 기록
+        const uploadTime = endTime - startTime; // 업로드 시간 계산
+        console.log(`파일 업로드 시간: ${uploadTime.toFixed(2)} ms`); // 업로드 시간 출력
     }
 }
 
@@ -619,7 +623,6 @@ container.addEventListener('drop', (event) => { // container 영역에 드롭했
 function openHiddenMenu() {
     if (!isMemoMenuBtnClicked) {
         waveEffect.style.display="block"; //프레임 웨이브 표시
-
         deleteBtn.style.display = "block"; //삭제 버튼 표시
         recorderBtn.style.display = "block"; //녹음 버튼 표시
         inviteBtn.style.display = 'block'; // 초대 버튼 표시
@@ -941,6 +944,7 @@ document.getElementById('invite-friends-button').addEventListener('click', async
 
 // 삭제 버튼 클릭 시 이벤트 핸들러
 document.getElementById('delete-button').addEventListener('click', async () => {
+    deleteAllTempFiles();
     window.electron.closeMemoWindow();
 });
 

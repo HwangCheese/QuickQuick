@@ -21,7 +21,7 @@ let socket;
 
 //어플리케이션이 준비되면
 app.whenReady().then(async() => {
-    app.setLoginItemSettings({ openAtLogin: true });
+    //app.setLoginItemSettings({ openAtLogin: true });
     userId = await generateId(); // 앱 시작 시 사용자 ID 생성
     console.log('userId: ' + userId);
     createMainfloatingWindow(); // main 플로팅 버튼 생성.

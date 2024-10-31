@@ -77,7 +77,12 @@ ipcMain.handle('run-file', async (_, tempFilePath)=>{
 // 다운로드 받는 파일의 경로는 C:/Users/사용자명/Appdata/Local/Temp/'파일이름'  에 있습니다.
 // 결과적으로 이 함수는 위의 경로를 return 해줍니다. renderer는 이 경로를 통해서 파일을 열어서 사용하면 됩니다.
 ipcMain.handle('fetch-file-for-data', async (_, dataId, filename) => {
+
+    console.time('fileDownload'); // 성능 측정 시작
+
     const fileExtension = path.extname(filename);  // filename에서 확장자 추출
+
+    console.log(`${config.SERVER_URL}/data/${dataId}/file`);
 
     if (filename.includes('&tQ9')) {
         // filename에 '&tQ9'가 있으면, 그 이전의 파일명만 사용
@@ -110,6 +115,7 @@ ipcMain.handle('fetch-file-for-data', async (_, dataId, filename) => {
         const arrayBuffer = await response.arrayBuffer();
         // 비동기 방식으로 파일 저장
         await fs.writeFile(tempFilePath, Buffer.from(arrayBuffer));
+        console.timeEnd('fileDownload'); // 성능 측정 종료
         // 저장 후 파일 경로 반환
         return tempFilePath;
     } catch (error) {

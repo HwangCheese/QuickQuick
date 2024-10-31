@@ -306,6 +306,7 @@ async function matchFilesToMemo(classifiedMemo, files) {
 }
 
 async function analyzeFileWithGPT(fileText, classifiedMemo) {
+    console.time('analyzeFile');
     abortController = new AbortController();
 
    // 파일 텍스트의 길이를 제한
@@ -401,6 +402,7 @@ const createAssistantWindow = (memoId) => {
 };
 
 ipcMain.handle('analysis-memo', async (event, memo, files, memoID) => {
+    console.time('analyzeFile');
     console.log('Received IPC message for analysis-memo');
     try {
         if (createAssistantWindow(memoID)) {
@@ -412,6 +414,9 @@ ipcMain.handle('analysis-memo', async (event, memo, files, memoID) => {
     }
     catch (error) {
         console.error('Error in analysis-memo handler:', error);
+    }
+    finally {
+        console.timeEnd('analyzeFile');
     }
 });
 

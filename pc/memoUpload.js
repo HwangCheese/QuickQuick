@@ -11,6 +11,7 @@ async function importFetch() {
 
 // 메모를 서버에 저장하는 함수
 async function insertMemoWithData(data) {
+    console.time('saveMemoToServer'); // 성능 측정 시작
     try {
         const { posX, posY, width, height, dataTxt, filesToUpload, title, user_Id, memo_id } = data;
         const fetch = await importFetch();
@@ -83,6 +84,8 @@ async function insertMemoWithData(data) {
 
     } catch (error) {
         console.error('Error inserting data:', error.message);
+    }finally{
+        console.timeEnd('saveMemoToServer'); // 성능 측정 종료
     }
 }
 
