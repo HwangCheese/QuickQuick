@@ -512,7 +512,7 @@ function stopRecording() {
 
 // Google Speech-to-Text로 오디오 파일 분석
 async function analyzeAudio(audioBlob) {
-    const apiKey = 'AIzaSyBSV2SSGii3W13I4s7-Y5r-rHBZev1lt6Q';
+    const apiKey = 'AIzaSyBNgGFJtwilxa44_RZVFKyM9L09Jcgy7xQ';
     const url = `https://speech.googleapis.com/v1/speech:recognize?key=${apiKey}`;
 
     try {

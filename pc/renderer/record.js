@@ -90,7 +90,7 @@ recordBtn.addEventListener('click', async () => {
 
 // 음성 파일 분석 함수
 async function analyzeAudio() {
-    const apiKey = 'AIzaSyBSV2SSGii3W13I4s7-Y5r-rHBZev1lt6Q';
+    const apiKey = GOOGLE_API;
     const url = `https://speech.googleapis.com/v1/speech:recognize?key=${apiKey}`;
 
     loadingEl.style.display = 'block'; // 로딩 화면 표시

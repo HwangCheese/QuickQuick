@@ -1,0 +1,8 @@
+server/node_modules/
+server/Users/
+
+pc/node_modules
+pc/.env
+pc/kor.traineddata
+pc/config.js
+pc/renderer/config.js
