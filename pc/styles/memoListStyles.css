@@ -1,102 +1,108 @@
-/* 기본 스타일 */
+/* 전체 페이지 스타일 */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background: transparent; 
+    display: flex;
+    align-items: flex-start; /* 컨텐츠가 상단에 위치하게 조정 */
+    justify-content: center;
+    padding-top: 20px; /* 컨텐츠 상단 여백 추가 */
+    height: 100vh;
 }
 
-/* 컨테이너 */
+/* 메모리스트 컨테이너 스타일 */
 .container {
-    width: 170px;
-    margin: 10px auto;
-    background-color: #fff;
-    padding: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    width: 700px; /* 너비를 넓게 변경 */
+    padding: 20px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    overflow: hidden;
+    background-color: #ffffff;
+    backdrop-filter: blur(8px);
 }
 
-/* 제목 스타일 */
-h1 {
-    text-align: center;
-    color: #333;
-}
-
-/* 메모 리스트 스타일 */
+/* 메모 리스트 섹션 */
 .memo-list {
-    max-height: 250px;
+    max-height: 450px; /* 높이 늘림 */
     overflow-y: auto;
-    padding-left: 2px;
-    /* 스크롤 숨김 후 애니메이션 적용 */
-    scrollbar-width: none; /* Firefox용 */
-    -ms-overflow-style: none; /* IE 및 Edge용 */
-}
-.memo-list::-webkit-scrollbar {
-    width: 0px;
-}
-
-/* 스크롤바 마우스 오버 시 나타나는 효과 */
-.memo-list:hover::-webkit-scrollbar {
-    width: 3px;
-}
-.memo-list::-webkit-scrollbar-thumb {
-    background-color: #bbb;
-    border-radius: 10px;
-    transition: background-color 0.3s ease-in-out;
-}
-.memo-list::-webkit-scrollbar-thumb:hover {
-    background-color: #007bff; /* 파란색으로 강조 */
-}
-
-/* 메모 항목 스타일 */
-.memo-item {
-    width: 152px;
-    height: 15px;
+    scrollbar-width: thin;
+    scrollbar-color: #007bff #f0f4ff;
     padding: 10px;
-    margin-top: 2.5px;
-    margin-bottom: 2.5px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+/* 스크롤바 스타일 */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #0056b3, #003e8a);
+}
+
+/* 메모 아이템 카드 스타일 */
+.memo-item {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    margin: 10px 0;
+    background: linear-gradient(135deg, #e3f2fd, #efc698);
+    border: 1px solid #dce7f5;
+    border-radius: 24px;
+    box-shadow: 0 6px 12px rgba(0, 123, 255, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    background-color: #f9f9f9;
 }
 
-/* 읽지 않은 메모 강조 */
-.unread-memo {
-    animation: flashBackground 2s infinite;
+.memo-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 20px rgba(0, 123, 255, 0.2);
 }
 
-/* 메모 제목 */
+/* 메모 제목과 본문 */
 .memo-item h2 {
     margin: 0 0 5px;
-    font-size: 18px;
-    color: #007bff;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
     overflow: hidden;
-    white-space: nowrap;
     text-overflow: ellipsis;
 }
 
-/* 메모 본문 */
 .memo-item p {
     margin: 0;
     font-size: 14px;
-    color: #555;
+    color: #666;
     overflow: hidden;
-    white-space: nowrap;
     text-overflow: ellipsis;
 }
 
-/* 배경 깜빡이는 애니메이션 */
+/* 읽지 않은 메모 강조 효과 */
+.unread-memo {
+    border: 1px solid #007bff;
+    background: linear-gradient(135deg, #bbdefb, #e3f2fd);
+    animation: flashBackground 2s infinite;
+}
+
 @keyframes flashBackground {
-    0% {
-        background-color: #ffffff;
+    0%, 100% {
+        background-color: #e3f2fd;
     }
     50% {
-        background-color: #007bff;
-    }
-    100% {
-        background-color: #ffffff;
+        background-color: #bbdefb;
     }
 }
