@@ -36,7 +36,7 @@ body {
     /* 타원형으로 만들기 */
     padding: 5px 9px;
     /* 버튼 내 여백 */
-    font-size: 12px;
+    font-size: 17px;
     /* 텍스트 크기 */
     cursor: pointer;
     /* 커서 모양 */
@@ -69,9 +69,9 @@ body {
     padding: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: relative;
-    width: 200px;
+    width: 300px;
     /* 정사각형 모양 유지 */
-    height: 200px;
+    height: 300px;
     /* 정사각형 모양 유지 */
     display: flex;
     flex-direction: column;
@@ -104,7 +104,7 @@ body {
 
     border: none;
     font-weight: bold;
-    font-size: medium;
+    font-size: 22px;
     background: #fff;
     resize: none;
     overflow: auto;
@@ -117,7 +117,7 @@ body {
     border: none;
     background: #fff;
     resize: none;
-    font-size: small;
+    font-size: 18px;
     width: 100%;
     height: 100%;
     box-sizing: border-box;
@@ -140,7 +140,7 @@ textarea:focus {
 /* 첨부 파일 리스트 */
 .file-list {
     max-height: 30%;
-    font-size: small;
+    font-size: 18px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
@@ -150,6 +150,7 @@ textarea:focus {
 .file-list-item {
     display: flex;
     align-items: center;
+    font-size: 20px;
     gap: 5px;
 }
 
@@ -214,8 +215,8 @@ textarea:focus {
     align-items: center;
     border: 1.5px dashed #26a1fe;
     border-radius: 8px;
-    width: 198px;
-    height: 198px;
+    width: 298px;
+    height: 298px;
     cursor: pointer;
     background-color: #ffffff00;
 }
