@@ -56,5 +56,5 @@
 <br>
 
 [은비]://okkkkkkkay
-[여린]:
+[여린]: //gooooooooooo
 [단비]: //ok
