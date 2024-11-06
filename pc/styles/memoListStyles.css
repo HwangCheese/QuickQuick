@@ -38,18 +38,18 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
+    background: #fcf5f1;
     border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: linear-gradient(135deg, #007bff, #0056b3);
+    background: #ebae6a;
     border-radius: 10px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    border: 2px solid #ffeae1;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(135deg, #0056b3, #003e8a);
+    background: #ebae6a;
 }
 
 /* 메모 아이템 카드 스타일 */
