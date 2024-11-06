@@ -92,45 +92,6 @@ function createFloatingWindow(fileName, xOffset, yOffset) {
   return newFloatingWindow;
 }
 
-// 플로팅 메뉴 생성 및 열기
-function showFloatingWindow(location, direction) {
-  newMemoFloatingWindow = createFloatingWindow('templates/writeFbtn.html', 0, location * spacing);
-
-  if (direction == 1) {
-    searchFloatingWindow = createFloatingWindow('templates/searchFbtn.html', -211, location * spacing * 2);
-    searchFloatingWindow.webContents.on('did-finish-load', () => {
-      searchFloatingWindow.webContents.send('expand-floating-window', 'left');
-    });
-  } else {
-    searchFloatingWindow = createFloatingWindow('templates/searchFbtn.html', 13, location * spacing * 2);
-    searchFloatingWindow.webContents.on('did-finish-load', () => {
-      searchFloatingWindow.webContents.send('expand-floating-window', 'right');
-    });
-  }
-  searchFloatingWindow.setBounds({ width: 270, height: 60 });
-
-  homeFloatingWindow = createFloatingWindow('templates/homeFbtn.html', 0, location * spacing * 3);
-  calendarFloatingWindow = createFloatingWindow('templates/calendarFbtn.html', 0, location * spacing * 4);
-}
-
-// 플로팅 버튼이 위, 아래 중에 어디에 위치하는지 계산
-function getHorizontalPosition() {
-  const workAreaHeight = screen.getAllDisplays()[0].workAreaSize.height;
-  const screenHalfY = workAreaHeight / 2;
-  const { y } = mainFloatingWindow.getBounds();
-  return y < screenHalfY ? -1 : 1;
-  // mainfloating이 위에 있으면 -1, 아래에 있으면 1 return
-}
-
-// 플로팅 버튼이 좌우 중에 어디에 위치하는지 계산
-function getVerticalPosition() {
-  const workAreaWidth = screen.getAllDisplays()[0].workAreaSize.width;
-  const screenHalfX = workAreaWidth / 2;
-  const { x } = mainFloatingWindow.getBounds();
-  return x < screenHalfX ? -1 : 1;
-  // mainfloating이 오른쪽에 있으면 -1, 왼쪽에 있으면 1 return
-}
-
 // memoList Window 생성
 function createMemoListWindow(xOffset, yOffset) {
   const newWindow = new BrowserWindow({
@@ -168,14 +129,7 @@ ipcMain.handle('move-floating-window', (event, { x, y }) => {
 // 메모 리스트 윈도우 생성 및 열기, 닫기
 ipcMain.handle('memo-list-window', (event, show) => {
   if (show) { // memoList 열기
-    if (getHorizontalPosition() < 0) { //위
-      if (getVerticalPosition() < 0) { memoListWindow = createMemoListWindow(65, 62); } // 왼쪽
-      else { memoListWindow = createMemoListWindow(30, 62); } // 오른쪽
-    }
-    else {
-      if (getVerticalPosition() < 0) { memoListWindow = createMemoListWindow(65, -252); } // 왼쪽
-      else { memoListWindow = createMemoListWindow(30, -252); } // 오른쪽
-    }
+    memoListWindow = createMemoListWindow(30, -252);
   }
   else { // memoList 닫기
     memoListWindow.close();
