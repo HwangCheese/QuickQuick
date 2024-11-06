@@ -11,7 +11,7 @@ const {} = require('./memoUpload.js');
 const {} = require('./memoPull.js');
 const {} = require('./memoDelete.js');
 const {} = require('./newVideoConference.js');
-const {} = require('./fullCalendar.js');
+const {createCalendarWindow} = require('./fullCalendar.js');
 const { cleanTempFiles } = require('./tempUnlink.js');
 const {} = require('./assistantWindow.js');
 
@@ -49,6 +49,10 @@ app.whenReady().then(async() => {
     });
     globalShortcut.register('CommandOrControl+U', () => {
       createUsersWindow();
+      // 새로운 창을 생성
+    });
+    globalShortcut.register('CommandOrControl+L', () => {
+      createCalendarWindow();
       // 새로운 창을 생성
     });
   });

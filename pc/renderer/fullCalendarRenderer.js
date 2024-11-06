@@ -1,12 +1,3 @@
-//플로팅 버튼을 누르면, 캘린더 윈도우 열기
-document.addEventListener('DOMContentLoaded', () => {
-  const button = document.querySelector('.floating-button');
-
-  button.addEventListener('click', () => {
-    window.electron.openCalendarWindow();
-  });
-});
-
 //캘린더 타이틀바의 닫기 버튼 클릭 시, 캘린더 윈도우 닫기
 document.getElementById('close-btn').addEventListener('click', () => {
   window.electron.closeCalendarWindow();

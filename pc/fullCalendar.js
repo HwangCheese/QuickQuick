@@ -28,6 +28,8 @@ function createCalendarWindow() {
         calendarWindow = null;
     });
 
+    calendarWindow = newWindow;
+
     return newWindow;
 }
 
@@ -41,10 +43,16 @@ ipcMain.handle('open-calendar-window', () => {
     }
 });
 
-//캘린더 윈도우 닫기
+// 캘린더 윈도우 닫기
 ipcMain.on('close-calendar-window', () => {
-    calendarWindow.close();
+    if (calendarWindow) {  // calendarWindow가 존재하는지 확인
+        calendarWindow.close();
+        calendarWindow = null;  // 창을 닫은 후 변수 초기화
+    } else {
+        console.log("캘린더 창이 이미 닫혀 있습니다.");
+    }
 });
+
 
 //이벤트 불러오기
 ipcMain.handle('load-events-in-server', async (event, userId) => {
