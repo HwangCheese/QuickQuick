@@ -47,8 +47,6 @@ contextBridge.exposeInMainWorld('electron', {
 
     // 각종 윈도우 관련 메서드
     moveFloatingWindow: (x, y) => ipcRenderer.invoke('move-floating-window', { x, y }),
-    openFloatingWindow: () => ipcRenderer.invoke('open-floating-window'),
-    closeFloatingWindow: () => ipcRenderer.invoke('close-floating-window'),
 
     //캘린더 관련 메서드
     openCalendarWindow: () => ipcRenderer.invoke('open-calendar-window'),

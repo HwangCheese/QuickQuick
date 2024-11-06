@@ -17,10 +17,10 @@ const floatingWindowOptions = {
   frame: false,
   transparent: true,
   alwaysOnTop: true,
-  resizable: false,
+  resizable: true,
   movable: true,
   show: false,
-  skipTaskbar: true, 
+  skipTaskbar: true,
   webPreferences: {
     contextIsolation: true,
     enableRemoteModule: true,
@@ -156,32 +156,6 @@ function createMemoListWindow(xOffset, yOffset) {
 
   return newWindow;
 }
-
-// 플로팅 메뉴 열기
-ipcMain.handle('open-floating-window', () => {
-  const location = getHorizontalPosition();
-  const direction = getVerticalPosition();
-  showFloatingWindow(location, direction);
-});
-
-// 플로팅 메뉴 닫기
-ipcMain.handle('close-floating-window', () => {
-  if (newMemoFloatingWindow && !newMemoFloatingWindow.isDestroyed()) {
-    newMemoFloatingWindow.close();
-  }
-  if (searchFloatingWindow && !searchFloatingWindow.isDestroyed()) {
-    searchFloatingWindow.close();
-  }
-  if (homeFloatingWindow && !homeFloatingWindow.isDestroyed()) {
-    homeFloatingWindow.close();
-  }
-  if (calendarFloatingWindow && !calendarFloatingWindow.isDestroyed()) {
-    calendarFloatingWindow.close();
-  }
-  if (memoListWindow && !memoListWindow.isDestroyed()) {
-    memoListWindow.close();
-  }
-});
 
 // 플로팅 창 이동
 ipcMain.handle('move-floating-window', (event, { x, y }) => {
