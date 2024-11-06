@@ -3,7 +3,7 @@ const { app, globalShortcut, ipcMain, BrowserWindow } = require('electron');
 const { createMemoWindow } = require('./newMemo');
 const { initializeSocket } = require('./socket'); // 소켓 초기화 모듈
 const { createExistMemoWindow } = require('./existMemo');
-const { createMainfloatingWindow } = require('./floting');
+const { createMainfloatingWindow, createUsersWindow } = require('./floting');
 const { generateId, checkAndSignUpUser,getUserName } = require('./login.js');
 const config = require('./config.js'); 
 const {} = require('./api-helpers');
@@ -45,6 +45,10 @@ app.whenReady().then(async() => {
     // 전역 단축키 등록 (control + Q) > 새로운 메모 생성
     globalShortcut.register('CommandOrControl+Q', () => {
       createMemoWindow('../templates/newMemo.html');
+      // 새로운 창을 생성
+    });
+    globalShortcut.register('CommandOrControl+U', () => {
+      createUsersWindow();
       // 새로운 창을 생성
     });
   });
