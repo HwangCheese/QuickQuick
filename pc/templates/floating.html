@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>플로팅 버튼</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Font Awesome CDN -->
+
+    <style>
+        body {
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+
+        .button-container {
+            position: relative;
+            width: 100px;
+            height: 100px;
+        }
+
+        .center-btn,
+        .top-btn,
+        .bottom-btn,
+        .left-btn,
+        .right-btn {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: none;
+            background-color: #E48758;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: none;
+            /* 기본적으로 모든 버튼 숨김 */
+        }
+
+        .center-btn {
+            top: 35px;
+            left: 35px;
+            display: block;
+            /* center 버튼은 항상 보이도록 설정 */
+        }
+
+        .top-btn {
+            top: 0;
+            left: 35px;
+        }
+
+        .bottom-btn {
+            bottom: 0;
+            left: 35px;
+        }
+
+        .left-btn {
+            top: 35px;
+            left: 0;
+        }
+
+        .right-btn {
+            top: 35px;
+            right: 0;
+        }
+
+        .button-container button i {
+            font-size: 18px;
+        }
+
+        .button-container button:hover {
+            background-color: #000000;
+            color: #55597A;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="button-container">
+        <button class="center-btn" onclick="toggleButtons()">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <button class="top-btn">
+            <i class="fa-solid fa-plus"></i>
+        </button>
+        <button class="bottom-btn">
+            <i class="fa-solid fa-calendar-days"></i>
+        </button>
+        <button class="left-btn">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <button class="right-btn">
+            <i class="fa-solid fa-user"></i>
+        </button>
+    </div>
+
+    <script>
+        function toggleButtons() {
+            const buttons = document.querySelectorAll('.button-container button');
+            buttons.forEach(button => {
+                if (button !== document.querySelector('.center-btn')) {
+                    // 버튼들의 display 속성을 토글
+                    button.style.display = button.style.display === 'block' ? 'none' : 'block';
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

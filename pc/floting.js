@@ -3,17 +3,12 @@ const path = require('path');
 
 // 전역 변수 선언
 let mainFloatingWindow;
-let newMemoFloatingWindow;
-let searchFloatingWindow;
-let homeFloatingWindow;
-let calendarFloatingWindow;
 let memoListWindow;
-let spacing = -50;
 let usersWindow;
 
 const floatingWindowOptions = {
-  width: 60,
-  height: 60,
+  width: 100,
+  height: 100,
   frame: false,
   transparent: true,
   alwaysOnTop: true,
@@ -58,21 +53,12 @@ function createMainfloatingWindow() {
     y: y,
   });
 
-  mainFloatingWindow.loadFile('templates/mainFbtn.html');
+  mainFloatingWindow.loadFile('templates/floating.html');
 
   mainFloatingWindow.once('ready-to-show', () => {
     mainFloatingWindow.show();
   });
 
-  mainFloatingWindow.on('closed', () => {
-    mainFloatingWindow = null;
-  });
-
-
-  mainFloatingWindow.loadFile('templates/mainFbtn.html');
-  mainFloatingWindow.once('ready-to-show', () => {
-    mainFloatingWindow.show();
-  });
   mainFloatingWindow.on('closed', () => {
     mainFloatingWindow = null;
   });
@@ -95,7 +81,7 @@ function createFloatingWindow(fileName, xOffset, yOffset) {
 // memoList Window 생성
 function createMemoListWindow(xOffset, yOffset) {
   const newWindow = new BrowserWindow({
-    width: 180,
+    width: 400,
     height: 250,
     frame: false,
     transparent: true,
@@ -121,7 +107,8 @@ function createMemoListWindow(xOffset, yOffset) {
 ipcMain.handle('move-floating-window', (event, { x, y }) => {
   const window = BrowserWindow.getFocusedWindow();
   if (window) {
-    window.setBounds({ x, y, width: 60, height: 60 }); // 애니메이션을 사용하지 않음
+    console.log("x: " + x + "y: " + y)
+    window.setBounds({ x: x, y: y, width: 100, height: 100 }); // 애니메이션을 사용하지 않음
   }
 });
 
