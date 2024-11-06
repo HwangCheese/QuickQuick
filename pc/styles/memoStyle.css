@@ -8,7 +8,6 @@ body {
     height: 100vh;
     border-radius: 10px;
     /* 모서리를 둥글게 설정 */
-    background-color: transparent;
 }
 
 /*TextArea & ImageDropZone & FileDropZone을 모두 포괄하는 contentsContainer*/
