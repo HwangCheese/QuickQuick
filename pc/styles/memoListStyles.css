@@ -1,9 +1,11 @@
+/* 기본 스타일 */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
 }
 
+/* 컨테이너 */
 .container {
     width: 170px;
     margin: 10px auto;
@@ -13,38 +15,39 @@ body {
     border-radius: 8px;
 }
 
+/* 제목 스타일 */
 h1 {
     text-align: center;
     color: #333;
 }
 
+/* 메모 리스트 스타일 */
 .memo-list {
     max-height: 250px;
     overflow-y: auto;
     padding-left: 2px;
+    /* 스크롤 숨김 후 애니메이션 적용 */
+    scrollbar-width: none; /* Firefox용 */
+    -ms-overflow-style: none; /* IE 및 Edge용 */
+}
+.memo-list::-webkit-scrollbar {
+    width: 0px;
 }
 
-.memo-list::-webkit-scrollbar {
+/* 스크롤바 마우스 오버 시 나타나는 효과 */
+.memo-list:hover::-webkit-scrollbar {
     width: 3px;
 }
-
 .memo-list::-webkit-scrollbar-thumb {
     background-color: #bbb;
     border-radius: 10px;
+    transition: background-color 0.3s ease-in-out;
+}
+.memo-list::-webkit-scrollbar-thumb:hover {
+    background-color: #007bff; /* 파란색으로 강조 */
 }
 
-@keyframes flashBackground {
-    0% {
-        background-color: #ffffff; /* 흰색 */
-    }
-    50% {
-        background-color: #007bff; /* 파란색 */
-    }
-    100% {
-        background-color: #ffffff; /* 다시 흰색 */
-    }
-}
-
+/* 메모 항목 스타일 */
 .memo-item {
     width: 152px;
     height: 15px;
@@ -57,13 +60,15 @@ h1 {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    background-color: #f9f9f9; /* 기본 배경색 */
+    background-color: #f9f9f9;
 }
 
+/* 읽지 않은 메모 강조 */
 .unread-memo {
-    animation: flashBackground 2s infinite; /* 읽지 않은 메모에만 애니메이션 적용 */
+    animation: flashBackground 2s infinite;
 }
 
+/* 메모 제목 */
 .memo-item h2 {
     margin: 0 0 5px;
     font-size: 18px;
@@ -73,6 +78,7 @@ h1 {
     text-overflow: ellipsis;
 }
 
+/* 메모 본문 */
 .memo-item p {
     margin: 0;
     font-size: 14px;
@@ -80,4 +86,17 @@ h1 {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+
+/* 배경 깜빡이는 애니메이션 */
+@keyframes flashBackground {
+    0% {
+        background-color: #ffffff;
+    }
+    50% {
+        background-color: #007bff;
+    }
+    100% {
+        background-color: #ffffff;
+    }
 }

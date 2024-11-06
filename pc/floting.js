@@ -110,8 +110,7 @@ function createMemoListWindow(xOffset, yOffset) {
   newWindow.loadFile("templates/memoList.html");
 
   newWindow.once('ready-to-show', () => {
-    const { x, y } = searchFloatingWindow.getBounds();
-    newWindow.setBounds({ x: x + xOffset, y: y + yOffset });
+    newWindow.setBounds({ x: 800, y: 200 });
     newWindow.show();
   });
 
@@ -200,4 +199,4 @@ ipcMain.on('search-memo', (event, searchTerm) => {
   }
 });
 
-module.exports = { createMainfloatingWindow, createUsersWindow, createNotificationWindow };
+module.exports = { createMainfloatingWindow, createUsersWindow, createNotificationWindow, createMemoListWindow };
