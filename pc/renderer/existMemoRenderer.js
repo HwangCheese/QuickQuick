@@ -5,16 +5,11 @@ const imageDropZone = document.getElementById('image-drop-zone'); // container �
 const imageDropZoneText = imageDropZone.querySelector('p'); // imageDropZone 내의 <p> 요소
 const fileDropZone = document.getElementById('file-drop-zone'); // container 내의 파일 삽입을 위한 dropZone
 const fileDropZoneText = fileDropZone.querySelector('p'); // fileDropZone 내의 <p> 요소
-//메모 내의 메뉴가 클릭된 상태인지를 판단하는 변수
-let isMemoMenuBtnClicked = 0;
+
 //메모 내의 메뉴
 const memoAddBtn = document.getElementById('add-btn'); //메모 내의 메모 추가 버튼(+)
-const memoMenuBtn = document.getElementById('arrow-btn'); //메모 내의 메뉴 열기 버튼(^)
+const memoDeleteBtn = document.getElementById('delete-btn'); //메모 내의 메뉴 삭제 버튼(휴지통)
 const memoCloseBtn = document.getElementById('close-btn'); //메모 내의 메모 닫기 버튼(X)
-//히든 버튼
-const deleteBtn = document.getElementById('delete-button'); //메모 삭제 버튼(hidden)
-//프레임의 물결 효과
-const waveEffect = document.getElementById('wave-effect');
 
 // 모달 창과 닫기 버튼 선택
 const modal = document.getElementById('media-modal');
@@ -361,11 +356,8 @@ function createDownloadButton(file, url) {
 
 // 프레임 focus 시, 메뉴를 표시하고 텍스트 필드의 높이를 조정
 editor.addEventListener('focus', () => {
-    closeHiddenMenu(); //히든 메뉴 숨기기
-    isMemoMenuBtnClicked=0; //히든 메뉴 닫힘
-    
     menu.style.display = 'block'; // 메뉴 표시
-    container.style.setProperty('top', '110px', 'important'); // container 상단 높이 조정
+    container.style.setProperty('top', '40px', 'important'); // container 상단 높이 조정
     //container.style.setProperty('bottom', '50px', 'important'); // container 하단 높이 조정
 });
 
@@ -374,7 +366,7 @@ editor.addEventListener('blur', () => {
     setTimeout(() => {
         if (!editor.matches(':focus')) { // editor에 포커스가 없을 때
             menu.style.display = 'none'; // 메뉴 숨기기
-            container.style.setProperty('top', '80px', 'important'); // container 상단 높이를 원래대로 복원
+            container.style.setProperty('top', '10px', 'important'); // container 상단 높이를 원래대로 복원
             //container.style.setProperty('bottom', '10px', 'important'); // container 하단 높이를 원래대로 복원
         }
     }, 200);
@@ -618,33 +610,6 @@ container.addEventListener('drop', (event) => { // container 영역에 드롭했
     fileDropZomeStateUpdate(filesDropped);
 });
 
-
-//숨겨진 메모의 메뉴들을 시각화하는 함수
-function openHiddenMenu() {
-    if (!isMemoMenuBtnClicked) {
-        waveEffect.style.display="block"; //프레임 웨이브 표시
-        deleteBtn.style.display = "block"; //삭제 버튼 표시
-        recorderBtn.style.display = "block"; //녹음 버튼 표시
-        inviteBtn.style.display = 'block'; // 초대 버튼 표시
-        sendBtn.style.display = "block"; //전송 버튼 표시
-
-        //memoMenuBtn.src = "../media/close-arrow-icon"; // 버튼 아이콘 변경
-    }
-}
-//숨겨진 메모의 메뉴들을 안보이게 하는 함수
-function closeHiddenMenu() {
-    if (isMemoMenuBtnClicked) {
-        waveEffect.style.display="none"; //프레임 웨이브 숨기기
-
-        deleteBtn.style.display = "none"; //삭제 버튼 숨기기
-        recorderBtn.style.display = "none"; //녹음 버튼 숨기기
-        inviteBtn.style.display = 'none'; // 초대 버튼 숨기기
-        sendBtn.style.display = "none"; //전송 버튼 숨기기
-
-        //memoMenuBtn.src = "../media/open-arrow-icon"; // 버튼 아이콘 변경
-    }
-}
-
 const deleteAllTempFiles = async () => {
     for (const filePath of tempPaths) {
         await window.electron.deleteTemp(filePath); // 각 파일 경로로 deleteTemp 호출
@@ -663,10 +628,10 @@ memoCloseBtn.addEventListener('click', async () => {
     window.electron.closeMemoWindow();
 });
 
-// "메뉴 열기" 버튼 클릭 시, 추가 메뉴 시각화
-memoMenuBtn.addEventListener('click', () => {
-    openHiddenMenu(); //히든 메뉴 시각화
-    isMemoMenuBtnClicked=1; //히든 메뉴 열림
+// "메뉴 삭제" 버튼 클릭 시, 이벤트 핸들러. 해당 메모 삭제
+memoDeleteBtn.addEventListener('click', async () => {
+    deleteAllTempFiles();
+    window.electron.closeMemoWindow();
 });
 
 // "추가" 버튼 클릭 시, 새 창을 열고 현재 창의 크기와 좌표를 출력
@@ -941,13 +906,6 @@ document.getElementById('invite-friends-button').addEventListener('click', async
         await inviteMeeting(targetUserId);
     }
 });
-
-// 삭제 버튼 클릭 시 이벤트 핸들러
-document.getElementById('delete-button').addEventListener('click', async () => {
-    deleteAllTempFiles();
-    window.electron.closeMemoWindow();
-});
-
 
 // 음성에서 추출된 텍스트를 메모에 불러오기
 function importText(text) {

@@ -17,6 +17,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
         rel="stylesheet">
+    <!-- Font Awesome 아이콘 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="../renderer/config.js"></script>
     <script src="../renderer/getFriendList.js"></script>
     <script src="../renderer/transInMemo.js" defer></script>
@@ -36,38 +38,8 @@
     <!--memo 테두리 디자인-->
     <div class="drag-region left"></div>
     <div class="drag-region right"></div>
-    <div class="drag-region bottom">
-    </div>
-    <div class="drag-region top">
-        <div class="transparent-part"> <!--상단 테두리의 오리 버튼들을 담는 컨테이너-->
-            <div class="button-container" style="display: flex; justify-content: space-around; align-items: center;">
-                <input id="send-button" class="hidden" type="image" src="../media/send-btn.png" alt="전송" width="70"
-                    height="60" draggable="false"
-                    style="user-select: none; -webkit-app-region: no-drag; pointer-events: auto;">
-                <input id="recorder-button" class="hidden" type="image" src="../media/mic-btn.png" alt="녹음" width="70"
-                    height="60" draggable="false"
-                    style="user-select: none; -webkit-app-region: no-drag; pointer-events: auto;">
-                <input id="call-button" class="hidden" type="image" src="../media/cam-btn.png" alt="통신" width="70"
-                    height="60" draggable="false"
-                    style="user-select: none; -webkit-app-region: no-drag; pointer-events: auto;">
-                <input id="delete-button" class="hidden" type="image" src="../media/delete-btn.png" alt="삭제" width="70"
-                    height="60" draggable="false"
-                    style="user-select: none; -webkit-app-region: no-drag; pointer-events: auto;">
-            </div>
-        </div>
-        <!-- 물결 모양을 투명 부분과 노란 부분 사이에 배치 -->
-        <div class="wave-container" style="position: relative; height: 20px; overflow: hidden;">
-            <svg id="wave-effect" class="hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"
-                preserveAspectRatio="none" style="width: 100%; height: 100%;">
-                <path
-                    d="M0,20 L120,20 L120,10 C110,20 100,0 90,10 C80,20 70,0 60,10 C50,20 40,0 30,10 C20,20 10,0 0,10 Z"
-                    fill="#ADDCFF" stroke="#ADDCFF" stroke-width="15" />
-            </svg>
-        </div>
-        <div class="yellow-part">
-            <!--<img src="../media/quickquick-image.png" alt="Top Image">-->
-        </div>
-    </div>
+    <div class="drag-region bottom"></div>
+    <div class="drag-region top"></div>
 
     <!--메모 내의 구조 관련-->
     <div id="container">
@@ -77,8 +49,8 @@
         <div id="file-drop-zone">
             <p>여기에 파일들을 놓으세요...</p>
         </div>
-        <textarea id="editor" spellcheck="false" placeholder="메모를 입력하세요..." oninput="checkText()" onmouseup="checkText()"
-            onkeyup="checkText()"></textarea>
+        <textarea id="editor" spellcheck="false" placeholder="메모를 입력하세요..." oninput="checkText()"
+            onmouseup="checkText()" onkeyup="checkText()"></textarea>
         <div id="map-url-zone"></div>
         <div id="result"></div>
         <div id="buttons" style="display: flex; gap: 10px;"><!--container내의 연잎 버튼들-->
@@ -86,21 +58,17 @@
                 height="30" draggable="false" style="user-select: none;">
             <input id="translate-button" class="hidden" type="image" src="../media/translate-btn.png" alt="번역"
                 width="60" height="30" draggable="false" style="user-select: none;">
-            <input id="analysis-button" class="hidden" type="image" src="../media/separate-btn.png" alt="분류" width="60" height="30"
-                draggable="false" style="user-select: none;">
+            <input id="analysis-button" class="hidden" type="image" src="../media/separate-btn.png" alt="분류" width="60"
+                height="30" draggable="false" style="user-select: none;">
         </div>
     </div>
-
-    <div class="background-div-left"></div>
     <div class="background-div"></div>
-    <div class="background-div-right"></div>
-    <div class="background-div-left-right-bottom"></div>
 
     <!--메모 상단의 메뉴 버튼-->
     <div class="menu" id="menu">
-        <button id="add-btn"><img src="../media/add-icon.png" alt="Add"></button>
-        <button id="arrow-btn"><img src="../media/open-arrow-icon.png" alt="Menu"></button>
-        <button id="close-btn"><img src="../media/close-icon.png" alt="Close"></button>
+        <button id="add-btn"><i class="fas fa-plus"></i></button>
+        <button id="delete-btn"><i class="fas fa-trash"></i></button>
+        <button id="close-btn"><i class="fas fa-times"></i></button>
     </div>
 
     <!--드롭 존의 컨텐츠 요소 컨테이너 내에 포함되는 다운로드 버튼 템플릿 구조-->
@@ -183,6 +151,7 @@
             align-items: center;
             z-index: 1000;
         }
+
         .loader {
             border: 8px solid rgba(243, 243, 243, 0.7);
             border-radius: 50%;
@@ -192,6 +161,7 @@
             animation: spin 1.5s ease-in-out infinite;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
+
         .loading-text {
             margin-top: 20px;
             font-family: 'Arial', sans-serif;
@@ -199,9 +169,15 @@
             color: #333;
             font-weight: 400;
         }
+
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
     </style>
 
