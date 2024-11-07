@@ -3,7 +3,7 @@ const { app, globalShortcut, ipcMain, BrowserWindow } = require('electron');
 const { createMemoWindow } = require('./newMemo');
 const { initializeSocket } = require('./socket'); // 소켓 초기화 모듈
 const { createExistMemoWindow } = require('./existMemo');
-const { createMainfloatingWindow, createUsersWindow, createMemoListWindow } = require('./floting');
+const { createMainfloatingWindow, createUsersWindow, createMemoListWindow,createSearchButtonWindow } = require('./floting');
 const { generateId, checkAndSignUpUser,getUserName } = require('./login.js');
 const config = require('./config.js'); 
 const {} = require('./api-helpers');
@@ -56,6 +56,7 @@ app.whenReady().then(async() => {
       // 새로운 창을 생성
     });
     globalShortcut.register('CommandOrControl+P', () => {
+      createSearchButtonWindow();
       createMemoListWindow();
       // 새로운 창을 생성
     });
