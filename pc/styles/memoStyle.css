@@ -244,7 +244,7 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    height: 10px;
+    height: 20px;
     display: flex;
     flex-direction: column;
     background-color: #EBEBEB;
@@ -300,9 +300,9 @@ body {
     position: absolute;
     top: 10px;
     width: 100%;
-    height: 50px;
+    height: 20px;
     padding: 10px;
-    background-color: transparent;
+    background-color: #EBEBEB;
     z-index: 10;
     border-radius: 10px;
     font-size: 50px;
@@ -323,8 +323,8 @@ body {
 /*메뉴 중 메모 생성 버튼*/
 #add-btn {
     position: absolute;
-    top: -10px;
-    left: 10;
+    top: -5px;
+    left: 0px;
     margin: 10px;
     background-color: #EBEBEB;
     border: none;
@@ -337,8 +337,8 @@ body {
 /*메뉴 중 메모 닫기 버튼*/
 #delete-btn {
     position: absolute;
-    top: -10px;
-    right: 40px;
+    top: -5px;
+    right: 50px;
     margin: 10px;
     background-color: #EBEBEB;
     border: none;
@@ -351,8 +351,8 @@ body {
 /*메뉴 중 메모 닫기 버튼*/
 #close-btn {
     position: absolute;
-    top: -10px;
-    right: 10px;
+    top: -5px;
+    right: 20px;
     margin: 10px;
     background-color: #EBEBEB;
     border: none;
@@ -380,7 +380,7 @@ body {
 /* 프레임 포커스 시, 투명 배경이 비춰지는 것을 방지하기 위한 (하얀 배경을 위한) div 설정*/
 .background-div {
     position: absolute;
-    top: 10px;
+    top: 30px;
     width: 100%;
     left: 0px;
     height: 20px;
