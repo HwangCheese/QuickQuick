@@ -7,8 +7,8 @@ let memoListWindow;
 let usersWindow;
 
 const floatingWindowOptions = {
-  width: 100,
-  height: 100,
+  width: 130,
+  height: 130,
   frame: false,
   transparent: true,
   alwaysOnTop: true,
@@ -136,7 +136,7 @@ ipcMain.handle('move-floating-window', (event, { x, y }) => {
   const window = BrowserWindow.getFocusedWindow();
   if (window) {
     console.log("x: " + x + "y: " + y)
-    window.setBounds({ x: x, y: y, width: 100, height: 100 }); // 애니메이션을 사용하지 않음
+    window.setBounds({ x: x, y: y, width: 130, height: 130 }); // 애니메이션을 사용하지 않음
   }
 });
 

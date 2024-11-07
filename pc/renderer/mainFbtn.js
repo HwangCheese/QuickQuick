@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const button = document.querySelector('#main-floating-button');
+  const button = document.querySelector('#center-btn');
 
   let isDragging = false;
-  let offsetX, offsetY;
+  let offsetX, offsetY;   
   let showMenu = false;
   let isClick = false;
 
@@ -20,10 +20,12 @@ document.addEventListener('DOMContentLoaded', () => {
       button.style.backgroundImage =  "url('media/plus.png')";
     }
   });*/
-
+  
   button.addEventListener('mousedown', (e) => {
     //button.style.backgroundImage =  "url('media/plus.png')";
     isDragging = true;
+    hideButtons();
+    showMenu = false;
 
     offsetX = e.clientX;
     offsetY = e.clientY;
@@ -34,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const throttle = (func, limit) => {
     let lastFunc;
     let lastRan;
-    return function () {
+    return function() {
       const context = this;
       const args = arguments;
       if (!lastRan) {
@@ -42,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         lastRan = Date.now();
       } else {
         clearTimeout(lastFunc);
-        lastFunc = setTimeout(function () {
+        lastFunc = setTimeout(function() {
           if ((Date.now() - lastRan) >= limit) {
             func.apply(context, args);
             lastRan = Date.now();
@@ -72,6 +74,18 @@ document.addEventListener('DOMContentLoaded', () => {
     isDragging = false;
     //button.style.backgroundImage =  "url('../media/plus.png')";
 
+    if(isClick){
+      if(!showMenu){
+        showButtons();
+        showMenu = true;
+        //button.style.backgroundImage = "url('../media/exit.png')";
+      }
+      else{
+        hideButtons();
+        showMenu = false;
+        //button.style.backgroundImage =  "url('../media/plus.png')";
+      }
+    }
   });
 });
 
