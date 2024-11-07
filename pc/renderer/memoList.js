@@ -6,6 +6,36 @@ let memoDataCache = {}; // 메모 ID와 텍스트 내용을 저장하는 캐시
 
 document.addEventListener('DOMContentLoaded', async () => {
     memoList = document.getElementById('memo-list');
+    memoItems = document.querySelectorAll('.memo-item');
+
+    const observerOptions = {
+        root: document.querySelector('.memo-list'),
+        rootMargin: '0px',
+        threshold: 0.5, // 50% 이상 보일 때 'active' 클래스를 추가
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        let activeItemCount = 0;
+
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                activeItemCount++;
+                entry.target.classList.add('active'); // 화면에 들어왔을 때 클래스 추가
+            } else {
+                entry.target.classList.remove('active'); // 화면을 벗어나면 클래스 제거
+            }
+        });
+
+        // activeItemCount가 많을수록 메모리스트의 크기를 증가시킴
+        if (activeItemCount > 0) {
+            const newHeight = 450 + (activeItemCount * 20); // 예시로 1개당 20px씩 늘리기
+            memoList.style.maxHeight = `${Math.min(newHeight, 600)}px`; // 최대 600px로 제한
+        }
+    }, observerOptions);
+
+    memoItems.forEach(item => {
+        observer.observe(item);
+    });
     try {
         // 사용자 아이디와 메모 데이터를 불러옴
         userId = await window.electron.getUserId(); 

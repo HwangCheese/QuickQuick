@@ -7,7 +7,6 @@ body {
     display: flex;
     align-items: flex-start; /* 컨텐츠가 상단에 위치하게 조정 */
     justify-content: center;
-    padding-top: 20px; /* 컨텐츠 상단 여백 추가 */
     height: 100vh;
 }
 
@@ -24,13 +23,16 @@ body {
 
 /* 메모 리스트 섹션 */
 .memo-list {
-    max-height: 450px; /* 높이 늘림 */
+    max-height: 450px; /* 기본 최대 높이 */
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: #007bff #f0f4ff;
-    padding: 10px;
+    padding: 0; /* 패딩 제거 */
+    margin: 0; /* 마진 제거 */
+    display: flex;
+    flex-direction: column;
+    transition: max-height 0.3s ease-out, padding 0.3s ease-out;
 }
-
 
 /* 스크롤바 스타일 */
 ::-webkit-scrollbar {
@@ -57,17 +59,25 @@ body {
     display: flex;
     flex-direction: column;
     padding: 15px;
-    margin: 10px 0;
-    background: linear-gradient(135deg, #e3f2fd, #efc698);
+    margin: 0 0 10px 0; /* 아래쪽에만 여백 추가 */
+    background: linear-gradient(135deg, #fff5ea, #efc698);
     border: 1px solid #dce7f5;
     border-radius: 24px;
     box-shadow: 0 6px 12px rgba(0, 123, 255, 0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.3s, opacity 0.3s, scale 0.3s;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    transform: scale(0.9); /* 초기 크기 축소 */
 }
 
+/* 중앙에 있을 때의 스타일 */
+.memo-item.active {
+    opacity: 1; /* 중앙에 가까운 메모는 완전히 불투명 */
+    transform: scale(1); /* 중앙에 가까운 메모는 크기가 커짐 */
+}
+
+/* 메모 아이템 카드 호버 효과 */
 .memo-item:hover {
     transform: translateY(-3px);
     box-shadow: 0 12px 20px rgba(0, 123, 255, 0.2);

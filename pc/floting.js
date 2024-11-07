@@ -124,7 +124,7 @@ function createSearchButtonWindow() {
     // 메모 리스트 창의 위에 위치시키기 위해 약간 위쪽에 오프셋 적용
     searchButtonWindow.setBounds({
       x: 840, // 메모 리스트 창과 동일한 X 좌표
-      y: 166  // 메모 리스트 창보다 약간 위쪽
+      y: 138  // 메모 리스트 창보다 약간 위쪽
     });
     searchButtonWindow.show();
   });
