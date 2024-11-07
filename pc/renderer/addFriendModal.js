@@ -28,24 +28,29 @@ async function addFriend(userName, friendUserName) {
 }
 
 const addFriendButton = document.getElementById('add-friend-button');
-const friendModal = document.getElementById('friend-modal');
-const closeButton = document.getElementById('friend-modal-close-button'); // x 버튼 선택
+const friendAddSection = document.getElementById('friend-add-section');
 const friendList = document.getElementById('friends');
 const newFriendNameInput = document.getElementById('new-friend-name');
 const errorMessageDiv = document.getElementById('error-message');
 
-// 친구 추가 버튼 클릭 시 모달 표시
+// 친구 추가 버튼 클릭 시 친구 추가 영역 표시
 addFriendButton.addEventListener('click', function () {
-    friendModal.style.display = 'flex';
+    // friendAddSection의 display가 'none'이면 'block'으로, 'block'이면 'none'으로 토글
+    if (friendAddSection.style.display === 'block') {
+        friendAddSection.style.display = 'none'; // 이미 보이면 숨김
+    } else {
+        friendAddSection.style.display = 'block'; // 안 보이면 보임
+    }
 });
 
-// 저장 버튼 클릭 시 새로운 친구 추가하고 모달 닫기
+// 저장 버튼 클릭 시 새로운 친구 추가하고 영역 닫기
 async function saveFriend() {
     const friendName = newFriendNameInput.value.trim();
     if (friendName) {
         try {
             await addFriend(userName, friendName);
 
+            // 친구 추가 후, 리스트에 추가
             const newFriendItem = document.createElement('li');
             newFriendItem.classList.add('friend-item');
             newFriendItem.innerHTML = `
@@ -56,7 +61,7 @@ async function saveFriend() {
             `;
             friendList.appendChild(newFriendItem);
             newFriendNameInput.value = ''; // 입력 필드 초기화
-            friendModal.style.display = 'none'; // 모달 숨기기
+            friendAddSection.style.display = 'none'; // 친구 추가 영역 숨기기
             errorMessageDiv.style.display = 'none'; // 에러 메시지 숨기기
         } catch (error) {
             // 에러 발생 시 처리
@@ -77,19 +82,46 @@ newFriendNameInput.addEventListener('keydown', function (event) {
     }
 });
 
-// x 버튼 클릭 시 모달 닫기
-closeButton.addEventListener('click', function () {
-    friendModal.style.display = 'none'; // 모달 숨기기
-    newFriendNameInput.value = ''; // 입력 필드 초기화
-    errorMessageDiv.style.display = 'none'; // 에러 메시지 숨기기
-});
-/*
-// 모달 외부 클릭 시 모달 닫기 (선택 사항)
-window.addEventListener('click', function (event) {
-    if (event.target === modal) {
-        friendModal.style.display = 'none';
-        newFriendNameInput.value = ''; // 입력 필드 초기화
-        errorMessageDiv.style.display = 'none'; // 에러 메시지 숨기기
+document.addEventListener('DOMContentLoaded', function () {
+    const toggleFriendListButton = document.getElementById('toggle-friend-list');
+    const friendListSection = document.getElementById('friend-list-section');
+    const friendSearchSection = document.getElementById('friend-search-section');
+    const rightColumn = document.querySelector('.right-column');
+    const verticalLine = document.querySelector('.vertical-line');  // 세로 구분선
+    const toggleSearchButton = document.getElementById('toggle-search-button'); // 검색창 토글 버튼
+
+    // 친구 목록 토글 버튼 클릭 시
+    toggleFriendListButton.addEventListener('click', function () {
+        // 친구 목록의 display 상태를 토글
+        friendListSection.classList.toggle('active');  // 'active' 클래스 추가/제거로 보이게/숨기게 설정
+
+        // 친구 검색 섹션 숨김
+        friendSearchSection.classList.remove('active');  // 검색창이 보이면 숨기기
+
+        // 오른쪽 영역 확장 여부 결정
+        toggleRightColumn(friendListSection.classList.contains('active'));
+    });
+
+    // 검색창 토글 버튼 클릭 시
+    toggleSearchButton.addEventListener('click', function () {
+        // 친구 검색창의 display 상태를 토글
+        friendSearchSection.classList.toggle('active');  // 'active' 클래스 추가/제거로 보이게/숨기게 설정
+
+        // 친구 목록 섹션은 숨김
+        friendListSection.classList.remove('active');  // 친구 목록이 보이면 숨기기
+
+        // 오른쪽 영역 확장 여부 결정
+        toggleRightColumn(friendSearchSection.classList.contains('active'));
+    });
+
+    // 오른쪽 영역 확장/축소 함수
+    function toggleRightColumn(isExpand) {
+        if (isExpand) {
+            rightColumn.classList.add('active');  // 오른쪽 영역 확장
+            verticalLine.classList.add('active'); // 세로 구분선 활성화
+        } else {
+            rightColumn.classList.remove('active');  // 오른쪽 영역 축소
+            verticalLine.classList.remove('active'); // 세로 구분선 비활성화
+        }
     }
 });
-*/

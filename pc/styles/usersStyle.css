@@ -1,34 +1,33 @@
 /* 전체 페이지 스타일 */
 body {
+  display: flex;
   font-family: Arial, sans-serif;
   color: #333;
   margin: 0;
   padding: 0;
-  overflow: hidden;
-  display: flex;
+  overflow: hidden;  /* 전체 페이지 스크롤 막기 */
   justify-content: center;
   align-items: flex-start;
   background-color: #FAFAFA;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  height: 100vh;
+  width: 100vw; /* 창 크기를 고정 */
+  box-sizing: border-box;
+  -webkit-app-region: drag;
 }
 
 /* 프로필 QR 코드 컨테이너 */
 .profile-qr-container {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  width: 500px;
-  height: 600px; /* 세로를 더 크게 설정 */
+  flex-direction: row; /* 가로로 정렬 */
+  justify-content: flex-start; /* 왼쪽과 오른쪽을 나누어 정렬 */
+  align-items: flex-start; /* 위쪽에 맞추기 */
+  width: 100%; /* 전체 화면을 차지 */
+  height: 100%; /* 전체 화면을 차지 */
   padding: 20px;
   background-color: #FAFAFA;
   border-radius: 8px;
-  -webkit-app-region: drag;
-}
-
-/* 왼쪽 영역 (사용자 정보 및 QR 코드) */
-.left-column {
-  width: 60%; /* 왼쪽은 40% 크기 */
-  padding-right: 20px;
+  box-sizing: border-box;
   position: relative;
 }
 
@@ -37,13 +36,20 @@ body {
   background: url('../media/close-icon.png') no-repeat center center;
   background-size: 15px 15px;
   border: none;
-  width: 15px;
-  height: 15px;
+  width: 20px; /* 버튼 크기 약간 키움 */
+  height: 20px;
   position: absolute;
   top: 15px;
   right: 15px;
   cursor: pointer;
   -webkit-app-region: no-drag;
+}
+
+/* 왼쪽 영역 (사용자 정보 및 QR 코드) */
+.left-column {
+  flex: 1;
+  padding-right: 20px;
+  position: relative;
 }
 
 /* 호버 시 */
@@ -54,8 +60,8 @@ body {
 
 /* 프로필 이미지와 사용자 이름 */
 .profile-row {
-  display: flex;
   align-items: center;
+  margin-top: 60px;
   margin-bottom: 10px;
 }
 
@@ -89,50 +95,56 @@ body {
   margin: 0;
 }
 
-/* 오른쪽 영역 (친구 목록) */
+/* 오른쪽 열은 기본적으로 숨김 */
 .right-column {
-  width: 40%; /* 오른쪽은 50% 크기 */
+  visibility: hidden; /* 기본적으로 숨김 */
+  opacity: 0; /* 기본적으로 불투명하게 설정 */
+  width: 40%; /* 오른쪽 영역 너비 */
   padding-left: 20px;
+  border-left: 1px solid #ccc;
+  position: absolute; /* 오른쪽에 고정되도록 설정 */
+  top: 0; /* 상단에 배치 */
+  right: 0; /* 오른쪽 끝에 배치 */
+  transition: width 0.3s ease, opacity 0.3s ease, visibility 0.3s ease; /* 부드러운 애니메이션 */
+}
+
+.right-column.active {
+  visibility: visible; /* 활성화 시 보이게 설정 */
+  opacity: 1; /* 불투명도 증가 */
+  width: 60%; /* 오른쪽 열이 열릴 때 너비 증가 */
 }
 
 /* 세로 구분선 */
 .vertical-line {
   width: 2px;
   background-color: #ccc;
-  height: 80%;
+  height: 0%; /* 기본 상태에서 세로선은 0% */
   margin: 0 20px;
+  transition: height 0.3s ease; /* 애니메이션을 추가하여 부드럽게 높이가 변하도록 설정 */
 }
 
-/* 친구 목록 섹션 */
+/* 세로 구분선이 활성화된 상태 */
+.vertical-line.active {
+  height: 80%; /* right-column이 활성화되었을 때 세로선의 높이를 80%로 설정 */
+}
+
+/* 친구 추가 및 검색 버튼 (QR 코드 아래) */
 .friends-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-top: 20px;
+  gap: 10px; /* 버튼 간 간격 조정 */
   -webkit-app-region: no-drag;
 }
 
 .friends-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   font-size: 18px;
   font-weight: bold;
-}
-
-/* 초대 목록 섹션 */
-.invites-container {
-  margin-top: 20px;
-  -webkit-app-region: no-drag;
-}
-
-.invites-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 18px;
-  font-weight: bold;
+  margin-bottom: 15px;
 }
 
 
-#toggle-friend-list,
 #add-friend-button {
   color: #fff;
   border: none;
@@ -147,39 +159,11 @@ body {
 }
 
 /* 친구 목록 */
-#friend-list-section {
-  padding: 10px;
-  background-color: #f9f9f9;
-  border-radius: 4px;
-}
-
-/* 친구 목록 */
 #friends {
-  max-height: 150px;
-  /* 원하는 높이로 조정 가능 */
   overflow-y: auto;
   /* 세로 스크롤 가능 */
   list-style: none;
   padding: 0;
-  margin: 0;
-}
-
-/*초대 목록 */
-#invite-list-section {
-  padding: 10px;
-  background-color: #f9f9f9;
-  border-radius: 4px;
-}
-
-/* 초대 목록 */
-#invites {
-  max-height: 150px;
-  /* 원하는 높이로 조정 가능 */
-  overflow-y: auto;
-  /* 세로 스크롤 가능 */
-  list-style: none;
-  padding: 0;
-  margin: 0;
 }
 
 /* 스크롤바 스타일 */
@@ -205,6 +189,66 @@ body {
   /* 마우스를 올렸을 때의 색상 */
 }
 
+/* 친구 검색 영역 */
+#friend-search-section,
+#friend-list-section {
+  visibility: hidden;  /* 기본적으로 숨김 */
+  opacity: 0;  /* 기본적으로 불투명하게 설정 */
+  transition: visibility 0.3s, opacity 0.3s ease;  /* visibility와 opacity의 전환 애니메이션 설정 */
+}
+
+#friend-search-section.active,
+#friend-list-section.active {
+  visibility: visible;  /* 활성화되면 보이도록 설정 */
+  opacity: 1;  /* 불투명도 1로 설정 */
+}
+
+#friends li:last-child {
+  border-bottom: none;
+}
+
+/* 친구 목록 항목 스타일 */
+.friend-item {
+  position: relative;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/*초대 목록 */
+#invite-list-section {
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+}
+
+/* 초대 목록 섹션 */
+.invites-container {
+  margin-top: 20px;
+  -webkit-app-region: no-drag;
+}
+
+.invites-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* 초대 목록 */
+#invites {
+  max-height: 150px;
+  /* 원하는 높이로 조정 가능 */
+  overflow-y: auto;
+  /* 세로 스크롤 가능 */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
 #invites::-webkit-scrollbar {
   width: 8px;
   /* 스크롤바의 너비 */
@@ -225,27 +269,6 @@ body {
 #invites::-webkit-scrollbar-thumb:hover {
   background: #555;
   /* 마우스를 올렸을 때의 색상 */
-}
-
-#friend-search,
-#new-friend-name {
-  width: 90%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-#friends li:last-child {
-  border-bottom: none;
-}
-
-/* 친구 목록 항목 스타일 */
-.friend-item {
-  position: relative;
-  padding: 8px;
-  border-bottom: 1px solid #ddd;
-  display: flex;
-  align-items: center;
 }
 
 #invites li:last-child {
@@ -314,53 +337,29 @@ body {
 }
 
 
-/* 전체 모달 배경 스타일 */
-#friend-modal {
-  display: none; /* 기본적으로 숨김 */
-  position: fixed; /* 화면에 고정 */
-  top: 0;
-  left: 0;
+/* 친구 추가 영역 스타일 */
+#friend-add-section {
+  margin-top: 100px;
+  margin-right: 10px;
+  transform: translate(-50%, -50%);
+  background-color: #FAFAFA;
+}
+
+/* 친구 추가 입력창 스타일 */
+#new-friend-name {
   width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
-  z-index: 1000; /* 다른 요소 위에 표시 */
-}
-
-/* 모달 콘텐츠 스타일 */
-.friend-modal-content {
-  background-color: #fff;
-  padding: 20px;
+  padding: 10px;
+  margin-top: 10px;
   border-radius: 5px;
-  width: 80%; /* 너비 조정 가능 */
-  max-width: 500px; /* 최대 너비 설정 */
-  text-align: center;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  
-  position: fixed; /* 모달을 화면에 고정 */
-  top: 50%; /* 화면의 세로 중앙 */
-  left: 50%; /* 화면의 가로 중앙 */
-  transform: translate(-50%, -50%); /* 중앙으로부터 자신의 절반만큼 이동하여 완전 중앙 배치 */
-
-  -webkit-app-region: no-drag;
+  border: 1px solid #ccc;
+  font-size: 16px;
 }
 
-/* 모달 닫기 버튼 (x) */
-#friend-modal-close-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: url('../media/close-icon.png') no-repeat center center;
-  background-size: 15px 15px;
-  width: 15px;
-  height: 15px;
-  border: none;
-  cursor: pointer;
-}
-
-/* 모달 닫기 버튼 호버시 */
-#friend-modal-close-button:hover {
-  background-color: rgba(0, 0, 0, 0.1);
-  /* 배경색 추가 */
+/* 에러 메시지 스타일 */
+#error-message {
+  color: red;
+  display: none; /* 기본적으로 숨김 */
+  margin-top: 10px;
 }
 
 /* 모달 스타일 */

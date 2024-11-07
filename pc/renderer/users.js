@@ -67,9 +67,9 @@ document.getElementById('qr-link').addEventListener('click', async () => {
     }
 });
 
-
 document.getElementById('toggle-friend-list').addEventListener('click', async function () {
     const friendListSection = document.getElementById('friend-list-section');
+    friendListSection.classList.toggle('visible');
 
     console.log(userName);
     const data = await fetchUserData();
@@ -79,7 +79,6 @@ document.getElementById('toggle-friend-list').addEventListener('click', async fu
 
     if (friendListSection.style.display === 'none') {
         friendListSection.style.display = 'block';
-        this.textContent = '친구 목록 접기';
 
         // friendNameSets 배열을 순회하면서 각 친구 이름을 <li>로 추가
         const friendList = document.getElementById('friends');
@@ -98,14 +97,13 @@ document.getElementById('toggle-friend-list').addEventListener('click', async fu
         });
     } else {
         friendListSection.style.display = 'none';
-        this.textContent = '친구 목록 보기';
     }
-    // frame 크기 변경
-    await window.electron.resizeUsersWindow(getProfileQrContainerSize());
 });
 
 // 친구 검색 기능 (기본적인 예제)
 document.getElementById('friend-search').addEventListener('input', function () {
+    const friendSearchSection = document.getElementById('friend-search-section');
+
     const searchValue = this.value.toLowerCase();
     const friends = document.querySelectorAll('#friends li');
     friends.forEach(friend => {
