@@ -241,9 +241,9 @@ body {
 
 /*상단 테두리*/
 .drag-region.top {
-    top: 0;
-    left: 0;
-    right: 0;
+    top: 10;
+    left: 10;
+    right: 10;
     height: 10px;
     display: flex;
     flex-direction: column;
