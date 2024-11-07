@@ -67,13 +67,6 @@ document.getElementById('qr-link').addEventListener('click', async () => {
     }
 });
 
-// 복사 버튼 이벤트 리스너
-document.getElementById('copy-button').addEventListener('click', function () {
-    navigator.clipboard.writeText(userName).then(function () {
-    }, function (err) {
-        console.error('복사 실패: ', err);
-    });
-});
 
 document.getElementById('toggle-friend-list').addEventListener('click', async function () {
     const friendListSection = document.getElementById('friend-list-section');
