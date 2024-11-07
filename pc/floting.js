@@ -174,6 +174,7 @@ function createUsersWindow() {
   newWindow.on('closed', () => {
     usersWindow = null;
   });
+  usersWindow = newWindow;
   return newWindow; // BrowserWindow 인스턴스를 반환
 }
 
