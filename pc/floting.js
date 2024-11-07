@@ -82,7 +82,7 @@ function createFloatingWindow(fileName, xOffset, yOffset) {
 function createMemoListWindow(xOffset, yOffset) {
   const newWindow = new BrowserWindow({
     width: 400,
-    height: 250,
+    height: 200,
     frame: false,
     transparent: true,
     alwaysOnTop: true,
@@ -99,7 +99,8 @@ function createMemoListWindow(xOffset, yOffset) {
     newWindow.setBounds({ x: 800, y: 200 });
     newWindow.show();
   });
-
+  
+  memoListWindow = newWindow;
   return newWindow;
 }
 
