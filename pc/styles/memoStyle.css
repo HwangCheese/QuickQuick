@@ -1,6 +1,13 @@
+@font-face {
+    font-family: 'MyCustomFont';
+    src: url('../media/KakaoOTFRegular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'MyCustomFont', sans-serif;
     overflow: hidden;
     position: relative;
     background-color: transparent;
@@ -14,9 +21,9 @@ body {
 #container {
     position: absolute;
     top: 10px;
-    left: 10px;
-    right: 10px;
-    bottom: 10px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
     border: none;
     outline: none;
     padding: 10px;
@@ -42,7 +49,7 @@ body {
     background-color: #EBEBEB;
     z-index: 1;
     transition: height 0.2s ease;
-    font-family: "IBM Plex Sans", sans-serif;
+    font-family: 'MyCustomFont', sans-serif;
     font-weight: 300;
     font-style: normal;
     font-size: 15px;
@@ -62,7 +69,7 @@ body {
     position: relative;
     z-index: 2;
     margin-bottom: 10px;
-    font-family: "IBM Plex Sans", sans-serif;
+    font-family: 'MyCustomFont', sans-serif;
     font-weight: 300;
     font-style: normal;
     font-size: 12px;
@@ -72,7 +79,7 @@ body {
 #image-drop-zone {
     display: none;
     flex-wrap: wrap;
-    font-family: "IBM Plex Sans", sans-serif;
+    font-family: 'MyCustomFont', sans-serif;
     font-weight: 300;
     font-style: normal;
 }
@@ -306,7 +313,7 @@ body {
 
 /* Font Awesome 아이콘에 스타일 */
 .menu button i {
-    color:#707070;
+    color: #707070;
     font-size: 15px;
     /* 아이콘 크기 설정 */
     transition: transform 0.3s ease;
@@ -358,9 +365,11 @@ body {
 /*메모 생성 및 닫기 버튼 위에 마우스 올라갔을 때 스타일*/
 /* 아이콘에 마우스를 올리면 위로 5px 올라가는 효과와 색상 변경 */
 .menu button:hover i {
-    transform: translateY(-5px); /* 아이콘을 위로 5px 이동 */
-    color: #E48758; /* 마우스를 올렸을 때 색상 변경 */
-  }
+    transform: translateY(-5px);
+    /* 아이콘을 위로 5px 이동 */
+    color: #E48758;
+    /* 마우스를 올렸을 때 색상 변경 */
+}
 
 /*메모 생성 및 닫기 버튼의 이미지*/
 .menu img {
@@ -450,7 +459,7 @@ body {
 }
 
 #result {
-    font-family: "IBM Plex Sans", sans-serif;
+    font-family: 'MyCustomFont', sans-serif;
     font-weight: bold;
     font-size: small;
     font-style: normal;
