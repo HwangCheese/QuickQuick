@@ -324,7 +324,7 @@ body {
 #add-btn {
     position: absolute;
     top: -10px;
-    left: 0;
+    left: 10;
     margin: 10px;
     background-color: #EBEBEB;
     border: none;
@@ -338,7 +338,7 @@ body {
 #delete-btn {
     position: absolute;
     top: -10px;
-    right: 55px;
+    right: 40px;
     margin: 10px;
     background-color: #EBEBEB;
     border: none;
@@ -352,7 +352,7 @@ body {
 #close-btn {
     position: absolute;
     top: -10px;
-    right: 20px;
+    right: 10px;
     margin: 10px;
     background-color: #EBEBEB;
     border: none;
