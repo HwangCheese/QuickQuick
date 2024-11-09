@@ -84,6 +84,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             renderMemos(filteredMemos);
         });
 
+        window.electron.ipcRenderer.on('filter-memo-list', (event, memoIds) => {
+            // memoIds 배열을 사용하여 메모들을 필터링
+            filteredMemos = memos.filter(memo => memoIds.includes(memo.memo_id));
+            renderMemos(filteredMemos);  // 필터링된 메모들을 화면에 렌더링
+        });
+
         renderMemos(memos); // 초기 메모 렌더링
     } catch (error) {
         console.error("server-db 연결 중 오류 발생:", error.message);

@@ -9,6 +9,25 @@ document.addEventListener('DOMContentLoaded', () => {
         window.electron.ipcRenderer.send('search-memo', searchTerm); // 검색어를 memoList.js로 전송
     });
 
+    input.addEventListener('keydown', async (event) => {
+        // Enter 키를 눌렀을 때만 실행
+        if (event.key === 'Enter') {
+            const searchTerm = input.value.trim(); // 앞뒤 공백 제거
+            if (searchTerm !== "") {  // 빈 문자열이 아닐 때만 전송
+                try {
+                    // 검색어를 서버로 보내서 결과 받기
+                    const response = await window.electron.searchMemo(searchTerm);
+                    const memoIds = response.data; // 결과에서 메모의 ID들만 받음
+                    console.log("검색된 메모 ID들:", memoIds);
+
+                    window.electron.ipcRenderer.send('filter-memo', memoIds);
+                } catch (error) {
+                    console.error("검색 오류:", error);
+                }
+            }
+        }
+    });
+
     window.electron.ipcRenderer.on('expand-floating-window', (event, message) => {
         console.log(message); 
         if (message == "left") { moveLeftButton(); }
