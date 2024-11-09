@@ -19,6 +19,8 @@ const port = 3000;
 const socketIo = require('socket.io');
 const mysql = require('mysql2');
 const { exec } = require('child_process'); // child_process 모듈 불러오기
+const { saveMemoToPinecone, searchInPinecone } = require('./pinecone');
+app.use(express.json());
 
 
 const server = http.createServer(app);
@@ -518,6 +520,7 @@ app.post('/memo', upload.array('files', 10), async (req, res) => {
             contentType: 'txt',
             fileName: fileName
         });
+        
 
         // 여러 개의 media 파일 처리
         if (files.length > 0) {
@@ -535,7 +538,8 @@ app.post('/memo', upload.array('files', 10), async (req, res) => {
                 });
             }
         }
-
+        console.log(`내용:${data_txt}, id:${memoId}`);
+        await saveMemoToPinecone(userId, data_txt, memoId);  // Pinecone 저장
         await insertDataToDB(res, insertData);
 
     } catch (err) {
@@ -595,6 +599,27 @@ function query(sql, params) {
         });
     });
 }
+
+// 메모 의미적 검색
+app.post('/search-memos', async (req, res) => {
+    const { queryText, userId } = req.body;
+    if (!queryText) {
+        return res.status(400).json({ error: '검색 텍스트를 입력해주세요.' });
+    }
+    if (!userId) {
+        return res.status(400).json({ error: 'userId가 필요합니다.' });
+    }
+    try {
+        console.log('결과 나오기 전 검색 텍스트:', queryText);
+        const results = await searchInPinecone(userId, queryText);
+        console.log("유사한 메모 검색 결과:", results);
+
+        res.json({ success: true, data: results });
+    } catch (error) {
+        console.error(`검색 API 오류: ${error.message}`);
+        res.status(500).json({ success: false, error: '검색 중 오류가 발생했습니다.' });
+    }
+});
 
 // userId로 모든 가진 메모를 가져오는 API 
 app.get('/memo/:id', (req, res) => {
