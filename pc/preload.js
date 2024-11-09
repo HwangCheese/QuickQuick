@@ -96,6 +96,9 @@ contextBridge.exposeInMainWorld('electron', {
     // tempfile 삭제
     deleteTemp: (filePath) => ipcRenderer.invoke('deleteTempFile', filePath),
 
+    // 메모 검색
+    searchMemo: (searchTerm) => ipcRenderer.invoke('search-memo', searchTerm),
+
     // 요약, 번역 관련 메서드
     analyzeText: (text) => ipcRenderer.invoke('analyze-text', text),
     translateText: (text, targetLanguage) => ipcRenderer.invoke('translate-text', text, targetLanguage),

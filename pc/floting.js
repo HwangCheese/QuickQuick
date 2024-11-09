@@ -215,4 +215,13 @@ ipcMain.on('search-memo', (event, searchTerm) => {
   }
 });
 
+ipcMain.on('filter-memo', (event, memoIds) => {
+  console.log(memoIds);
+  if (memoListWindow) {
+    memoListWindow.webContents.send('filter-memo-list', memoIds);
+  } else {
+    console.log('Memo list window is not open.');
+  }
+});
+
 module.exports = { createMainfloatingWindow, createUsersWindow, createNotificationWindow, createMemoListWindow, createSearchButtonWindow };

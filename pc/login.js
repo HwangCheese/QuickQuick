@@ -131,4 +131,34 @@ ipcMain.handle('get-user-id-By-Name', async (event, { friendNameSet }) => {
     }
 });
 
+ipcMain.handle('search-memo', async (event, searchTerm) => {
+    try {
+        // fetch를 사용하여 API에 요청 보내기
+        const fetch = await importFetch();
+        const response = await fetch(`${config.SERVER_URL}/search-memos`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                queryText: searchTerm,
+                userId: userId
+            })
+        });
+        if (!response.ok) {
+            throw new Error(`서버 응답 상태: ${response.status}`);
+        }
+        const responseData = await response.json();
+        if (responseData.success) {
+            console.log(responseData.data);
+            return { success: true, data: responseData.data }; // 메모 ID들만 반환
+        } else {
+            return { success: false, error: responseData.error };
+        }
+    } catch (error) {
+        console.error('서버 호출 오류:', error);
+        return { success: false, error: '검색 중 오류가 발생했습니다.' };
+    }
+});
+
 module.exports={ generateId, checkAndSignUpUser, getUserName};
