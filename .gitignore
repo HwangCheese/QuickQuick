@@ -1,5 +1,6 @@
 server/node_modules/
 server/Users/
+server/config.js
 
 pc/node_modules
 pc/.env
