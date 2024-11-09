@@ -102,5 +102,22 @@ async function searchInPinecone(userId, queryText) {
     }
 }
 
+// Pinecone 벡터 삭제 함수
+async function deleteMemoFromPinecone(memoId, userId) {
+    const url = `${pineconeConfig.apiUrlDelete}?namespace=${userId}`;
+    console.log(url);
+    const data = { ids: [memoId] };
+    const headers = {
+        'Api-Key': pineconeConfig.apiKey,
+    };
+    try {
+        const response = await retryRequestWithBackoff(url, data, 5, 1000, headers, 'DELETE');
+        console.log(`Pinecone에서 memo_id ${memoId} 삭제 완료.`);
+        return response;
+    } catch (error) {
+        console.error(`Pinecone 삭제 중 오류 발생: ${error.message}`);
+        throw error;
+    }
+}
 
-module.exports = { saveMemoToPinecone, searchInPinecone };
+module.exports = { saveMemoToPinecone, searchInPinecone, deleteMemoFromPinecone };

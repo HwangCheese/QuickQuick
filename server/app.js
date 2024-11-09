@@ -19,7 +19,7 @@ const port = 3000;
 const socketIo = require('socket.io');
 const mysql = require('mysql2');
 const { exec } = require('child_process'); // child_process 모듈 불러오기
-const { saveMemoToPinecone, searchInPinecone } = require('./pinecone');
+const { saveMemoToPinecone, searchInPinecone, deleteMemoFromPinecone } = require('./pinecone');  // pineCone db 연결
 app.use(express.json());
 
 
@@ -729,51 +729,73 @@ app.get('/data/:dataId/file', (req, res) => {
 });
 
 // memo_id에 해당하는 데이터 모두 삭제
-app.delete('/memo/:memo_id', (req, res) => {
+app.delete('/memo/:memo_id', async (req, res) => {
     const memo_id = req.params.memo_id;
 
-    // 1. memo_id에 해당하는 파일 경로들을 가져옵니다.
-    db.query('SELECT path FROM Data WHERE memo_id = ?', [memo_id], (err, rows) => {
+    // 1. memo_id에 해당하는 user_id를 Memo 테이블에서 가져옵니다.
+    db.query('SELECT user_id FROM Memo WHERE memo_id = ?', [memo_id], async (err, rows) => {
         if (err) {
             return res.status(500).json({ error: '데이터베이스 쿼리 오류' });
         }
         if (!rows || rows.length === 0) {
-            return res.status(404).json({ error: '데이터를 찾을 수 없습니다.' });
+            return res.status(404).json({ error: '메모를 찾을 수 없습니다.' });
         }
-        // 2. 파일들을 비동기적으로 삭제합니다.
-        const deleteFilesPromises = rows.map(row => {
-            return new Promise((resolve, reject) => {
-                fs.unlink(row.path, (err) => {
-                    if (err) {
-                        console.error('파일 삭제 오류:', err);
-                        reject(err);
-                    } else {
-                        console.log('파일 삭제 성공:', row.path);
-                        resolve();
-                    }
-                });
-            });
-        });
 
-        // 3. 모든 파일 삭제가 완료되면 데이터베이스에서 데이터를 삭제합니다.
-        Promise.all(deleteFilesPromises)
-            .then(() => {
-                db.query('DELETE FROM Data WHERE memo_id = ?', [memo_id], function(err) {
-                    if (err) {
-                        return res.status(500).json({ error: 'Data 테이블 데이터베이스 삭제 오류' });
-                    }
+        const user_id = rows[0].user_id;
 
-                    db.query('DELETE FROM Memo WHERE memo_id = ?', [memo_id], function(err) {
+        // 2. memo_id에 해당하는 파일 경로들을 가져옵니다.
+        db.query('SELECT path FROM Data WHERE memo_id = ?', [memo_id], (err, rows) => {
+            if (err) {
+                return res.status(500).json({ error: '데이터베이스 쿼리 오류' });
+            }
+            if (!rows || rows.length === 0) {
+                return res.status(404).json({ error: '관련 파일을 찾을 수 없습니다.' });
+            }
+
+            // 3. 파일들을 비동기적으로 삭제합니다.
+            const deleteFilesPromises = rows.map(row => {
+                return new Promise((resolve, reject) => {
+                    fs.unlink(row.path, (err) => {
                         if (err) {
-                            return res.status(500).json({ error: 'Memo 테이블 데이터베이스 삭제 오류' });
+                            console.error('파일 삭제 오류:', err);
+                            reject(err);
+                        } else {
+                            console.log('파일 삭제 성공:', row.path);
+                            resolve();
                         }
-                        res.status(200).json({ message: '메모와 관련된 모든 데이터와 파일이 성공적으로 삭제되었습니다.' });
                     });
                 });
-            })
-            .catch(err => {
-                res.status(500).json({ error: '파일 삭제 중 오류가 발생했습니다.', message: err.message });
             });
+
+            // 4. 모든 파일 삭제가 완료되면 데이터베이스에서 데이터를 삭제합니다.
+            Promise.all(deleteFilesPromises)
+                .then(() => {
+                    db.query('DELETE FROM Data WHERE memo_id = ?', [memo_id], function(err) {
+                        if (err) {
+                            return res.status(500).json({ error: 'Data 테이블 데이터베이스 삭제 오류' });
+                        }
+
+                        db.query('DELETE FROM Memo WHERE memo_id = ?', [memo_id], function(err) {
+                            if (err) {
+                                return res.status(500).json({ error: 'Memo 테이블 데이터베이스 삭제 오류' });
+                            }
+
+                            // 5. Pinecone에서 memo_id에 해당하는 벡터 삭제
+                            deleteMemoFromPinecone(memo_id, user_id)
+                                .then(() => {
+                                    console.log("Pinecone에서 벡터 삭제 성공:", memo_id);
+                                    res.status(200).json({ message: '메모와 관련된 모든 데이터와 파일이 성공적으로 삭제되었습니다.' });
+                                })
+                                .catch(error => {
+                                    return res.status(500).json({ error: 'Pinecone 삭제 중 오류가 발생했습니다.', message: error.message });
+                                });
+                        });
+                    });
+                })
+                .catch(err => {
+                    res.status(500).json({ error: '파일 삭제 중 오류가 발생했습니다.', message: err.message });
+                });
+        });
     });
 });
 
