@@ -6,13 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>메모 관리</title>
     <link rel="stylesheet" href="../styles/assistantStyles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <div class="title-button-container">
-        <button id="cancelButton">취소</button>
         <span id="title">Quick Assistant</span>
-        <button id="confirmButton">확인</button>
+        <div id="buttonContainer"> <!-- 버튼들을 감싸는 컨테이너 -->
+        <button id="cancelButton">취소</button>
+        <button id="confirmButton">모두 저장</button>
+        </div>
     </div>
     <div id="loading-container">
         <div id="loading"></div>
@@ -22,6 +27,7 @@
     </div>
     <!-- 모달창 구조 -->
     <div id="modal" class="modal">
+        <span id="title">Quick Assistant</span>
         <div class="modal-content">
             <span class="close-button" id="closeButton">&times;</span>
             <p id="modalContent">모달 내용이 여기에 들어갑니다.</p>
