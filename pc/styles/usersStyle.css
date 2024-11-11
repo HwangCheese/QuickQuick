@@ -118,7 +118,8 @@
   position: absolute;
   top: 0;
   right: 0;
-  transition: width 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+  transition: width 0.3s ease;
+  /*, opacity 0.3s ease, visibility 0.3s ease*/
   /* 초기 상태에서 오른쪽 열은 숨김 */
   transform: translateX(-100%);
   /* 오른쪽으로 이동 */
@@ -140,7 +141,13 @@
   margin: 0;
   top: 0;
   left: 0;
-  transition: height 0.3s ease;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+.vertical-line.active {
+  opacity: 1;
+  /* 활성화 시 페이드 인 */
 }
 
 /* 친구 추가 및 검색 버튼 (QR 코드 아래) */
