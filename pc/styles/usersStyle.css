@@ -62,9 +62,7 @@
 
 /* 왼쪽 영역 (사용자 정보 및 QR 코드) */
 .left-column {
-  flex: 1;
-  padding-right: 20px;
-  position: relative;
+  flex: 0 0 250px;
 }
 
 /* 호버 시 */
@@ -113,30 +111,25 @@
 /* 오른쪽 열은 기본적으로 숨김 */
 .right-column {
   visibility: hidden;
-  /* 기본적으로 숨김 */
   opacity: 0;
-  /* 기본적으로 불투명하게 설정 */
   width: 40%;
-  /* 오른쪽 영역 너비 */
   padding-left: 20px;
   border-left: 1px solid #ccc;
   position: absolute;
-  /* 오른쪽에 고정되도록 설정 */
   top: 0;
-  /* 상단에 배치 */
   right: 0;
-  /* 오른쪽 끝에 배치 */
   transition: width 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
-  /* 부드러운 애니메이션 */
+  /* 초기 상태에서 오른쪽 열은 숨김 */
+  transform: translateX(-100%);
+  /* 오른쪽으로 이동 */
+  flex: 1;
 }
 
 .right-column.active {
   visibility: visible;
-  /* 활성화 시 보이게 설정 */
   opacity: 1;
-  /* 불투명도 증가 */
-  width: 60%;
-  /* 오른쪽 열이 열릴 때 너비 증가 */
+  width: 45%;
+  transform: translateX(0);
 }
 
 /* 세로 구분선 */
@@ -144,16 +137,10 @@
   width: 2px;
   background-color: #ccc;
   height: 0%;
-  /* 기본 상태에서 세로선은 0% */
-  margin: 0 20px;
+  margin: 0;
+  top: 0;
+  left: 0;
   transition: height 0.3s ease;
-  /* 애니메이션을 추가하여 부드럽게 높이가 변하도록 설정 */
-}
-
-/* 세로 구분선이 활성화된 상태 */
-.vertical-line.active {
-  height: 80%;
-  /* right-column이 활성화되었을 때 세로선의 높이를 80%로 설정 */
 }
 
 /* 친구 추가 및 검색 버튼 (QR 코드 아래) */
@@ -392,22 +379,22 @@
 }
 
 #new-friend-name {
-  width: 100%;
   padding: 10px;
   margin-top: 10px;
-  border-radius: 5px;
   border: 1px solid #ccc;
   font-size: 16px;
 }
 
 /* 친구 추가 입력창 스타일 */
 .search-input {
-  width: 100%;
+  width: 200px;
   padding: 10px;
-  margin-top: 10px;
-  border-radius: 5px;
+  margin-top: 50px;
+  border-radius: 20px;
   border: 1px solid #ccc;
   font-size: 16px;
+  font-family: 'MyCustomFont', sans-serif;
+  z-index: 10;
 }
 
 /* 에러 메시지 스타일 */

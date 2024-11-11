@@ -12,10 +12,32 @@
     <div class="profile-qr-container">
         <!-- Close Button -->
         <div id="notificationArea"></div>
-        <button id="close-button" aria-label="닫기"></button>
+        <!-- <button id="close-button" aria-label="닫기"></button> -->
+
+        <!-- 오른쪽 영역 (친구 목록) -->
+        <div class="right-column">
+            <!-- 친구 추가 영역 (모달 대신 페이지 내 표시) -->
+            <div id="friend-add-section">
+                <div class="friend-modal-content">
+                    <input type="text" class="search-input" id="new-friend-name" placeholder="친구 추가">
+                    <br>
+                    <input type="text" class="search-input" id="search-friend-name" placeholder="친구 검색">
+                    <div id="error-message" style="color: red; display: none; margin-top: 10px;"></div>
+                    <!-- 에러 메시지 영역 -->
+                </div>
+            </div>
+            <div class="friends-list" id="friend-list-section" style="display: none;">
+                <ul id="friends">
+                    <!-- 여기에 친구 목록이 동적으로 추가됩니다 -->
+                </ul>
+            </div>
+        </div>
+
+        <!-- 세로 구분선 (가운데) -->
+        <div class="vertical-line"></div>
 
         <!-- 왼쪽 영역 (사용자 정보, 친구목록, 친구검색) -->
-        <div style="align-items: center;" class="left-column">
+        <div class="left-column">
             <div class="profile-row">
                 <span id="username">조용한 미술관</span>
             </div>
@@ -30,43 +52,12 @@
             <div class="friends-container">
                 <div class="friends-header">
                     <a href="#" id="add-friend-button">
-                        <img src="../media/search.png" alt="친구 추가" style="width: 30px; height: 30px;">
+                        <img src="../media/search.png" alt="친구 추가" style="width: 38px; height: 38px;">
                     </a>
                     <a href="#" id="toggle-friend-list">
                         <img src="../media/phonebook.png" alt="친구 목록" style="width: 38px; height: 38px;">
                     </a>
                 </div>
-            </div>
-        </div>
-
-        <!-- 세로 구분선 (가운데) -->
-        <div class="vertical-line"></div>
-
-        <!-- 오른쪽 영역 (친구 목록) -->
-        <div class="right-column">
-            <!-- 친구 추가 영역 (모달 대신 페이지 내 표시) -->
-            <div id="friend-add-section">
-                <div class="friend-modal-content">
-                    <input type="text" class="search-input" id="new-friend-name" placeholder="친구 추가">
-                    <br>
-                    <input type="text" class="search-input" id="search-friend-name" placeholder="친구 검색">
-                    <div id="error-message" style="color: red; display: none; margin-top: 10px;"></div>
-                    <!-- 에러 메시지 영역 -->
-                </div>
-            </div>
-            <div class="friend-search" id="friend-search-section" style="display: none;">
-                <div id="friend-search-input-container">
-                    <!-- 친구 추가 검색 input -->
-                    <input type="text" id="friend-add-search-input" placeholder="친구 추가 검색" />
-                    <!-- 주소록 친구 검색 input -->
-                    <input type="text" id="friend-list-search-input" placeholder="주소록 친구 검색" />
-                </div>
-                <ul id="friend-search-results"></ul> <!-- 검색 결과 리스트 -->
-            </div>
-            <div class="friends-list" id="friend-list-section" style="display: none;">
-                <ul id="friends">
-                    <!-- 여기에 친구 목록이 동적으로 추가됩니다 -->
-                </ul>
             </div>
         </div>
     </div>

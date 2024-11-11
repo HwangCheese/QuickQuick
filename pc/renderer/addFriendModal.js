@@ -70,6 +70,10 @@ newFriendNameInput.addEventListener('keydown', function (event) {
     }
 });
 
+function requestWindowResize(width, height) {
+    window.electron.resizeWindow(width, height);
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     const toggleFriendListButton = document.getElementById('toggle-friend-list');
     const friendListSection = document.getElementById('friend-list-section');
@@ -89,6 +93,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // 오른쪽 영역 확장 여부 결정
         toggleRightColumn(friendListSection.classList.contains('active'));
+
+        if (friendListSection.classList.contains('active')) {
+            requestWindowResize(550, 400);
+        } else {
+            requestWindowResize(300, 400);
+        }
     });
 
     // 친구 추가 버튼 클릭 시 친구 추가 영역 표시
@@ -97,6 +107,11 @@ document.addEventListener('DOMContentLoaded', function () {
         // 필요하다면 다른 섹션을 숨기기
         friendListSection.classList.remove('active');
         toggleRightColumn(friendAddSection.classList.contains('active'));
+        if (friendAddSection.classList.contains('active')) {
+            requestWindowResize(550, 400);
+        } else {
+            requestWindowResize(300, 400);
+        }
     });
 
     // 오른쪽 영역 확장/축소 함수

@@ -99,7 +99,7 @@ function createMemoListWindow() {
     newWindow.setBounds({ x: 800, y: 200 });
     newWindow.show();
   });
-  
+
   memoListWindow = newWindow;
   return newWindow;
 }
@@ -184,8 +184,8 @@ ipcMain.handle('resize-users-window', (event, height) => {
 // users Window(QR로그인, 친구추가 창) 생성
 function createUsersWindow() {
   const newWindow = new BrowserWindow({
-    width: 340,
-    height: 198,
+    width: 300,
+    height: 400,
     frame: false,
     transparent: true,
     resizable: true,
@@ -205,6 +205,13 @@ function createUsersWindow() {
   usersWindow = newWindow;
   return newWindow; // BrowserWindow 인스턴스를 반환
 }
+
+ipcMain.on('resize-window', (event, arg) => {
+  const { width, height } = arg;
+  if (usersWindow) {
+    usersWindow.setSize(width, height);
+  }
+})
 
 ipcMain.on('search-memo', (event, searchTerm) => {
   console.log(searchTerm);
