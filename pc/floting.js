@@ -226,6 +226,7 @@ ipcMain.on('filter-memo', (event, memoIds) => {
   console.log(memoIds);
   if (memoListWindow) {
     memoListWindow.webContents.send('filter-memo-list', memoIds);
+    console.log('render로');
   } else {
     console.log('Memo list window is not open.');
   }
