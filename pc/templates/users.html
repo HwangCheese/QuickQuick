@@ -7,24 +7,25 @@
     <title>사용자 프로필</title>
     <link rel="stylesheet" href="../styles/usersStyle.css">
 </head>
-<body>
+
+<body id="users-body">
     <div class="profile-qr-container">
         <!-- Close Button -->
         <div id="notificationArea"></div>
         <button id="close-button" aria-label="닫기"></button>
-    
+
         <!-- 왼쪽 영역 (사용자 정보, 친구목록, 친구검색) -->
-        <div class="left-column">
+        <div style="align-items: center;" class="left-column">
             <div class="profile-row">
-                <span id="username"></span>
+                <span id="username">조용한 미술관</span>
             </div>
-    
+
             <div class="qr-row">
-                <a href="#" id="qr-link">QR코드</a>생성
+                <a href="#" id="qr-link"><b>QR 코드</b></a> 생성
             </div>
             <div id="qrCodeContainer"></div>
             <p id="timer" style="display: none;"></p>
-    
+
             <!-- 친구 목록 및 검색 버튼 -->
             <div class="friends-container">
                 <div class="friends-header">
@@ -32,15 +33,15 @@
                         <img src="../media/search.png" alt="친구 추가" style="width: 30px; height: 30px;">
                     </a>
                     <a href="#" id="toggle-friend-list">
-                        <img src="../media/phonebook.png" alt="친구 목록" style="width: 30px; height: 30px;">
+                        <img src="../media/phonebook.png" alt="친구 목록" style="width: 38px; height: 38px;">
                     </a>
                 </div>
             </div>
         </div>
-    
+
         <!-- 세로 구분선 (가운데) -->
         <div class="vertical-line"></div>
-    
+
         <!-- 오른쪽 영역 (친구 목록) -->
         <div class="right-column">
             <div class="friend-search" id="friend-search-section" style="display: none;">
@@ -59,15 +60,17 @@
             </div>
         </div>
     </div>
-    
 
-<!-- 친구 추가 영역 (모달 대신 페이지 내 표시) -->
-<div id="friend-add-section" style="display: none;">
-    <div class="friend-modal-content">
-        <input type="text" id="new-friend-name" placeholder="친구 추가">
-        <div id="error-message" style="color: red; display: none; margin-top: 10px;"></div> <!-- 에러 메시지 영역 -->
+
+    <!-- 친구 추가 영역 (모달 대신 페이지 내 표시) -->
+    <div id="friend-add-section" style="display: none;">
+        <div class="friend-modal-content">
+            <input type="text" class="search-input" id="new-friend-name" placeholder="친구 추가">
+            <br>
+            <input type="text" class="search-input" id="search-friend-name" placeholder="친구 검색">
+            <div id="error-message" style="color: red; display: none; margin-top: 10px;"></div> <!-- 에러 메시지 영역 -->
+        </div>
     </div>
-</div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="../renderer/config.js"></script>

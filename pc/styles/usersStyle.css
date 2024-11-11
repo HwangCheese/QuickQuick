@@ -1,3 +1,23 @@
+#users-body {
+  display: flex;
+  font-family: Arial, sans-serif;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  /* 전체 페이지 스크롤 막기 */
+  justify-content: center;
+  align-items: flex-start;
+  background-color: #FAFAFA;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  height: 100vh;
+  width: 100vw;
+  /* 창 크기를 고정 */
+  box-sizing: border-box;
+  -webkit-app-region: drag;
+  text-align: center;
+}
+
 /* 프로필 QR 코드 컨테이너 */
 .profile-qr-container {
   display: flex;
@@ -38,7 +58,6 @@
   flex: 1;
   padding-right: 20px;
   position: relative;
-  align-items: center;
 }
 
 /* 호버 시 */
@@ -203,6 +222,39 @@
   /* 마우스를 올렸을 때의 색상 */
 }
 
+/* 친구 검색 영역 */
+#friend-search-section,
+#friend-list-section {
+  visibility: hidden;
+  /* 기본적으로 숨김 */
+  opacity: 0;
+  /* 기본적으로 불투명하게 설정 */
+  transition: visibility 0.3s, opacity 0.3s ease;
+  /* visibility와 opacity의 전환 애니메이션 설정 */
+}
+
+#friend-search-section.active,
+#friend-list-section.active {
+  visibility: visible;
+  /* 활성화되면 보이도록 설정 */
+  opacity: 1;
+  /* 불투명도 1로 설정 */
+}
+
+#friends li:last-child {
+  border-bottom: none;
+}
+
+/* 친구 목록 항목 스타일 */
+.friend-item {
+  position: relative;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
 /*초대 목록 */
 #invite-list-section {
   padding: 10px;
@@ -322,13 +374,21 @@
   display: none;
 }
 
-
 /* 친구 추가 영역 스타일 */
 #friend-add-section {
   margin-top: 100px;
   margin-right: 10px;
   transform: translate(-50%, -50%);
   background-color: #FAFAFA;
+}
+
+#new-friend-name {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
 }
 
 /* 친구 추가 입력창 스타일 */
