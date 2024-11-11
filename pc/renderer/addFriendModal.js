@@ -27,21 +27,9 @@ async function addFriend(userName, friendUserName) {
     }
 }
 
-const addFriendButton = document.getElementById('add-friend-button');
-const friendAddSection = document.getElementById('friend-add-section');
 const friendList = document.getElementById('friends');
 const newFriendNameInput = document.getElementById('new-friend-name');
 const errorMessageDiv = document.getElementById('error-message');
-
-// 친구 추가 버튼 클릭 시 친구 추가 영역 표시
-addFriendButton.addEventListener('click', function () {
-    // friendAddSection의 display가 'none'이면 'block'으로, 'block'이면 'none'으로 토글
-    if (friendAddSection.style.display === 'block') {
-        friendAddSection.style.display = 'none'; // 이미 보이면 숨김
-    } else {
-        friendAddSection.style.display = 'block'; // 안 보이면 보임
-    }
-});
 
 // 저장 버튼 클릭 시 새로운 친구 추가하고 영역 닫기
 async function saveFriend() {
@@ -88,7 +76,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const friendSearchSection = document.getElementById('friend-search-section');
     const rightColumn = document.querySelector('.right-column');
     const verticalLine = document.querySelector('.vertical-line');  // 세로 구분선
-    const toggleSearchButton = document.getElementById('toggle-search-button'); // 검색창 토글 버튼
+    const addFriendButton = document.getElementById('add-friend-button');
+    const friendAddSection = document.getElementById('friend-add-section');
 
     // 친구 목록 토글 버튼 클릭 시
     toggleFriendListButton.addEventListener('click', function () {
@@ -96,22 +85,18 @@ document.addEventListener('DOMContentLoaded', function () {
         friendListSection.classList.toggle('active');  // 'active' 클래스 추가/제거로 보이게/숨기게 설정
 
         // 친구 검색 섹션 숨김
-        friendSearchSection.classList.remove('active');  // 검색창이 보이면 숨기기
+        friendAddSection.classList.remove('active');  // 검색창이 보이면 숨기기
 
         // 오른쪽 영역 확장 여부 결정
         toggleRightColumn(friendListSection.classList.contains('active'));
     });
 
-    // 검색창 토글 버튼 클릭 시
-    toggleSearchButton.addEventListener('click', function () {
-        // 친구 검색창의 display 상태를 토글
-        friendSearchSection.classList.toggle('active');  // 'active' 클래스 추가/제거로 보이게/숨기게 설정
-
-        // 친구 목록 섹션은 숨김
-        friendListSection.classList.remove('active');  // 친구 목록이 보이면 숨기기
-
-        // 오른쪽 영역 확장 여부 결정
-        toggleRightColumn(friendSearchSection.classList.contains('active'));
+    // 친구 추가 버튼 클릭 시 친구 추가 영역 표시
+    addFriendButton.addEventListener('click', function () {
+        friendAddSection.classList.toggle('active');
+        // 필요하다면 다른 섹션을 숨기기
+        friendListSection.classList.remove('active');
+        toggleRightColumn(friendAddSection.classList.contains('active'));
     });
 
     // 오른쪽 영역 확장/축소 함수

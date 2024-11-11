@@ -44,6 +44,16 @@
 
         <!-- 오른쪽 영역 (친구 목록) -->
         <div class="right-column">
+            <!-- 친구 추가 영역 (모달 대신 페이지 내 표시) -->
+            <div id="friend-add-section">
+                <div class="friend-modal-content">
+                    <input type="text" class="search-input" id="new-friend-name" placeholder="친구 추가">
+                    <br>
+                    <input type="text" class="search-input" id="search-friend-name" placeholder="친구 검색">
+                    <div id="error-message" style="color: red; display: none; margin-top: 10px;"></div>
+                    <!-- 에러 메시지 영역 -->
+                </div>
+            </div>
             <div class="friend-search" id="friend-search-section" style="display: none;">
                 <div id="friend-search-input-container">
                     <!-- 친구 추가 검색 input -->
@@ -58,17 +68,6 @@
                     <!-- 여기에 친구 목록이 동적으로 추가됩니다 -->
                 </ul>
             </div>
-        </div>
-    </div>
-
-
-    <!-- 친구 추가 영역 (모달 대신 페이지 내 표시) -->
-    <div id="friend-add-section" style="display: none;">
-        <div class="friend-modal-content">
-            <input type="text" class="search-input" id="new-friend-name" placeholder="친구 추가">
-            <br>
-            <input type="text" class="search-input" id="search-friend-name" placeholder="친구 검색">
-            <div id="error-message" style="color: red; display: none; margin-top: 10px;"></div> <!-- 에러 메시지 영역 -->
         </div>
     </div>
 
