@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -8,8 +9,11 @@
     <link rel="stylesheet" href="./webview-style.css" media="(max-width: 480px)">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
     <div id="preparation-container">
         <video id="preview-video" autoplay muted></video><br>
@@ -22,9 +26,11 @@
             </button>
         </div><br>
         <input type="text" id="username-input" placeholder="이름을 입력해주세요"> <br>
-        <button id="start-conference-button">입장</button>
+        <button
+            class="button button--ujarak button--border-thick button--text-upper button--size-s button--inverted button--text-thick"
+            id="start-conference-button">입장</button>
     </div>
-    
+
     <div id="video-chat-container" style="display:none;">
         <div class="local-video-wrapper">
             <div class="video-wrapper">
@@ -32,7 +38,7 @@
                 <div class="video-nickname" id="local-nickname">Your Name</div> <!-- 사용자 닉네임 표시 -->
             </div>
         </div>
-    
+
         <div class="remoteVideo" id="remote-video"></div>
     </div>
 
@@ -45,8 +51,12 @@
 
     <div id="chat-container">
         <div id="chat-header">
-            <button id="chat-tab-button"><h3>Chat</h3></button>
-            <button id="ai-tab-button"><h3>AI</h3></button>
+            <button id="chat-tab-button">
+                <h3>Chat</h3>
+            </button>
+            <button id="ai-tab-button">
+                <h3>AI</h3>
+            </button>
             <button id="close-chat-button">></button>
         </div>
 
@@ -58,31 +68,35 @@
             <input type="text" id="chat-input" placeholder="메세지 입력...">
             <button id="send-chat-button">전송</button>
         </div>
-        
+
         <div id="ai-analysis-container" style="display:none;">
             <div id="ai-analysis-header">
                 <h3>AI 분석 결과</h3>
             </div>
             <textarea id="ai-transcription-result" readonly placeholder="분석된 텍스트가 없습니다"></textarea>
         </div>
-    </div>        
+    </div>
 
     <div id="control-buttons-container" style="display: none;">
         <button id="camera-toggle-button" class="control-button">
             <img id="cam-img" src="./images/cam-on.png" alt="Camera Toggle">
         </button>
-    
+
         <button id="microphone-toggle-button" class="control-button">
             <img id="mic-img" src="./images/mic-on.png" alt="Microphone Toggle">
         </button>
-    
+
         <button id="end-call-button" class="control-button">
             <img src="./images/call_end.png" alt="End Call">
         </button>
-    </div>    
-    
+    </div>
+
     <script src="/socket.io/socket.io.js"></script>
     <script src="./client.js"></script>
     <script src="./videoLayout.js"></script>
+    <a class="dribbble" href="https://dribbble.com/shots/7441241-Button-Hover-Effects" target="_blank"><img
+            src="https://cdn.dribbble.com/assets/dribbble-ball-mark-2bd45f09c2fb58dbbfb44766d5d1d07c5a12972d602ef8b32204d28fa3dda554.svg"
+            alt=""></a>
 </body>
+
 </html>

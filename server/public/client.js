@@ -25,11 +25,11 @@ const peerAudioChunks = {};
 
 const iceServers = {
     iceServers: [
-        {urls: 'stun:stun.l.google.com:19302'}, 
-        {urls: 'stun:stun1.l.google.com:19302'}, 
-        {urls: 'stun:stun2.l.google.com:19302'}, 
-        {urls: 'stun:stun3.l.google.com:19302'}, 
-        {urls: 'stun:stun4.l.google.com:19302'}, 
+        { urls: 'stun:stun.l.google.com:19302' },
+        { urls: 'stun:stun1.l.google.com:19302' },
+        { urls: 'stun:stun2.l.google.com:19302' },
+        { urls: 'stun:stun3.l.google.com:19302' },
+        { urls: 'stun:stun4.l.google.com:19302' },
     ]
 };
 
@@ -39,10 +39,10 @@ socket.on('connect', () => {
 
 socket.on('existing_clients', async (clients) => {
     console.log('Existing clients:', clients);
-    
-    for (const client of clients) { 
+
+    for (const client of clients) {
         const { clientId, username } = client;
-        
+
         clientUsernames[clientId] = username;
 
         if (!peerConnections[clientId]) {
@@ -60,7 +60,7 @@ socket.on('existing_clients', async (clients) => {
 
 socket.on('new_client', async (data) => {
     console.log(`New client connected: ${data.clientId} (${data.username})`);
-    
+
     const clientId = data.clientId;
     const username = data.username;
 
@@ -111,7 +111,7 @@ async function initializeLocalStream() {
     try {
         localStream = await navigator.mediaDevices.getUserMedia(mediaConstraints);
         localVideoComponent.srcObject = localStream;
-        showVideoConference(); 
+        showVideoConference();
     } catch (error) {
         console.error('Error accessing local stream:', error);
         throw error;
@@ -274,7 +274,7 @@ document.getElementById('prep-microphone-toggle-button').addEventListener('click
 document.getElementById('start-conference-button').addEventListener('click', async () => {
     const usernameInput = document.getElementById('username-input');
     username = usernameInput.value.trim();
-    
+
     if (!username) {
         alert('Please enter your name');
         return;
@@ -300,7 +300,7 @@ document.getElementById('invite-button').addEventListener('click', () => {
         return;
     }
     const inviteUrl = `${window.location.origin}${window.location.pathname}?roomId=${roomId}`;
-    
+
     navigator.clipboard.writeText(inviteUrl).then(() => {
         alert('초대 링크가 클립보드에 복사되었습니다: ' + inviteUrl);
     }).catch(err => {
@@ -347,7 +347,7 @@ function sendMessage() {
 }
 
 socket.on('chat_message', (data) => {
-    if(data.sender !== userId)
+    if (data.sender !== userId)
         addMessageToChat(data.sender, data.message);
 });
 
@@ -393,6 +393,47 @@ function addMessageToChat(sender, message) {
     chatMessages.appendChild(messageElement);
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
+
+const prepCamImg = document.getElementById('prep-cam-img');
+const prepMicImg = document.getElementById('prep-mic-img');
+const camImg = document.getElementById('cam-img');
+const micImg = document.getElementById('mic-img');
+
+// 준비 화면에서 카메라 이미지 hover 시
+prepCamImg.addEventListener('mouseover', () => {
+    prepCamImg.src = isVideoEnabled ? './images/cam-on-hover.png' : './images/cam-off-hover.png';
+});
+
+prepCamImg.addEventListener('mouseout', () => {
+    prepCamImg.src = isVideoEnabled ? './images/cam-on.png' : './images/cam-off.png';
+});
+
+// 준비 화면에서 마이크 이미지 hover 시
+prepMicImg.addEventListener('mouseover', () => {
+    prepMicImg.src = isAudioEnabled ? './images/mic-on-hover.png' : './images/mic-off-hover.png';
+});
+
+prepMicImg.addEventListener('mouseout', () => {
+    prepMicImg.src = isAudioEnabled ? './images/mic-on.png' : './images/mic-off.png';
+});
+
+// 카메라 이미지 hover 시
+camImg.addEventListener('mouseover', () => {
+    camImg.src = isVideoEnabled ? './images/cam-on-hover.png' : './images/cam-off-hover.png';
+});
+
+camImg.addEventListener('mouseout', () => {
+    camImg.src = isVideoEnabled ? './images/cam-on.png' : './images/cam-off.png';
+});
+
+// 마이크 이미지 hover 시
+micImg.addEventListener('mouseover', () => {
+    micImg.src = isVideoEnabled ? './images/mic-on-hover.png' : './images/mic-off-hover.png';
+});
+
+micImg.addEventListener('mouseout', () => {
+    micImg.src = isVideoEnabled ? './images/mic-on.png' : './images/mic-off.png';
+});
 
 // 종료 버튼 이벤트 리스너 추가
 document.getElementById('end-call-button').addEventListener('click', () => {
@@ -457,7 +498,7 @@ socket.on('client_left', (clientId) => {
 socket.on('client_disconnected', (clientId) => {
     console.log(`Client ${clientId} disconnected`);
     removeVideoElement(clientId);
-    delete clientUsernames[clientId]; 
+    delete clientUsernames[clientId];
 });
 
 let mediaRecorder;
