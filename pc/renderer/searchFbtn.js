@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const searchTerm = input.value.trim();
             if (searchTerm !== "") {  
                 try {
+                    window.electron.ipcRenderer.send('loading-start');
                     const response = await window.electron.searchMemo(searchTerm);
                     const memoIds = response.data;
                     console.log("검색된 메모 ID들:", memoIds);
