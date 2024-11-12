@@ -35,7 +35,7 @@ app.get('/roomId', (req, res) => {
 });
 
 app.use(cors());
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 const users = {};           // 사용자 ID -> 소켓 ID 매핑
 const userSocketMap = {};   // 사용자 이름 -> 소켓 ID 매핑
@@ -46,16 +46,16 @@ io.on('connection', (socket) => {
     socket.on('join-room', (user) => {
         const [userId, name, room] = user.split(';');
         const roomId = room;
-    
+
         //console.log(`사용자 ${userId}(${name})가 방 ${roomId}에 참여했습니다.`);
-    
+
         // 사용자의 소켓 ID와 이름을 저장
         users[socket.id] = { userId, username: name };
-        usersSocketId[userId]=socket.id;
+        usersSocketId[userId] = socket.id;
         userSocketMap[name] = socket.id;
         socket.join(roomId);
         socket.roomId = roomId;
-    
+
         // 기존 클라이언트 정보(이름 포함)를 전송
         const clientsInRoom = io.sockets.adapter.rooms.get(roomId) || new Set();
         const clients = Array.from(clientsInRoom).filter(id => id !== socket.id);
@@ -63,13 +63,13 @@ io.on('connection', (socket) => {
             clientId: clientId,
             username: users[clientId]?.username || 'Anonymous'
         }));
-    
+
         socket.emit('existing_clients', existingClientsInfo);
-    
+
         // 새로운 클라이언트가 입장했음을 다른 클라이언트들에게 알림
         socket.to(roomId).emit('new_client', { clientId: socket.id, username: name });
     });
-    
+
 
     // 친구 추가 요청 처리
     socket.on('add-friend', (data) => {
@@ -117,15 +117,15 @@ io.on('connection', (socket) => {
                 message: data.message
             });
         }
-    });    
+    });
 
     socket.on('start-conference', (roomId) => {
         socket.join(roomId); // 방에 참여
-    
+
         setTimeout(() => {
             const clientsInRoom = io.sockets.adapter.rooms.get(roomId) || new Set();
             const clients = Array.from(clientsInRoom).filter(id => id !== socket.id);
-    
+
             if (clients.length > 0) {
                 socket.emit('existing_clients', clients);
                 clients.forEach(clientId => {
@@ -140,7 +140,7 @@ io.on('connection', (socket) => {
                 });
             }
         }, 100);
-    });    
+    });
 
     socket.on('transcription', (data) => {
         const { roomId, senderId, senderName, transcript } = data;
@@ -158,7 +158,7 @@ io.on('connection', (socket) => {
         if (roomId) {
             console.log(`클라이언트 ${socket.id}가 방 ${roomId}에서 나갔습니다.`);
             socket.leave(roomId); // 클라이언트를 방에서 제거
-            
+
             // 방의 다른 클라이언트들에게 해당 클라이언트가 방을 떠났음을 알림
             socket.to(roomId).emit('client_left', socket.id);
 
@@ -170,14 +170,14 @@ io.on('connection', (socket) => {
     // 클라이언트가 연결을 끊을 때 처리
     socket.on('disconnect', () => {
         console.log('클라이언트 연결 종료:', socket.id);
-        
+
         // 클라이언트가 방에 있을 경우, 방에서 나가게 처리
         const roomId = socket.roomId;
         if (roomId) {
             socket.to(roomId).emit('client_left', socket.id);
             socket.leave(roomId);
         }
-        
+
         // 연결 종료된 소켓의 사용자 정보를 삭제
         if (socket.userId && users[socket.userId]) {
             delete users[socket.userId];
@@ -243,7 +243,7 @@ const upload = multer({ storage: storage });
 app.use(bodyParser.json());
 
 // 50MB로 설정 (필요에 따라 조정)
-app.use(bodyParser.json({ limit: '1024mb' }));  
+app.use(bodyParser.json({ limit: '1024mb' }));
 
 // QR 코드 생성 함수
 function generateQRCode(id) {
@@ -279,8 +279,8 @@ app.get('/generate-qr/:userId', async (req, res) => {
         const token = generateToken();  // 임시 토큰 생성
         const expiryTime = Date.now() + 10 * 60 * 1000;  // 토큰 만료 시간 10분
         // 생성된 토큰을 데이터베이스에 저장
-        db.query('INSERT INTO Tokens (token, userId, expiryTime) VALUES (?, ?, ?)', 
-            [token, userId, expiryTime], 
+        db.query('INSERT INTO Tokens (token, userId, expiryTime) VALUES (?, ?, ?)',
+            [token, userId, expiryTime],
             (err, result) => {
                 if (err) {
                     console.error('토큰 저장 오류:', err);
@@ -313,19 +313,19 @@ app.post('/login-mobile', (req, res) => {
         }
         // 토큰이 유효하면 토큰을 삭제
         //db.query('DELETE FROM Tokens WHERE token = ?', [token], (err) => {
-            //if (err) {
-                //return res.status(500).json({ error: '토큰 삭제 오류' });
-            //}
-            // 사용자 정보 조회
-            db.query('SELECT * FROM User WHERE id = ?', [userId], (err, results) => {
-                if (err || results.length === 0) {
-                    return res.status(401).json({ error: '해당 전화번호의 유저가 없습니다.' });
-                }
-                // 로그인 성공
-                res.status(200).json({ message: '(mobile) 로그인 성공' });
-                console.log(`(mobile) user:${userId} 님이 접속 했습니다.`);
-            });
-        
+        //if (err) {
+        //return res.status(500).json({ error: '토큰 삭제 오류' });
+        //}
+        // 사용자 정보 조회
+        db.query('SELECT * FROM User WHERE id = ?', [userId], (err, results) => {
+            if (err || results.length === 0) {
+                return res.status(401).json({ error: '해당 전화번호의 유저가 없습니다.' });
+            }
+            // 로그인 성공
+            res.status(200).json({ message: '(mobile) 로그인 성공' });
+            console.log(`(mobile) user:${userId} 님이 접속 했습니다.`);
+        });
+
     });
 });
 
@@ -494,7 +494,7 @@ app.post('/memo', upload.array('files', 10), async (req, res) => {
     const memoId = memo_id;  // 클라이언트 쪽에서 랜덤 아이디값 만든후 보내줄 것임.
     const senderUserId = userId; // 처음 생성 시 메모의 소유자는 userId
     const isRead = true; // 새로 생성된 메모는 읽음 상태로 저장
-    
+
     const memoQuery = `
         INSERT INTO Memo (memo_id, user_id, date, theme, posX, posY, width, height, title, is_read, sender_user_id) 
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
@@ -520,7 +520,7 @@ app.post('/memo', upload.array('files', 10), async (req, res) => {
             contentType: 'txt',
             fileName: fileName
         });
-        
+
 
         // 여러 개의 media 파일 처리
         if (files.length > 0) {
@@ -770,12 +770,12 @@ app.delete('/memo/:memo_id', async (req, res) => {
             // 4. 모든 파일 삭제가 완료되면 데이터베이스에서 데이터를 삭제합니다.
             Promise.all(deleteFilesPromises)
                 .then(() => {
-                    db.query('DELETE FROM Data WHERE memo_id = ?', [memo_id], function(err) {
+                    db.query('DELETE FROM Data WHERE memo_id = ?', [memo_id], function (err) {
                         if (err) {
                             return res.status(500).json({ error: 'Data 테이블 데이터베이스 삭제 오류' });
                         }
 
-                        db.query('DELETE FROM Memo WHERE memo_id = ?', [memo_id], function(err) {
+                        db.query('DELETE FROM Memo WHERE memo_id = ?', [memo_id], function (err) {
                             if (err) {
                                 return res.status(500).json({ error: 'Memo 테이블 데이터베이스 삭제 오류' });
                             }
@@ -815,17 +815,17 @@ app.post('/kock', async (req, res) => {
         FROM Friend 
         WHERE user_name = ? AND friend_user_name = ?`;
     const friendNameResult2 = await query(friendNameQuery2, [targetUserDisplayName, sourceUserName]);
-    const targetUserDisplayName2 = friendNameResult2.length > 0 
-    ? friendNameResult2[0].friend_name_set
-    : sourceUserName;
+    const targetUserDisplayName2 = friendNameResult2.length > 0
+        ? friendNameResult2[0].friend_name_set
+        : sourceUserName;
 
     const targetSocketId = userSocketMap[targetUserDisplayName];  //소켓 ID 찾기
 
     console.log('소켓아이디: ' + targetSocketId);
     if (targetSocketId) {
         io.to(targetSocketId).emit('kock', `${targetUserDisplayName2}님이 당신을 콕 찔렀어요!`);
-        console.log(sourceUserName+'님이 '+ targetUserDisplayName+'님을 콕 찔렀네요.');
-        res.status(200).json({ message:  '콕이 성공적으로 전송되었습니다.' });
+        console.log(sourceUserName + '님이 ' + targetUserDisplayName + '님을 콕 찔렀네요.');
+        res.status(200).json({ message: '콕이 성공적으로 전송되었습니다.' });
     } else {
         console.log(`대상 사용자 ${targetUserName} 님이 접속 중이 아닙니다!`);
         return res.status(404).json({ message: '콕 전송 실패. 사용자가 접속중이 아닙니다.' });
@@ -857,7 +857,7 @@ app.post('/send-memo', async (req, res) => {
             INSERT INTO Memo (memo_id, user_id, date, theme, posX, posY, width, height, title, is_read, sender_user_id) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         `;
-       // 여기서, VALUES의 매개변수 개수와 전달할 값의 개수를 맞춤
+        // 여기서, VALUES의 매개변수 개수와 전달할 값의 개수를 맞춤
         await query(newMemoQuery, [
             newMemoId,
             targetUserId,
@@ -926,34 +926,34 @@ app.post('/send-memo', async (req, res) => {
                                      VALUES (?, ?, ?, ?, ?, ?)`;
             await query(newTxtDataQuery, [newTxtDataId, newMemoId, newTxtFilePath, 'txt', 'txt', 'data.txt']);
         }
-    
-       // 6. 보내는 사람의 이름과 받는 사람의 원래 이름 조회
-       const sourceUserNameQuery = 'SELECT name FROM user WHERE id = ?';
-       const sourceUser = await query(sourceUserNameQuery, [sourceUserId]);
-       if (sourceUser.length === 0) {
-           return res.status(404).json({ error: '보내는 사용자를 찾을 수 없습니다.' });
-       }
-       const sourceUserName = sourceUser[0].name;
 
-       const targetUserNameQuery = 'SELECT name FROM user WHERE id = ?';
-       const targetUser = await query(targetUserNameQuery, [targetUserId]);
-       if (targetUser.length === 0) {
-           return res.status(404).json({ error: '대상 사용자를 찾을 수 없습니다.' });
-       }
-       const targetUserName = targetUser[0].name;
+        // 6. 보내는 사람의 이름과 받는 사람의 원래 이름 조회
+        const sourceUserNameQuery = 'SELECT name FROM user WHERE id = ?';
+        const sourceUser = await query(sourceUserNameQuery, [sourceUserId]);
+        if (sourceUser.length === 0) {
+            return res.status(404).json({ error: '보내는 사용자를 찾을 수 없습니다.' });
+        }
+        const sourceUserName = sourceUser[0].name;
 
-       const friendNameQuery = `
+        const targetUserNameQuery = 'SELECT name FROM user WHERE id = ?';
+        const targetUser = await query(targetUserNameQuery, [targetUserId]);
+        if (targetUser.length === 0) {
+            return res.status(404).json({ error: '대상 사용자를 찾을 수 없습니다.' });
+        }
+        const targetUserName = targetUser[0].name;
+
+        const friendNameQuery = `
             SELECT friend_name_set 
             FROM Friend 
             WHERE user_name = ? AND friend_user_name = ?`;
-        const friendNameResult = await query(friendNameQuery, [targetUserName,sourceUserName]);
+        const friendNameResult = await query(friendNameQuery, [targetUserName, sourceUserName]);
 
-        const targetUserDisplayName = friendNameResult.length > 0 
-            ? friendNameResult[0].friend_name_set 
+        const targetUserDisplayName = friendNameResult.length > 0
+            ? friendNameResult[0].friend_name_set
             : sourceUserName;
 
-       // 7. 알림을 전송하기 위해 targetUserId로 소켓 ID 찾기
-       const targetSocketId = usersSocketId[targetUserId];  // users 객체에서 소켓 ID 찾기
+        // 7. 알림을 전송하기 위해 targetUserId로 소켓 ID 찾기
+        const targetSocketId = usersSocketId[targetUserId];  // users 객체에서 소켓 ID 찾기
 
         //    let targetSocketId;
         //     for (const [socketId, user] of Object.entries(users)) {
@@ -964,19 +964,19 @@ app.post('/send-memo', async (req, res) => {
         //     }
         //    console.log('소켓아이디: ' + targetSocketId);
 
-        console.log(sourceUserId+'가 '+targetUserId+'에게 메모'+memoId+'를 보냈다,');
-       if (targetSocketId) {
-           io.to(targetSocketId).emit('new-memo', `${targetUserDisplayName}님이 당신에게 메모를 전송했습니다.`,`${newMemoId}`);
-       } else {
-           console.log(`대상 사용자 ${targetUserId}의 소켓 ID를 찾을 수 없습니다.`);
-       }
-       res.status(200).json({ message: '메모가 성공적으로 전송되었습니다.' });
-   } catch (err) {
-       console.error('서버 오류:', err.message);
-       if (!res.headersSent) {
-           res.status(500).json({ error: '서버 오류', message: err.message });
-       }
-   }
+        console.log(sourceUserId + '가 ' + targetUserId + '에게 메모' + memoId + '를 보냈다,');
+        if (targetSocketId) {
+            io.to(targetSocketId).emit('new-memo', `${targetUserDisplayName}님이 당신에게 메모를 전송했습니다.`, `${newMemoId}`);
+        } else {
+            console.log(`대상 사용자 ${targetUserId}의 소켓 ID를 찾을 수 없습니다.`);
+        }
+        res.status(200).json({ message: '메모가 성공적으로 전송되었습니다.' });
+    } catch (err) {
+        console.error('서버 오류:', err.message);
+        if (!res.headersSent) {
+            res.status(500).json({ error: '서버 오류', message: err.message });
+        }
+    }
 });
 
 // 친구 추가 API
@@ -987,12 +987,12 @@ app.post('/friend', (req, res) => {
     if (!user_name || !friend_user_name) {
         return res.status(400).json({ error: 'user_name과 friend_user_name을 입력하세요.' });
     }
-    
+
     // 자기 자신을 친구로 추가할 수 없음
     if (user_name === friend_user_name) {
         return res.status(400).json({ error: '자기 자신을 친구로 추가할 수 없습니다.' });
     }
-    
+
     // user_name과 friend_user_name으로 각각의 id 조회
     db.query('SELECT id FROM User WHERE name = ?', [user_name], (err, userResults) => {
         if (err) {
@@ -1002,7 +1002,7 @@ app.post('/friend', (req, res) => {
             return res.status(404).json({ error: '사용자를 찾을 수 없습니다.' });
         }
         const user_id = userResults[0].id;
-        
+
         db.query('SELECT id FROM User WHERE name = ?', [friend_user_name], (err, friendResults) => {
             if (err) {
                 return res.status(500).json({ error: '데이터베이스 쿼리 오류' });
@@ -1011,7 +1011,7 @@ app.post('/friend', (req, res) => {
                 return res.status(404).json({ error: '친구를 찾을 수 없습니다.' });
             }
             const friend_id = friendResults[0].id;
-            
+
             // 친구 관계 존재 여부 확인
             db.query('SELECT * FROM Friend WHERE user_name = ? AND friend_user_name = ?', [user_name, friend_user_name], (err, results) => {
                 if (err) {
@@ -1020,7 +1020,7 @@ app.post('/friend', (req, res) => {
                 if (results.length > 0) {
                     return res.status(409).json({ error: '이미 친구 관계입니다.' });
                 }
-                
+
                 // 친구 관계 추가
                 db.query('INSERT INTO Friend (user_name, friend_user_name, friend_name_set, friend_user_id) VALUES (?, ?, ?, ?)', [user_name, friend_user_name, friend_user_name, friend_id], (err) => {
                     if (err) {
@@ -1053,7 +1053,7 @@ app.get('/friends/:user_name', (req, res) => {
         JOIN User u ON f.friend_user_name = u.name
         WHERE f.user_name = ?
     `;
-    
+
     db.query(query, [user_name], (err, results) => {
         if (err) {
             return res.status(500).json({ error: '데이터베이스 쿼리 오류', message: err.message });
@@ -1124,38 +1124,38 @@ app.put('/friend/name', (req, res) => {
 app.post('/events', (req, res) => {
     const { user_id, event_datetime, description } = req.body;
     if (!user_id || !event_datetime || !description) {
-      return res.status(400).send('Missing required fields');
+        return res.status(400).send('Missing required fields');
     }
     const event_id = uuidv4(); // 고유 이벤트 ID 생성
     const query = 'INSERT INTO event (event_id, user_id, event_datetime, description) VALUES (?, ?, ?, ?)';
     db.query(query, [event_id, user_id, event_datetime, description], (error) => {
-      if (error) {
-        console.error('Error inserting event:', error);
-        return res.status(500).send('Failed to add event');
-      }
-      res.status(201).send('Event added');
-    });
-});
-  
-  // GET 요청 처리: 이벤트 조회
-app.get('/events/:user_id', (req, res) => {
-    const userId = req.params.user_id; // URL에서 user_id를 가져옵니다.
-    const query = 'SELECT * FROM event WHERE user_id = ?'; // user_id에 해당하는 이벤트만 조회
-    
-    db.query(query, [userId], (error, results) => {
-      if (error) {
-        console.error('Error fetching events:', error);
-        return res.status(500).send('Failed to fetch events');
-      }
-      res.json(results);
+        if (error) {
+            console.error('Error inserting event:', error);
+            return res.status(500).send('Failed to add event');
+        }
+        res.status(201).send('Event added');
     });
 });
 
-  // 이벤트 삭제
+// GET 요청 처리: 이벤트 조회
+app.get('/events/:user_id', (req, res) => {
+    const userId = req.params.user_id; // URL에서 user_id를 가져옵니다.
+    const query = 'SELECT * FROM event WHERE user_id = ?'; // user_id에 해당하는 이벤트만 조회
+
+    db.query(query, [userId], (error, results) => {
+        if (error) {
+            console.error('Error fetching events:', error);
+            return res.status(500).send('Failed to fetch events');
+        }
+        res.json(results);
+    });
+});
+
+// 이벤트 삭제
 app.delete('/events/:event_id', (req, res) => {
     const eventId = req.params.event_id; // URL에서 event_id를 가져옵니다.
     const query = 'DELETE FROM event WHERE event_id = ?'; // event_id에 해당하는 이벤트 삭제
-    
+
     db.query(query, [eventId], (error, results) => {
         if (error) {
             console.error('Error deleting event:', error);
@@ -1207,12 +1207,12 @@ app.post('/invite', async (req, res) => {
     } else {
         console.error("friendNameResult가 비어 있습니다.");
     }
-    
+
     const targetSocketId = userSocketMap[targetUserDisplayName];
     console.log('초대할 사람의 소켓아이디: ' + targetSocketId);
     if (targetSocketId) {
         io.to(targetSocketId).emit('invite', inviteUrl); // `${inviteUrl}`을 `inviteUrl`로 수정
-        console.log(sourceUserName+'님이 '+ targetUserDisplayName+'님 초대!');
+        console.log(sourceUserName + '님이 ' + targetUserDisplayName + '님 초대!');
         res.status(200).json({ message: '초대 성공' });
     } else {
         console.log(`대상 사용자 ${targetUserDisplayName} 님이 접속 중이 아닙니다!`);
