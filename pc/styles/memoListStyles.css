@@ -10,6 +10,29 @@ body {
     height: 100vh;
 }
 
+/* 로딩 애니메이션 중앙 위치 */
+body.loading::before {
+    content: "";
+    position: fixed; /* 전체 페이지 중앙에 위치 */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px; /* 로딩 스피너 크기 */
+    height: 50px;
+    background-image: url('../media/loading-anime.gif'); /* 로딩 스피너 이미지 경로 */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    z-index: 1000; /* 상단 레이어 */
+}
+
+/* 로딩 중일 때 메모 리스트 내용 흐리게 */
+body.loading .container {
+    opacity: 0.3; /* 로딩 중인 상태에서 전체 흐리게 표시 */
+    pointer-events: none; /* 사용자 상호작용 차단 */
+}
+
+
 /* 메모리스트 컨테이너 스타일 */
 .container {
     width: 700px; /* 너비를 넓게 변경 */
