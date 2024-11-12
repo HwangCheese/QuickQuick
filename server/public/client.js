@@ -419,20 +419,20 @@ prepMicImg.addEventListener('mouseout', () => {
 
 // 카메라 이미지 hover 시
 camImg.addEventListener('mouseover', () => {
-    camImg.src = isVideoEnabled ? './images/cam-on-hover.png' : './images/cam-off-hover.png';
+    camImg.src = videoTrackEnabled ? './images/cam-on-hover.png' : './images/cam-off-hover.png';
 });
 
 camImg.addEventListener('mouseout', () => {
-    camImg.src = isVideoEnabled ? './images/cam-on.png' : './images/cam-off.png';
+    camImg.src = videoTrackEnabled ? './images/cam-on.png' : './images/cam-off.png';
 });
 
 // 마이크 이미지 hover 시
 micImg.addEventListener('mouseover', () => {
-    micImg.src = isVideoEnabled ? './images/mic-on-hover.png' : './images/mic-off-hover.png';
+    micImg.src = audioTrackEnabled ? './images/mic-on-hover.png' : './images/mic-off-hover.png';
 });
 
 micImg.addEventListener('mouseout', () => {
-    micImg.src = isVideoEnabled ? './images/mic-on.png' : './images/mic-off.png';
+    micImg.src = audioTrackEnabled ? './images/mic-on.png' : './images/mic-off.png';
 });
 
 // 종료 버튼 이벤트 리스너 추가
