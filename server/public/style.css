@@ -1,5 +1,12 @@
+@font-face {
+    font-family: 'MyCustomFont';
+    src: url('./media/KakaoOTFRegular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
-    font-family: "IBM Plex Sans", sans-serif;
+    font-family: 'MyCustomFont', sans-serif;
     font-weight: 300;
     font-style: normal;
     display: flex;
@@ -8,6 +15,7 @@ body {
     justify-content: center;
     height: 100vh;
     margin: 0;
+    background-color: #FAFAFA;
 }
 
 #video-chat-container {
@@ -21,22 +29,22 @@ body {
 }
 
 video {
-    width: 300px;  
-    height: 200px; 
-    border: 1px solid #000;
-    border-radius: 5px;
-    background-color: black;
+    width: 300px;
+    height: 200px;
+    /* border: 1px solid #777777; */
+    border-radius: 15px;
+    background-color: #DDDDDD;
 }
 
 #invite-button {
     width: 60px;
-    height: 50px; 
+    height: 50px;
     background: none;
     border: none;
     cursor: pointer;
     position: fixed;
     top: 30px;
-    right: 80px; 
+    right: 80px;
 }
 
 #invite-button img {
@@ -46,13 +54,13 @@ video {
 
 #chat-button {
     width: 60px;
-    height: 50px; 
+    height: 50px;
     background: none;
     border: none;
     cursor: pointer;
     position: fixed;
     top: 30px;
-    right: 15px; 
+    right: 15px;
 }
 
 #chat-button img {
@@ -62,20 +70,20 @@ video {
 
 #chat-container {
     position: fixed;
-    right: -400px; 
+    right: -400px;
     top: 0;
     width: 300px;
     height: 100%;
     background-color: white;
-    box-shadow: -2px 0 5px rgba(0,0,0,0.5);
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
-    transition: right 0.3s ease; 
+    transition: right 0.3s ease;
     z-index: 100;
 }
 
 #chat-container.show {
-    right: 0; 
+    right: 0;
 }
 
 #chat-header {
@@ -85,7 +93,8 @@ video {
     width: 100%;
 }
 
-#chat-tab-button, #ai-tab-button {
+#chat-tab-button,
+#ai-tab-button {
     width: 50%;
     padding: 10px 0;
     border: none;
@@ -95,14 +104,16 @@ video {
     text-align: center;
 }
 
-#chat-tab-button.active, #ai-tab-button.active {
+#chat-tab-button.active,
+#ai-tab-button.active {
     background-color: #d3d3d3;
 }
 
 #chat-messages-container {
     flex: 1;
     padding: 10px;
-    overflow-y: auto; /* 메시지가 많을 경우 스크롤 활성화 */
+    overflow-y: auto;
+    /* 메시지가 많을 경우 스크롤 활성화 */
     border-top: 1px solid #ddd;
 }
 
@@ -139,8 +150,8 @@ video {
     font-size: 20px;
     cursor: pointer;
     position: absolute;
-    left: -30px; 
-    top: 50%; 
+    left: -30px;
+    top: 50%;
     transform: translateY(-50%);
     padding: 10px;
 }
@@ -161,7 +172,7 @@ video {
     cursor: pointer;
     position: fixed;
     bottom: 20px;
-    left: calc(50% + 90px); 
+    left: calc(50% + 90px);
 }
 
 #camera-toggle-button {
@@ -172,10 +183,11 @@ video {
     cursor: pointer;
     position: fixed;
     bottom: 20px;
-    left: calc(50% - 200px); 
+    left: calc(50% - 200px);
 }
 
-#cam-img, #mic-img {
+#cam-img,
+#mic-img {
     width: 80px;
     height: 80px;
 }
@@ -183,9 +195,9 @@ video {
 #end-call-button {
     width: 100px;
     height: 100px;
-    background: none; 
-    border: none; 
-    cursor: pointer; 
+    background: none;
+    border: none;
+    cursor: pointer;
     position: fixed;
     bottom: 20px;
     left: calc(50% - 50px);
@@ -196,30 +208,145 @@ video {
     height: 100%;
 }
 
-#cam-off, #mic-off {
+#cam-off,
+#mic-off {
     width: 70px;
     height: 70px;
-    background: none; 
-    border: none; 
-    cursor: pointer; 
+    background: none;
+    border: none;
+    cursor: pointer;
     position: fixed;
     bottom: 35px;
     display: none;
 }
 
 #cam-off {
-    left: calc(50% - 184px); 
+    left: calc(50% - 184px);
 }
 
 #mic-off {
-    left: calc(50% + 103px); 
+    left: calc(50% + 103px);
 }
 
 #preparation-container {
+    font-family: 'MyCustomFont', sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+#username-input {
+    font-family: 'MyCustomFont', sans-serif;
+    border: 1px solid #A5A5A5;
+    padding-left: 15px;
+    height: 20px;
+    border-radius: 20px;
+}
+
+#username-input:focus {
+    outline: none;
+}
+
+.button {
+    float: left;
+    min-width: 150px;
+    max-width: 250px;
+    display: block;
+    margin: 1em;
+    padding: 1em 2em;
+    border: none;
+    background: none;
+    color: inherit;
+    vertical-align: middle;
+    position: relative;
+    z-index: 1;
+    -webkit-backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.button:focus {
+    outline: none;
+}
+
+.button--ujarak {
+    -webkit-transition: border-color 0.4s, color 0.4s;
+    transition: border-color 0.4s, color 0.4s;
+}
+
+.button--ujarak::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #37474f;
+    z-index: -1;
+    opacity: 0;
+    -webkit-transform: scale3d(0.7, 1, 1);
+    transform: scale3d(0.7, 1, 1);
+    -webkit-transition: -webkit-transform 0.4s, opacity 0.4s;
+    transition: transform 0.4s, opacity 0.4s;
+    -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+    transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.button--ujarak.button--round-s::before {
+    border-radius: 2px;
+}
+
+.button--ujarak.button--inverted::before {
+    background: #E48758;
+}
+
+.button--ujarak,
+.button--ujarak::before {
+    -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+    transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.button--ujarak:hover {
+    color: #fff;
+    border-color: #37474f;
+}
+
+.button--ujarak.button--inverted:hover {
+    color: #37474F;
+    border-color: #fff;
+}
+
+.button--ujarak:hover::before {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+.button--ujarak:hover::after {
+    border-radius: 20px;
+}
+
+#start-conference-button {
+    font-family: 'MyCustomFont', sans-serif;
+    background-color: transparent;
+    border: 2px solid #E48758;
+    border-radius: 20px;
+    color: #E48758;
+    font-weight: bold;
+    margin-top: 50px;
+    width: 100px;
+    /* 기존 크기에 맞게 조정 */
+    height: 40px;
+    font-size: 20px;
+    transition: all 0.3s ease;
+    /* 부드러운 전환 효과 */
+}
+
+#start-conference-button:hover {
+    background-color: #E48758;
+    /* 내부 색상 채우기 */
+    color: #ffffff;
+    /* 글자 색을 흰색으로 변경 */
 }
 
 #toggle-buttons {
@@ -230,16 +357,19 @@ video {
     margin: 10px;
 }
 
-#prep-cam-img, #prep-mic-img {
+#prep-cam-img,
+#prep-mic-img {
     width: 70px;
     height: 70px;
+    transition: all 0.3s ease;
 }
 
 #toggle-buttons .control-button {
     margin: 0 5px;
 }
 
-#prep-camera-toggle-button, #prep-microphone-toggle-button {
+#prep-camera-toggle-button,
+#prep-microphone-toggle-button {
     background: none;
     border: none;
 }
@@ -249,22 +379,22 @@ video {
     height: 400px;
 }
 
-#start-conference-button {
-    width: 100px;
-    height: 30px;
-}
-
 /* 추가 또는 수정된 CSS 코드 */
 #remote-video {
     display: flex;
-    flex-wrap: wrap; /* 비디오가 화면을 넘어갈 경우 다음 줄로 넘어가도록 설정 */
-    justify-content: center; /* 비디오들을 가운데 정렬 */
-    gap: 10px; /* 비디오 간 간격 설정 */
+    flex-wrap: wrap;
+    /* 비디오가 화면을 넘어갈 경우 다음 줄로 넘어가도록 설정 */
+    justify-content: center;
+    /* 비디오들을 가운데 정렬 */
+    gap: 10px;
+    /* 비디오 간 간격 설정 */
 }
 
 .video-wrapper {
-    width: 300px; /* 비디오 요소의 너비 설정 */
-    height: 200px; /* 비디오 요소의 높이 설정 */
+    width: 300px;
+    /* 비디오 요소의 너비 설정 */
+    height: 200px;
+    /* 비디오 요소의 높이 설정 */
     position: relative;
 }
 
@@ -273,10 +403,12 @@ video {
     position: absolute;
     bottom: 10px;
     left: 10px;
-    background-color: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* 반투명 배경 */
     color: white;
     padding: 5px 10px;
     font-size: 14px;
     border-radius: 3px;
-    z-index: 1; /* 비디오 위에 표시되도록 z-index 설정 */
+    z-index: 1;
+    /* 비디오 위에 표시되도록 z-index 설정 */
 }

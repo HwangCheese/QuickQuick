@@ -110,7 +110,6 @@
   opacity: 0;
   width: 40%;
   padding-left: 20px;
-  border-left: 1px solid #ccc;
   position: absolute;
   top: 0;
   right: 0;
@@ -133,7 +132,7 @@
 
 /* 세로 구분선 */
 .vertical-line {
-  width: 2px;
+  width: 0px;
   background-color: #ccc;
   height: 0%;
   margin: 0;

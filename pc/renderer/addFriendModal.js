@@ -89,6 +89,7 @@ document.addEventListener('DOMContentLoaded', function () {
         friendListSection.classList.toggle('active');  // 'active' 클래스 추가/제거로 보이게/숨기게 설정
 
         // 친구 검색 섹션 숨김
+        friendAddSection.style.display = 'none';
         friendAddSection.classList.remove('active');  // 검색창이 보이면 숨기기
 
         rightColumn.classList.add('active');
@@ -105,10 +106,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // 친구 추가 버튼 클릭 시 친구 추가 영역 표시
     addFriendButton.addEventListener('click', function () {
+        friendAddSection.style.display = 'block';
         friendAddSection.classList.toggle('active');
         // 필요하다면 다른 섹션을 숨기기
         friendListSection.classList.remove('active');
         rightColumn.classList.add('active');
+
         toggleRightColumn(friendAddSection.classList.contains('active'));
         if (friendAddSection.classList.contains('active')) {
             requestWindowResize(550, 400);
