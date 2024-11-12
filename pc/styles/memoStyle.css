@@ -395,6 +395,11 @@ body {
     display: none;
 }
 
+/*css 수정을 위한 임의 코드, 추후 통으로 show 클래스 통째로 삭제할 것*/
+.show{ 
+    display: block;
+}
+
 /* 전송 버튼 스타일 */
 #send-friends-button {
     background-color: #007bff;
