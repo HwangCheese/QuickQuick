@@ -12,17 +12,13 @@
   margin: 0;
   padding: 0;
   overflow: hidden;
-  /* 전체 페이지 스크롤 막기 */
-  justify-content: center;
-  align-items: flex-start;
-  background-color: #FAFAFA;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  height: 100vh;
-  width: 100vw;
-  /* 창 크기를 고정 */
-  box-sizing: border-box;
-  -webkit-app-region: drag;
   text-align: center;
+  /* justify-content: center;*/
+  -webkit-app-region: drag;
+  /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);*/
+  background-color: #FAFAFA;
+  height: 100%;
+  width: 100%;
 }
 
 /* 프로필 QR 코드 컨테이너 */
@@ -124,12 +120,14 @@
   transform: translateX(-100%);
   /* 오른쪽으로 이동 */
   flex: 1;
+  z-index: 998;
 }
 
 .right-column.active {
   visibility: visible;
   opacity: 1;
   width: 45%;
+  height: 100%;
   transform: translateX(0);
 }
 
@@ -401,7 +399,7 @@
   border: 1px solid #ccc;
   font-size: 16px;
   font-family: 'MyCustomFont', sans-serif;
-  z-index: 10;
+  -webkit-app-region: no-drag;
 }
 
 /* 에러 메시지 스타일 */

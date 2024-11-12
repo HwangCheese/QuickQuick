@@ -91,6 +91,8 @@ document.addEventListener('DOMContentLoaded', function () {
         // 친구 검색 섹션 숨김
         friendAddSection.classList.remove('active');  // 검색창이 보이면 숨기기
 
+        rightColumn.classList.add('active');
+
         // 오른쪽 영역 확장 여부 결정
         toggleRightColumn(friendListSection.classList.contains('active'));
 
@@ -106,6 +108,7 @@ document.addEventListener('DOMContentLoaded', function () {
         friendAddSection.classList.toggle('active');
         // 필요하다면 다른 섹션을 숨기기
         friendListSection.classList.remove('active');
+        rightColumn.classList.add('active');
         toggleRightColumn(friendAddSection.classList.contains('active'));
         if (friendAddSection.classList.contains('active')) {
             requestWindowResize(550, 400);

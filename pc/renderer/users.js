@@ -45,6 +45,7 @@ document.getElementById('qr-link').addEventListener('click', async () => {
 
     try {
         const qrResponse = await fetch(`${QR_URL}${userId}`);
+        console.log(qrResponse);
         if (!qrResponse.ok) {
             throw new Error('네트워크 응답이 올바르지 않습니다.');
         }
@@ -101,19 +102,47 @@ document.getElementById('toggle-friend-list').addEventListener('click', async fu
 });
 
 // 친구 검색 기능 (기본적인 예제)
-document.getElementById('friend-search').addEventListener('input', function () {
-    const friendSearchSection = document.getElementById('friend-search-section');
+// document.getElementById('search-friend-name').addEventListener('input', function () {
+//     const searchedFriends = document.getElementById('searched-friends');
 
+//     const searchValue = this.value.toLowerCase();
+//     const friends = document.querySelectorAll('#friends li');
+//     friends.forEach(friend => {
+//         if (friend.textContent.toLowerCase().includes(searchValue)) {
+//             friend.style.display = '';
+//         } else {
+//             friend.style.display = 'none';
+//         }
+//     });
+// });
+
+document.querySelectorAll('.search-input').forEach(input => {
+    input.addEventListener('mousedown', () => {
+        input.focus();
+    });
+});
+
+document.getElementById('search-friend-name').addEventListener('input', function () {
+    const searchedFriends = document.getElementById('searched-friends');
     const searchValue = this.value.toLowerCase();
     const friends = document.querySelectorAll('#friends li');
+
+    // 검색 결과 초기화
+    searchedFriends.innerHTML = '';
+
+    // 친구 목록을 순회하며 검색어에 일치하는 친구를 찾기
     friends.forEach(friend => {
         if (friend.textContent.toLowerCase().includes(searchValue)) {
-            friend.style.display = '';
-        } else {
-            friend.style.display = 'none';
+            // 일치하는 친구를 `searchedFriends`에 추가
+            const friendName = friend.querySelector('.friend-name').textContent;
+            const searchResultItem = document.createElement('div');
+            searchResultItem.classList.add('search-result-item');
+            searchResultItem.textContent = friendName;
+            searchedFriends.appendChild(searchResultItem);
         }
     });
 });
+
 
 // 이벤트 위임을 사용하여 friend-action-button에 대한 이벤트 처리
 document.getElementById('friends').addEventListener('click', async function (event) {
@@ -124,7 +153,7 @@ document.getElementById('friends').addEventListener('click', async function (eve
         const pre_name = nameElement.textContent.trim(); // 기존 이름 저장
         console.log(button);
 
-        if (button.id=='edit-friend-button') {
+        if (button.id == 'edit-friend-button') {
             nameElement.contentEditable = 'true';
             nameElement.focus();
 
@@ -167,12 +196,12 @@ document.getElementById('friends').addEventListener('click', async function (eve
                     showNotification('이름을 변경했습니다.');
                 }
             }
-        } else if (button.id=='remove-friend-button')  {
+        } else if (button.id == 'remove-friend-button') {
             item.remove();
             await deleteFriend(userName, nameElement.textContent);
             showNotification('친구를 삭제했습니다.');
-        } else if(button.id=='kock-button') {
-            await handleKockAction(userName, pre_name); 
+        } else if (button.id == 'kock-button') {
+            await handleKockAction(userName, pre_name);
         }
     }
 });
@@ -182,21 +211,21 @@ function showNotification(message) {
     notificationArea.textContent = message;
     notificationArea.style.display = 'block';
     setTimeout(() => {
-      notificationArea.style.display = 'none';
+        notificationArea.style.display = 'none';
     }, 3000); // 3초 후에 알림 숨기기
-  }
+}
 
 // 'kock-button' 클릭 시 처리할 함수 정의
 async function handleKockAction(userName, friendName) {
     console.log(friendName);
-    let check = await window.electron.kockAction({userName,friendName});  // 사용자 접속 여부 확인
-    if(check)
+    let check = await window.electron.kockAction({ userName, friendName });  // 사용자 접속 여부 확인
+    if (check)
         showNotification('콕 찌르기 성공!');
     else
         showNotification('사용자가 접속 중이 아닙니다.');
 }
 
 // usersWindow 닫기
-document.getElementById('close-button').addEventListener('click', function () {
-   window.electron.closeUsersWindow();
-});
+// document.getElementById('close-button').addEventListener('click', function () {
+//     window.electron.closeUsersWindow();
+// });
