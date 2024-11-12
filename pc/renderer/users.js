@@ -78,8 +78,7 @@ document.getElementById('toggle-friend-list').addEventListener('click', async fu
     const friendNameSets = data.map(item => item.friend_name_set);
     console.log(friendNameSets); // ["강인한 고양이", "고요한 구름", "아린"]
 
-    if (friendListSection.style.display === 'none') {
-        friendListSection.style.display = 'block';
+    if (friendListSection.classList.contains('active')) {
 
         // friendNameSets 배열을 순회하면서 각 친구 이름을 <li>로 추가
         const friendList = document.getElementById('friends');
@@ -89,15 +88,15 @@ document.getElementById('toggle-friend-list').addEventListener('click', async fu
             const newFriendItem = document.createElement('li');
             newFriendItem.classList.add('friend-item');
             newFriendItem.innerHTML = `
-                 <span class="friend-name" contenteditable="false">${friendName}</span>
-                 <button class="friend-action-button" id="edit-friend-button">수정</button>
-                 <button class="friend-action-button" id="remove-friend-button">삭제</button>
-                 <button class="friend-action-button" id="kock-button">콕!</button>
-             `;
+                    <span class="friend-name" contenteditable="false">${friendName}</span>
+                    <button class="friend-action-button" id="edit-friend-button">수정</button>
+                    <button class="friend-action-button" id="remove-friend-button">삭제</button>
+                    <button class="friend-action-button" id="kock-button">콕!</button>
+                `;
             friendList.appendChild(newFriendItem);
         });
     } else {
-        friendListSection.style.display = 'none';
+
     }
 });
 
