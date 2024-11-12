@@ -81,7 +81,7 @@ function createFloatingWindow(fileName, xOffset, yOffset) {
 // memoList Window 생성
 function createMemoListWindow() {
   const newWindow = new BrowserWindow({
-    width: 400,
+    width: 345,
     height: 200,
     frame: false,
     transparent: true,
