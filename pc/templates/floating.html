@@ -13,6 +13,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            /* background-color: transparent; */
             background-color: transparent;
             /* 투명 배경 설정 */
         }
@@ -30,10 +31,12 @@
             border-radius: 50%;
             border: none;
             background-color: #E48758;
+            /* background-image: url('C:/Users/user/Desktop/background.gif'); GIF 이미지 추가 */
             color: white;
             font-size: 20px;
             cursor: pointer;
-            transition: background-color 0.3s, transform 0.6s ease, opacity 0.6s ease;
+            transition: background-color 0.6s, transform 0.6s ease, opacity 0.6s ease;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* 그림자 추가 */
         }
 
         .toggle-visible {
@@ -70,7 +73,9 @@
             left: 45px;
             display: block;
             z-index: 20;
-            transition: transform 0.3s ease;
+            transition: transform 0.6s ease, background-color 0.6s, color 0.6s;  /* 색상 변화 애니메이션 추가 */
+            /* background-image: url('C:/Users/user/Desktop/background.gif'); GIF 이미지 추가 */
+
             /* 회전 시 부드러운 애니메이션 추가 */
         }
 
