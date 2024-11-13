@@ -56,6 +56,24 @@
   -webkit-app-region: no-drag;
 }
 
+#close-user-button {
+  background: url('../media/close-icon.png') no-repeat center center;
+  background-size: 15px 15px;
+  border: none;
+  width: 20px;
+  /* 버튼 크기 약간 키움 */
+  height: 20px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+  -webkit-app-region: no-drag;
+}
+
+#close-user-button img:hover {
+  background: url(../media/close-icon-hover.png);
+}
+
 /* 왼쪽 영역 (사용자 정보 및 QR 코드) */
 .left-column {
   flex: 0 0 250px;
@@ -132,14 +150,15 @@
 
 /* 세로 구분선 */
 .vertical-line {
-  width: 0px;
+  width: 1px;
   background-color: #ccc;
-  height: 0%;
+  height: 100vh;
   margin: 0;
   top: 0;
-  left: 0;
+  left: 300px;
   transition: opacity 0.3s ease;
   opacity: 0;
+  position: absolute;
 }
 
 .vertical-line.active {
@@ -161,6 +180,26 @@
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 15px;
+}
+
+.friend-connection {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 8px;
+  /* 이름과 동그라미 사이 간격 */
+  vertical-align: middle;
+}
+
+/* 접속 중일 때의 색상 */
+.friend-connection.online {
+  background-color: #E48758;
+}
+
+/* 접속 중이 아닐 때의 색상 */
+.friend-connection.offline {
+  background-color: #DDDDDD;
 }
 
 #add-friend-button {
@@ -195,6 +234,7 @@
   /* 세로 스크롤 가능 */
   list-style: none;
   padding: 0;
+  -webkit-app-region: no-drag;
 }
 
 /* 스크롤바 스타일 */
@@ -241,7 +281,105 @@
   transform: translateX(0);
 }
 
+.friend-modal-content {
+  -webkit-app-region: no-drag;
+}
+
+#friend-list-section {
+  display: flex;
+  flex-direction: column;
+  /* 수직 방향으로 요소 정렬 */
+  justify-content: center;
+  /* 세로 중앙 정렬 */
+  height: 100vh;
+  /* 화면 전체 높이 사용 */
+}
+
+/* 친구 목록 항목 스타일 */
+.user-friend-item {
+  position: relative;
+  padding: 16px 10px;
+  /* 좌우 패딩 제거 */
+  display: flex;
+  align-items: center;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.user-friend-item::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+  /* 시작 지점을 조금 오른쪽으로 이동 */
+  width: calc(100% - 20px);
+  /* 좌우 간격을 통해 길이 조정 */
+  border-bottom: 1px solid #ddd;
+}
+
 #friends li:last-child {
+  border-bottom: none;
+}
+
+#friends li:first-child::before {
+  width: calc(100% - 20px);
+  border-top: 1px solid #ddd;
+}
+
+/*전송 목록 */
+#friend-list-section2 {
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+}
+
+/* 초대 목록 섹션 */
+.friends2-container {
+  margin-top: 20px;
+  -webkit-app-region: no-drag;
+}
+
+.friends2-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* 전송 목록 */
+#friends2 {
+  max-height: 150px;
+  /* 원하는 높이로 조정 가능 */
+  overflow-y: auto;
+  /* 세로 스크롤 가능 */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#friends2::-webkit-scrollbar {
+  width: 8px;
+  /* 스크롤바의 너비 */
+}
+
+#friends2::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  /* 스크롤바 배경 */
+}
+
+#friends2::-webkit-scrollbar-thumb {
+  background: #888;
+  /* 스크롤바의 색상 */
+  border-radius: 4px;
+  /* 스크롤바의 둥근 모서리 */
+}
+
+#friends2::-webkit-scrollbar-thumb:hover {
+  background: #555;
+  /* 마우스를 올렸을 때의 색상 */
+}
+
+#friends2 li:last-child {
   border-bottom: none;
 }
 
@@ -252,7 +390,6 @@
   border-bottom: 1px solid #ddd;
   display: flex;
   align-items: center;
-  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 /*초대 목록 */
@@ -403,21 +540,60 @@
 }
 
 #remove-friend-button {
-  background-color: #ff2200;
+  background-color: transparent;
+  margin-left: auto;
+  border: none;
+  cursor: pointer;
+  width: 15px;
+  height: 15px;
+  margin-right: 20px;
 }
 
-#edit-friend-button {
-  background-color: #5ebe22;
+#remove-friend-button img {
+  width: 15px;
+  height: 15px;
 }
 
-#kock-button {
-  background-color: blue;
+#remove-friend-button img:hover {
+  content: url("../media/trash-hover.png");
 }
 
 /* 친구 항목 호버 시 수정 버튼 표시 */
-.friend-item:hover .friend-action-button {
+.friend-item:hover .friend-action-button .user-friend-item {
   display: block;
   /* 호버 시 버튼 보이기 */
+}
+
+
+/* 전체 모달 배경 스타일 */
+#friend-modal {
+  display: none;
+  /* 기본적으로 숨김 */
+  position: fixed;
+  /* 화면에 고정 */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* 반투명 배경 */
+  z-index: 1000;
+  /* 다른 요소 위에 표시 */
+}
+
+.friend-modal-content2 {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  width: 80%;
+  max-width: 500px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-app-region: no-drag;
 }
 
 /* 이름 수정 가능 상태 */
@@ -425,6 +601,25 @@
   /*border: 1px solid #007bff;*/
   border: none;
   border-radius: 4px;
+}
+
+/* 모달 닫기 버튼 (x) */
+#friend-modal-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: url('../media/close-icon.png') no-repeat center center;
+  background-size: 15px 15px;
+  width: 15px;
+  height: 15px;
+  border: none;
+  cursor: pointer;
+}
+
+/* 모달 닫기 버튼 호버시 */
+#friend-modal-close-button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  /* 배경색 추가 */
 }
 
 /* 이름 수정 가능 상태에서 기본 포커스 스타일을 제거 */
@@ -437,7 +632,7 @@
 }
 
 /* 수정 중일 때 버튼 숨기기 */
-.friend-item:hover .friend-action-button.editing {
+.friend-item:hover .friend-action-button.editing .user-friend-item:hover {
   display: none;
 }
 
