@@ -117,6 +117,7 @@ video {
     color: #DDDDDD;
     cursor: pointer;
     text-align: center;
+    font-family: 'MyCustomFont', sans-serif;
 }
 
 #chat-tab-button {
