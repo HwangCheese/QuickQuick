@@ -605,15 +605,32 @@ async function analyzeAudio(audioBlob) {
     }
 }
 
+document.getElementById('copy-analysis').addEventListener('click', () => {
+    const transcriptionResult = document.getElementById('ai-transcription-result').value;
+    navigator.clipboard.writeText(transcriptionResult)
+        .then(() => {
+            alert("텍스트가 클립보드에 복사되었습니다."); // 복사 성공 알림
+        })
+        .catch(err => {
+            console.error("텍스트 복사에 실패했습니다:", err); // 복사 실패 시 오류 출력
+        });
+});
+
 // 탭 전환 로직
 document.getElementById('chat-tab-button').addEventListener('click', () => {
     document.getElementById('chat-messages-container').style.display = 'block'; // 채팅 메시지 표시
     document.getElementById('chat-input-container').style.display = 'flex';
     document.getElementById('ai-analysis-container').style.display = 'none'; // AI 분석 결과 숨기기
+
+    document.getElementById('chat-tab-button').style.color = '#E48758';
+    document.getElementById('ai-tab-button').style.color = '#DDDDDD';
 });
 
 document.getElementById('ai-tab-button').addEventListener('click', () => {
     document.getElementById('chat-messages-container').style.display = 'none'; // 채팅 메시지 숨기기
     document.getElementById('chat-input-container').style.display = 'none';
     document.getElementById('ai-analysis-container').style.display = 'block'; // AI 분석 결과 표시
+
+    document.getElementById('ai-tab-button').style.color = '#E48758';
+    document.getElementById('chat-tab-button').style.color = '#DDDDDD';
 });

@@ -104,6 +104,7 @@ video {
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    position: relative;
 }
 
 #chat-tab-button,
@@ -113,13 +114,43 @@ video {
     border: none;
     font-size: 20px;
     background-color: #FAFAFA;
+    color: #DDDDDD;
     cursor: pointer;
     text-align: center;
 }
 
-#chat-tab-button.active,
-#ai-tab-button.active {
-    background-color: #d3d3d3;
+#chat-tab-button {
+    color: #E48758;
+}
+
+.vertical-divider {
+    width: 1px;
+    /* 세로줄 두께 */
+    height: 100%;
+    /* 헤더 높이에 맞추어 세로로 맞춤 */
+    background-color: #ddd;
+    /* 세로줄 색상 */
+    margin: 0 10px;
+    /* 버튼과의 간격 */
+}
+
+#chat-container {
+    position: fixed;
+    right: -400px;
+    top: 0;
+    width: 300px;
+    height: 100%;
+    background-color: #FAFAFA;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    transition: right 0.4s ease;
+    /* 슬라이드 애니메이션 */
+    z-index: 100;
+}
+
+#chat-container.show {
+    right: 0;
 }
 
 #chat-messages-container {
@@ -128,6 +159,18 @@ video {
     overflow-y: auto;
     /* 메시지가 많을 경우 스크롤 활성화 */
     border-top: 1px solid #ddd;
+}
+
+#chat-messages {
+    padding-top: 5px;
+    padding-left: 5px;
+}
+
+#chat-messages .chat-message {
+    margin-bottom: 3px;
+    /* 메시지 간격 설정 */
+    padding: 5px;
+    /* 메시지 내부 여백 설정 */
 }
 
 #chat-input-container {
@@ -146,6 +189,7 @@ video {
     border: 1px solid #ddd;
     box-sizing: border-box;
     font-family: 'MyCustomFont', sans-serif;
+    border-radius: 20px;
 }
 
 #chat-input:focus {
@@ -160,6 +204,10 @@ video {
     cursor: pointer;
     margin-left: 10px;
     width: 80px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 15px;
+    font-family: 'MyCustomFont', sans-serif;
 }
 
 #close-chat-button {
@@ -174,14 +222,75 @@ video {
     padding: 10px;
 }
 
+#ai-analysis-header {
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+    border-left: 20px;
+    /* 왼쪽 여백 설정 */
+    border-top: 1px solid #ddd;
+}
+
+#copy-analysis {
+    width: 10px;
+    height: 10px;
+    background-color: transparent;
+    /* 배경색 설정 */
+    border: none;
+    /* 테두리 제거 */
+    cursor: pointer;
+    padding: 8px;
+    /* 패딩 추가 */
+    border-radius: 5px;
+    /* 모서리 둥글게 */
+    transition: all 0.3s ease;
+    /* 부드러운 전환 효과 */
+
+}
+
+#copy-analysis {
+    width: 28px;
+    /* 버튼 크기 설정 */
+    height: 32px;
+    /* 배경색 설정 */
+    border: none;
+    /* 테두리 제거 */
+    cursor: pointer;
+    padding: 4px;
+    /* 패딩 조정 */
+    border-radius: 5px;
+    /* 모서리 둥글게 */
+    transition: all 0.3s ease;
+    /* 부드러운 전환 효과 */
+}
+
+#copy-analysis img {
+    width: 100%;
+    /* 이미지를 버튼 크기에 맞춤 */
+    height: 100%;
+    transition: all 0.3s ease;
+    /* 이미지 전환 효과 */
+}
+
+#copy-analysis:hover img {
+    content: url('./images/copy-hover.png');
+    /* hover 시 이미지 변경 */
+}
+
 #ai-transcription-result {
     border: none;
     resize: none;
-    width: 290px;
+    width: 270px;
     height: 500px;
     overflow-y: auto;
     background-color: #FAFAFA;
     font-family: 'MyCustomFont', sans-serif;
+    padding-left: 20px;
+}
+
+#ai-transcription-result:focus {
+    outline: none;
+    box-shadow: none;
 }
 
 #microphone-toggle-button {

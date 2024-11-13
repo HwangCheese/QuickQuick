@@ -42,18 +42,10 @@
         <div class="remoteVideo" id="remote-video"></div>
     </div>
 
-    <!-- 커밋 전에 주석 풀기
     <button id="invite-button" style="display:none;">
         <img src="./images/add-friend.png" alt="">
     </button>
     <button id="chat-button" style="display:none;">
-        <img src="./images/chat.png" alt="">
-    </button> -->
-
-    <button id="invite-button">
-        <img src="./images/add-friend.png" alt="">
-    </button>
-    <button id="chat-button">
         <img src="./images/chat.png" alt="">
     </button>
 
@@ -62,6 +54,7 @@
             <button id="chat-tab-button">
                 <h3>Chat</h3>
             </button>
+            <div class="vertical-divider"></div>
             <button id="ai-tab-button">
                 <h3>AI</h3>
             </button>
@@ -79,9 +72,12 @@
 
         <div id="ai-analysis-container" style="display:none;">
             <div id="ai-analysis-header">
-                <h3>AI 분석 결과</h3>
+                <h3>텍스트 변환 결과</h3>
+                <button id="copy-analysis">
+                    <img src="./images/copy.png" alt="">
+                </button>
             </div>
-            <textarea id="ai-transcription-result" readonly placeholder="분석된 텍스트가 없습니다"></textarea>
+            <textarea id="ai-transcription-result" readonly placeholder="변환된 텍스트가 없습니다"></textarea>
         </div>
     </div>
 
