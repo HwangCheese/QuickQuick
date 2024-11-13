@@ -3,7 +3,7 @@ const { app, globalShortcut, ipcMain, BrowserWindow } = require('electron');
 const { createMemoWindow } = require('./newMemo');
 const { initializeSocket } = require('./socket'); // 소켓 초기화 모듈
 const { createExistMemoWindow } = require('./existMemo');
-const { createMainfloatingWindow, createUsersWindow, createMemoListWindow,createSearchButtonWindow } = require('./floting');
+const { createfloatingWindow, createUsersWindow, createMemoListWindow,createSearchButtonWindow } = require('./floting');
 const { generateId, checkAndSignUpUser,getUserName } = require('./login.js');
 const config = require('./config.js'); 
 const {} = require('./api-helpers');
@@ -24,7 +24,7 @@ app.whenReady().then(async() => {
     //app.setLoginItemSettings({ openAtLogin: true });
     userId = await generateId(); // 앱 시작 시 사용자 ID 생성
     console.log('userId: ' + userId);
-    createMainfloatingWindow(); // main 플로팅 버튼 생성.
+    createfloatingWindow(); // main 플로팅 버튼 생성.
     // 사용자 가입 확인 및 처리
     try {
       await checkAndSignUpUser(userId);

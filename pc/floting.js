@@ -2,7 +2,7 @@ const { BrowserWindow, ipcMain, screen } = require('electron');
 const path = require('path');
 
 // 전역 변수 선언
-let mainFloatingWindow;
+let floatingWindow;
 let memoListWindow;
 let usersWindow;
 
@@ -26,14 +26,14 @@ const floatingWindowOptions = {
 };
 
 //메인 플로팅 버튼 생성
-function createMainfloatingWindow() {
+function createfloatingWindow() {
   /*
   // 화면 크기 및 작업 영역 얻기
   const { width, height } = screen.getPrimaryDisplay().workAreaSize;
   // 버튼의 위치를 화면의 우측 하단으로 설정
   const x = width - floatingWindowOptions.width;
   const y = height - floatingWindowOptions.height;
-  mainFloatingWindow = new BrowserWindow({
+  floatingWindow = new BrowserWindow({
     ...floatingWindowOptions,
     //x: x-10,
     // y: y-10,
@@ -47,20 +47,20 @@ function createMainfloatingWindow() {
   const x = width - floatingWindowOptions.width - 50; // 우측 끝에서 50px 여백 추가
   const y = height - floatingWindowOptions.height - 50; // 하단 끝에서 50px 여백 추가
 
-  mainFloatingWindow = new BrowserWindow({
+  floatingWindow = new BrowserWindow({
     ...floatingWindowOptions,
     x: x,
     y: y,
   });
 
-  mainFloatingWindow.loadFile('templates/floating.html');
+  floatingWindow.loadFile('templates/floating.html');
 
-  mainFloatingWindow.once('ready-to-show', () => {
-    mainFloatingWindow.show();
+  floatingWindow.once('ready-to-show', () => {
+    floatingWindow.show();
   });
 
-  mainFloatingWindow.on('closed', () => {
-    mainFloatingWindow = null;
+  floatingWindow.on('closed', () => {
+    floatingWindow = null;
   });
 }
 
@@ -70,7 +70,7 @@ function createFloatingWindow(fileName, xOffset, yOffset) {
   newFloatingWindow.loadFile(fileName);
 
   newFloatingWindow.once('ready-to-show', () => {
-    const { x, y } = mainFloatingWindow.getBounds();
+    const { x, y } = floatingWindow.getBounds();
     newFloatingWindow.setBounds({ x: x + xOffset, y: y + yOffset });
     newFloatingWindow.show();
   });
@@ -250,4 +250,4 @@ ipcMain.on('loading-end', (event) => {
   }
 });
 
-module.exports = { createMainfloatingWindow, createUsersWindow, createNotificationWindow, createMemoListWindow, createSearchButtonWindow };
+module.exports = { createfloatingWindow, createUsersWindow, createNotificationWindow, createMemoListWindow, createSearchButtonWindow };

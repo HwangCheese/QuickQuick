@@ -4,9 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>플로팅 버튼</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
+    <link rel="stylesheet" href="../styles/floatingStyles.css">
     <style>
         body {
             height: 100vh;
@@ -23,7 +22,7 @@
             height: 130px;
         }
 
-        #button-container button{
+        #button-container button {
             position: absolute;
             width: 40px;
             height: 40px;
@@ -36,9 +35,21 @@
             transition: background-color 0.3s;
         }
 
-        .toggle-visible{
-            display: none;
-        }
+       /* 기존 스타일 유지 */
+.toggle-visible {
+    display: none; /* 기본적으로 숨김 */
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* 버튼이 보일 때 애니메이션 효과 */
+.show {
+    display: block !important; /* show 클래스가 추가되면 block으로 표시 */
+    opacity: 1;
+    transform: scale(1);
+}
+
 
         #center-btn {
             top: 45px;
@@ -76,9 +87,8 @@
 
 <body>
     <div id="button-container">
-        <button id="center-btn" >
-            
-        <!-- </button>onclick="toggleButtons()">  -->
+        <button id="center-btn">
+
             <i class="fa-solid fa-xmark"></i>
         </button>
 
@@ -95,26 +105,7 @@
             <i class="fa-solid fa-user"></i>
         </button>
     </div>
-
-    <script>
-        const buttons = document.querySelectorAll('#button-container button');
-
-        function showButtons() {
-            buttons.forEach(button => {
-                if (button !== document.querySelector('#center-btn')) {
-                    button.style.display = 'block';
-                }
-            });
-        }
-        function hideButtons() {
-            buttons.forEach(button => {
-                if (button !== document.querySelector('#center-btn')) {
-                    button.style.display = 'none';
-                }
-            });
-        }
-    </script>
-    <script src="../renderer/mainFbtn.js"></script>
+    <script src="../renderer/floating.js"></script>
 
 </body>
 
