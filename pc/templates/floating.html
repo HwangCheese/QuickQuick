@@ -13,7 +13,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #f0f0f0;
+            background-color: transparent; /* 투명 배경 설정 */
         }
 
         #button-container {
@@ -32,55 +32,53 @@
             color: white;
             font-size: 20px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.6s ease, opacity 0.6s ease;
         }
 
-       /* 기존 스타일 유지 */
-.toggle-visible {
-    display: none; /* 기본적으로 숨김 */
-    opacity: 0;
-    transform: scale(0.5);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
+        .toggle-visible {
+            opacity: 0;
+            transform: scale(0.5);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            pointer-events: none;
+        }
 
-/* 버튼이 보일 때 애니메이션 효과 */
-.show {
-    display: block !important; /* show 클래스가 추가되면 block으로 표시 */
-    opacity: 1;
-    transform: scale(1);
-}
+        .show {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
+        }
 
+        #top-btn.show {
+            transform: translate(0, -45px);
+        }
+
+        #bottom-btn.show {
+            transform: translate(0, 45px);
+        }
+
+        #left-btn.show {
+            transform: translate(-45px, 0);
+        }
+
+        #right-btn.show {
+            transform: translate(45px, 0);
+        }
 
         #center-btn {
+    top: 45px;
+    left: 45px;
+    display: block;
+    z-index: 20;
+    transition: transform 0.3s ease; /* 회전 시 부드러운 애니메이션 추가 */
+}
+
+.rotate {
+    transform: rotate(45deg); /* 45도 회전 */
+}
+        #top-btn, #bottom-btn, #left-btn, #right-btn {
             top: 45px;
             left: 45px;
-            display: block;
-            /* center 버튼은 항상 보이도록 설정 */
-        }
-
-        #top-btn {
-            top: 0;
-            left: 45px;
-        }
-
-        #bottom-btn {
-            bottom: 0;
-            left: 45px;
-        }
-
-        #left-btn {
-            top: 45px;
-            left: 0;
-        }
-
-        #right-btn {
-            top: 45px;
-            right: 0;
-        }
-
-        #button-container button:hover {
-            background-color: #000000;
-            color: #55597A;
+            z-index: 10;
         }
     </style>
 </head>
@@ -88,8 +86,7 @@
 <body>
     <div id="button-container">
         <button id="center-btn">
-
-            <i class="fa-solid fa-xmark"></i>
+            <i class="fa-solid fa-plus"></i>
         </button>
 
         <button id="top-btn" class="toggle-visible">
@@ -106,7 +103,6 @@
         </button>
     </div>
     <script src="../renderer/floating.js"></script>
-
 </body>
 
 </html>
