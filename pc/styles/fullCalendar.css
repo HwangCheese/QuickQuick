@@ -179,7 +179,7 @@ body {
 .fc-day-today .fc-daygrid-day-number {
     position: relative;
     z-index: 1; /* 숫자가 동그라미 위에 표시되도록 */
-    color: #E48758; /* 오늘 날짜 숫자 색상 */
+    color: #D46C3A; /* 오늘 날짜 숫자 색상 */
 }
 
 /* 날짜 숫자에 동그라미 추가 */
@@ -191,7 +191,7 @@ body {
     transform: translate(-50%, -50%);
     width: 28px;
     height: 28px;
-    border: 2px solid #E48758; /* 동그라미 색상 */
+    border: 2px solid #D46C3A; /* 동그라미 색상 */
     border-radius: 50%;
     z-index: -1; /* 숫자보다 뒤에 표시되도록 */
     pointer-events: none; /* 클릭 방지 */
