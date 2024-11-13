@@ -70,6 +70,14 @@ body {
   background-position: center right 8px; /* 위치 조정 */
   background-color: white;
 }
+
+@font-face {
+  font-family: 'MyCustomFont';
+  src: url('../media/KakaoOTFRegular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* 검색 입력 필드 스타일 */
 #search-bar {
   width: 365px;
@@ -79,6 +87,7 @@ body {
   border-radius: 20px;
   outline: none;
   font-size: 16px;
+  font-family: 'MyCustomFont';
   opacity: 1;
   transition: width 0.3s ease, opacity 0.3s ease;
   background-color: white;
