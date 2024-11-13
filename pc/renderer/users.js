@@ -86,12 +86,13 @@ document.getElementById('toggle-friend-list').addEventListener('click', async fu
 
         friendNameSets.forEach(friendName => {
             const newFriendItem = document.createElement('li');
-            newFriendItem.classList.add('friend-item');
+            newFriendItem.classList.add('user-friend-item');
             newFriendItem.innerHTML = `
+                    <span class="friend-connection online"></span>
                     <span class="friend-name" contenteditable="false">${friendName}</span>
-                    <button class="friend-action-button" id="edit-friend-button">수정</button>
-                    <button class="friend-action-button" id="remove-friend-button">삭제</button>
-                    <button class="friend-action-button" id="kock-button">콕!</button>
+                    <button class="friend-action-button" id="remove-friend-button">
+                        <img src='../media/trash.png' alt=''></img>
+                    </button>
                 `;
             friendList.appendChild(newFriendItem);
         });
@@ -100,27 +101,13 @@ document.getElementById('toggle-friend-list').addEventListener('click', async fu
     }
 });
 
-// 친구 검색 기능 (기본적인 예제)
-// document.getElementById('search-friend-name').addEventListener('input', function () {
-//     const searchedFriends = document.getElementById('searched-friends');
-
-//     const searchValue = this.value.toLowerCase();
-//     const friends = document.querySelectorAll('#friends li');
-//     friends.forEach(friend => {
-//         if (friend.textContent.toLowerCase().includes(searchValue)) {
-//             friend.style.display = '';
-//         } else {
-//             friend.style.display = 'none';
-//         }
-//     });
-// });
-
 document.querySelectorAll('.search-input').forEach(input => {
     input.addEventListener('mousedown', () => {
         input.focus();
     });
 });
 
+// 친구 검색 기능
 document.getElementById('search-friend-name').addEventListener('input', function () {
     const searchedFriends = document.getElementById('searched-friends');
     const searchValue = this.value.toLowerCase();
@@ -145,64 +132,106 @@ document.getElementById('search-friend-name').addEventListener('input', function
 
 // 이벤트 위임을 사용하여 friend-action-button에 대한 이벤트 처리
 document.getElementById('friends').addEventListener('click', async function (event) {
-    if (event.target.classList.contains('friend-action-button')) {
-        const button = event.target;
-        const item = button.closest('.friend-item');
-        const nameElement = item.querySelector('.friend-name');
+    if (event.target.classList.contains('friend-name')) {
+        const nameElement = event.target;
         const pre_name = nameElement.textContent.trim(); // 기존 이름 저장
-        console.log(button);
+        nameElement.contentEditable = 'true';
+        nameElement.focus();
 
-        if (button.id == 'edit-friend-button') {
-            nameElement.contentEditable = 'true';
-            nameElement.focus();
+        // 텍스트 커서를 끝으로 이동
+        const range = document.createRange();
+        const selection = window.getSelection();
+        range.selectNodeContents(nameElement);
+        range.collapse(false);
+        selection.removeAllRanges();
+        selection.addRange(range);
 
-            const range = document.createRange();
-            const selection = window.getSelection();
-            range.selectNodeContents(nameElement);
-            range.collapse(false);
-            selection.removeAllRanges();
-            selection.addRange(range);
-
-            // 포커스가 다른 곳으로 이동할 때 자동 저장
-            nameElement.addEventListener('blur', saveName, { once: true });
-
-            nameElement.addEventListener('keydown', function (event) {
-                if (event.key === 'Enter') {
-                    event.preventDefault();
-                    nameElement.blur(); // Enter 키를 눌렀을 때 blur 이벤트 발생
-                }
-            });
-
-            // 모든 버튼에서 editing 클래스 제거
-            item.querySelectorAll('.friend-action-button').forEach(btn => {
-                btn.classList.add('editing');
-            });
-
-            // 수정 후 이름 저장
-            function saveName() {
-                nameElement.contentEditable = 'false';
-
-                // 모든 버튼에서 editing 클래스 제거
-                item.querySelectorAll('.friend-action-button').forEach(btn => {
-                    btn.classList.remove('editing');
-                });
-
-                const newName = nameElement.textContent.trim(); // 변경된 이름 가져오기
-                if (pre_name !== newName) { // 이름이 변경되었는지 확인
-                    console.log('기존 이름:', pre_name);
-                    console.log('변경된 이름:', newName);
-                    updateFriendName(userName, pre_name, newName); // 서버에 업데이트 요청
-                    showNotification('이름을 변경했습니다.');
-                }
+        // 포커스가 다른 곳으로 이동하거나 엔터 키 입력 시 수정 완료
+        const saveName = async () => {
+            nameElement.contentEditable = 'false';
+            const newName = nameElement.textContent.trim();
+            if (pre_name !== newName) {
+                console.log('기존 이름:', pre_name);
+                console.log('변경된 이름:', newName);
+                await updateFriendName(userName, pre_name, newName); // 서버에 업데이트 요청
+                showNotification('이름을 변경했습니다.');
             }
-        } else if (button.id == 'remove-friend-button') {
-            item.remove();
-            await deleteFriend(userName, nameElement.textContent);
-            showNotification('친구를 삭제했습니다.');
-        } else if (button.id == 'kock-button') {
-            await handleKockAction(userName, pre_name);
-        }
+        };
+
+        // 포커스를 잃거나 엔터 키를 누르면 수정 저장
+        nameElement.addEventListener('blur', saveName, { once: true });
+        nameElement.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                nameElement.blur(); // 엔터 키로 blur 이벤트 발생
+            }
+        });
     }
+    else if (event.target.classList.contains('friend-connection') && event.target.classList.contains('online')) {
+        const friendName = event.target.getAttribute('data-friend-name');
+
+        // 콕! 동작 수행 함수 호출
+        await handleKockAction(userName, friendName);
+    }
+
+    // if (event.target.classList.contains('friend-action-button')) {
+    //     const button = event.target;
+    //     const item = button.closest('.friend-item');
+    //     const nameElement = item.querySelector('.friend-name');
+    //     const pre_name = nameElement.textContent.trim(); // 기존 이름 저장
+    //     console.log(button);
+
+    //     if (button.id == 'edit-friend-button') {
+    //         nameElement.contentEditable = 'true';
+    //         nameElement.focus();
+
+    //         const range = document.createRange();
+    //         const selection = window.getSelection();
+    //         range.selectNodeContents(nameElement);
+    //         range.collapse(false);
+    //         selection.removeAllRanges();
+    //         selection.addRange(range);
+
+    //         // 포커스가 다른 곳으로 이동할 때 자동 저장
+    //         nameElement.addEventListener('blur', saveName, { once: true });
+
+    //         nameElement.addEventListener('keydown', function (event) {
+    //             if (event.key === 'Enter') {
+    //                 event.preventDefault();
+    //                 nameElement.blur(); // Enter 키를 눌렀을 때 blur 이벤트 발생
+    //             }
+    //         });
+
+    //         // 모든 버튼에서 editing 클래스 제거
+    //         item.querySelectorAll('.friend-action-button').forEach(btn => {
+    //             btn.classList.add('editing');
+    //         });
+
+    //         // 수정 후 이름 저장
+    //         function saveName() {
+    //             nameElement.contentEditable = 'false';
+
+    //             // 모든 버튼에서 editing 클래스 제거
+    //             item.querySelectorAll('.friend-action-button').forEach(btn => {
+    //                 btn.classList.remove('editing');
+    //             });
+
+    //             const newName = nameElement.textContent.trim(); // 변경된 이름 가져오기
+    //             if (pre_name !== newName) { // 이름이 변경되었는지 확인
+    //                 console.log('기존 이름:', pre_name);
+    //                 console.log('변경된 이름:', newName);
+    //                 updateFriendName(userName, pre_name, newName); // 서버에 업데이트 요청
+    //                 showNotification('이름을 변경했습니다.');
+    //             }
+    //         }
+    //     } else if (button.id == 'remove-friend-button') {
+    //         item.remove();
+    //         await deleteFriend(userName, nameElement.textContent);
+    //         showNotification('친구를 삭제했습니다.');
+    //     } else if (button.id == 'kock-button') {
+    //         await handleKockAction(userName, pre_name);
+    //     }
+    // }
 });
 
 function showNotification(message) {
