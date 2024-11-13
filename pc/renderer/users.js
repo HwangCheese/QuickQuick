@@ -88,7 +88,7 @@ document.getElementById('toggle-friend-list').addEventListener('click', async fu
             const newFriendItem = document.createElement('li');
             newFriendItem.classList.add('user-friend-item');
             newFriendItem.innerHTML = `
-                    <span class="friend-connection online"></span>
+                    <span class="friend-connection"></span>
                     <span class="friend-name" contenteditable="false">${friendName}</span>
                     <button class="friend-action-button" id="remove-friend-button">
                         <img src='../media/trash.png' alt=''></img>
@@ -167,7 +167,7 @@ document.getElementById('friends').addEventListener('click', async function (eve
             }
         });
     }
-    else if (event.target.classList.contains('friend-connection') && event.target.classList.contains('online')) {
+    else if (event.target.classList.contains('friend-connection')) {
         const friendName = event.target.getAttribute('data-friend-name');
 
         // 콕! 동작 수행 함수 호출
@@ -254,6 +254,6 @@ async function handleKockAction(userName, friendName) {
 }
 
 // usersWindow 닫기
-// document.getElementById('close-button').addEventListener('click', function () {
-//     window.electron.closeUsersWindow();
-// });
+document.getElementById('close-user-button').addEventListener('click', function () {
+    window.electron.closeUsersWindow();
+});
