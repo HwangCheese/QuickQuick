@@ -90,6 +90,9 @@ contextBridge.exposeInMainWorld('electron', {
     // 메모리스트 관련 메서드
     memoListWindow: (show) => ipcRenderer.invoke('memo-list-window', show),
 
+    // 메모 검색창을 Open or Show 메서드
+    openSearchMemoWindow: () => ipcRenderer.invoke('open-search-window'),
+
     // 메모 삭제 관련 메서드
     deleteMemo: (memoId) => ipcRenderer.invoke('delete-memo', memoId),
 

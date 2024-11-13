@@ -5,7 +5,7 @@ const Speaker = require('speaker');
 const fs = require('fs');
 const config = require('./config.js'); 
 const { shell } = require('electron'); 
-const { createNotificationWindow } = require('./floting');
+const { createUsersWindow } = require('./floting');
 const { createExistMemoWindow } = require('./existMemo');
 
 let socket = null;
@@ -51,7 +51,8 @@ function showFriendNotification(title, body) {
         notification.show();
         playSound();
         notification.on('click', () => {
-            createNotificationWindow();
+            // [은비] 이 부분 수정했는데 테스트가 불가한 상황이라 그냥 둠
+            createUsersWindow();
         });
     } catch (error) {
         console.error('알림 생성 중 오류:', error);
@@ -70,7 +71,7 @@ function showKockNotification(title, body) {
         notification.show();
         playSound();
         notification.on('click', () => {
-            createNotificationWindow();
+            createUsersWindow();
         });
     } catch (error) {
         console.error('알림 생성 중 오류:', error);

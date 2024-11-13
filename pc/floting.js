@@ -80,6 +80,10 @@ function createFloatingWindow(fileName, xOffset, yOffset) {
 
 // memoList Window 생성
 function createMemoListWindow() {
+  if (memoListWindow) {
+    console.log('already opened search-window');
+    return memoListWindow;
+  }
   const newWindow = new BrowserWindow({
     width: 345,
     height: 200,
@@ -105,8 +109,12 @@ function createMemoListWindow() {
 }
 
 // 검색창
-function createSearchButtonWindow() {
-  searchButtonWindow = new BrowserWindow({
+let searchMemoWindow;
+function createSearchMemoWindow() {
+  if (searchMemoWindow) {
+    return searchMemoWindow;
+  }
+const newWindow = new BrowserWindow({
     width: 310,
     height: 70,
     frame: false,
@@ -119,23 +127,38 @@ function createSearchButtonWindow() {
       preload: path.join(__dirname, 'preload.js')
     }
   });
-  searchButtonWindow.loadFile("templates/searchFbtn.html");
-  searchButtonWindow.once('ready-to-show', () => {
+  newWindow.loadFile("templates/searchFbtn.html");
+  newWindow.once('ready-to-show', () => {
     // 메모 리스트 창의 위에 위치시키기 위해 약간 위쪽에 오프셋 적용
-    searchButtonWindow.setBounds({
+    newWindow.setBounds({
       x: 840, // 메모 리스트 창과 동일한 X 좌표
       y: 138  // 메모 리스트 창보다 약간 위쪽
     });
-    searchButtonWindow.show();
+    newWindow.show();
   });
-  return searchButtonWindow;
+
+  newWindow.on('closed', () => {
+    searchMemoWindow = null;
+});
+
+searchMemoWindow = newWindow;
+
+return searchMemoWindow;
+
 }
+
+// 검색 윈도우 생성
+ipcMain.handle('open-search-window', () => {
+  console.log('open search-window');
+  createSearchMemoWindow();
+  createMemoListWindow();
+});
 
 // 플로팅 창 이동
 ipcMain.handle('move-floating-window', (event, { x, y }) => {
   const window = BrowserWindow.getFocusedWindow();
   if (window) {
-    console.log("x: " + x + "y: " + y)
+    //console.log("x: " + x + "y: " + y)
     window.setBounds({ x: x, y: y, width: 130, height: 130 }); // 애니메이션을 사용하지 않음
   }
 });
@@ -143,28 +166,17 @@ ipcMain.handle('move-floating-window', (event, { x, y }) => {
 // 메모 리스트 윈도우 생성 및 열기, 닫기
 ipcMain.handle('memo-list-window', (event, show) => {
   if (show) { // memoList 열기
-    memoListWindow = createMemoListWindow();
+    createMemoListWindow();
   }
   else { // memoList 닫기
     memoListWindow.close();
   }
 });
 
-function createNotificationWindow() {
-  if (!usersWindow) {
-    usersWindow = createUsersWindow();
-  } else {
-    usersWindow.focus();
-  }
-}
-
 // users Window(QR로그인, 친구추가 창) 생성 및 열기
 ipcMain.handle('open-users-window', () => {
-  if (!usersWindow) {
-    usersWindow = createUsersWindow();
-  } else {
-    usersWindow.focus();
-  }
+  console.log('open users-window');
+  createUsersWindow();
 });
 
 // users Window(QR로그인, 친구추가 창) 닫기
@@ -183,6 +195,11 @@ ipcMain.handle('resize-users-window', (event, height) => {
 
 // users Window(QR로그인, 친구추가 창) 생성
 function createUsersWindow() {
+  if (usersWindow) {
+    usersWindow.focus();
+    console.log('already opened users-window');
+    return;
+  }
   const newWindow = new BrowserWindow({
     width: 300,
     height: 400,
@@ -203,7 +220,7 @@ function createUsersWindow() {
     usersWindow = null;
   });
   usersWindow = newWindow;
-  return newWindow; // BrowserWindow 인스턴스를 반환
+  return usersWindow; // BrowserWindow 인스턴스를 반환
 }
 
 ipcMain.on('resize-window', (event, arg) => {
@@ -250,4 +267,4 @@ ipcMain.on('loading-end', (event) => {
   }
 });
 
-module.exports = { createfloatingWindow, createUsersWindow, createNotificationWindow, createMemoListWindow, createSearchButtonWindow };
+module.exports = { createfloatingWindow, createUsersWindow, createMemoListWindow, createSearchMemoWindow };

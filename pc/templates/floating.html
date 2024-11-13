@@ -13,7 +13,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: transparent; /* 투명 배경 설정 */
+            background-color: transparent;
+            /* 투명 배경 설정 */
         }
 
         #button-container {
@@ -65,17 +66,23 @@
         }
 
         #center-btn {
-    top: 45px;
-    left: 45px;
-    display: block;
-    z-index: 20;
-    transition: transform 0.3s ease; /* 회전 시 부드러운 애니메이션 추가 */
-}
+            top: 45px;
+            left: 45px;
+            display: block;
+            z-index: 20;
+            transition: transform 0.3s ease;
+            /* 회전 시 부드러운 애니메이션 추가 */
+        }
 
-.rotate {
-    transform: rotate(45deg); /* 45도 회전 */
-}
-        #top-btn, #bottom-btn, #left-btn, #right-btn {
+        .rotate {
+            transform: rotate(45deg);
+            /* 45도 회전 */
+        }
+
+        #top-btn,
+        #bottom-btn,
+        #left-btn,
+        #right-btn {
             top: 45px;
             left: 45px;
             z-index: 10;

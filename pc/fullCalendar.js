@@ -11,6 +11,11 @@ async function importFetch() {
 
 // 캘린더 윈도우 생성
 function createCalendarWindow() {
+    if (calendarWindow){
+        calendarWindow.focus();
+        console.log('already opened calendar');
+        return;
+    }
     const newWindow = new BrowserWindow({
         frame: false,
         webPreferences: {
@@ -36,11 +41,7 @@ function createCalendarWindow() {
 //캘린더 윈도우 생성
 ipcMain.handle('open-calendar-window', () => {
     console.log('open calendar');
-    if (!calendarWindow) {
-        calendarWindow = createCalendarWindow();
-    } else {
-        calendarWindow.focus();
-    }
+    createCalendarWindow();
 });
 
 // 캘린더 윈도우 닫기
