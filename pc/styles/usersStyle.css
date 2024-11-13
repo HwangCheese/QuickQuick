@@ -329,7 +329,7 @@
 #friend-list-section2 {
   padding: 10px;
   background-color: #f9f9f9;
-  border-radius: 4px;
+  border-radius: 10px;
 }
 
 /* 초대 목록 섹션 */
@@ -353,8 +353,8 @@
   overflow-y: auto;
   /* 세로 스크롤 가능 */
   list-style: none;
-  padding: 0;
-  margin: 0;
+  padding: 5px;
+  margin-right: 10px;
 }
 
 #friends2::-webkit-scrollbar {
@@ -363,12 +363,12 @@
 }
 
 #friends2::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #F4EEE7;
   /* 스크롤바 배경 */
 }
 
 #friends2::-webkit-scrollbar-thumb {
-  background: #888;
+  background: #FFDCB3;
   /* 스크롤바의 색상 */
   border-radius: 4px;
   /* 스크롤바의 둥근 모서리 */
@@ -487,7 +487,6 @@
   overflow-y: auto;
   /* 세로 스크롤 가능 */
   list-style: none;
-  padding: 0;
   margin: 0;
 }
 
@@ -497,12 +496,12 @@
 }
 
 #friends2::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #F4EEE7;
   /* 스크롤바 배경 */
 }
 
 #friends2::-webkit-scrollbar-thumb {
-  background: #888;
+  background: #FFDCB3;
   /* 스크롤바의 색상 */
   border-radius: 4px;
   /* 스크롤바의 둥근 모서리 */
@@ -581,7 +580,7 @@
 }
 
 .friend-modal-content2 {
-  background-color: #fff;
+  background-color: #F4EEE7;
   padding: 20px;
   border-radius: 5px;
   width: 80%;
@@ -607,7 +606,7 @@
   position: absolute;
   top: 10px;
   right: 10px;
-  background: url('../media/close-icon.png') no-repeat center center;
+  background: url('../media/close-icon1.png') no-repeat center center;
   background-size: 15px 15px;
   width: 15px;
   height: 15px;
@@ -617,7 +616,7 @@
 
 /* 모달 닫기 버튼 호버시 */
 #friend-modal-close-button:hover {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: #FAFAFA;
   /* 배경색 추가 */
 }
 
@@ -657,7 +656,7 @@
   margin-top: 50px;
   border-radius: 20px;
   border: 1px solid #ccc;
-  font-size: 16px;
+  font-size: 13px;
   font-family: 'MyCustomFont', sans-serif;
   -webkit-app-region: no-drag;
 }
@@ -702,9 +701,9 @@
 }
 
 .friend-modal-content2 {
-  background-color: #fff;
+  background-color: #F4EEE7;
   padding: 20px;
-  border-radius: 5px;
+  border-radius: 10px;
   width: 80%;
   max-width: 500px;
   text-align: center;
@@ -718,7 +717,7 @@
 
 /* 모달 콘텐츠 스타일 */
 .invite-modal-content {
-  background-color: #fff;
+  background-color: #FAFAFA;
   padding: 20px;
   border-radius: 5px;
   width: 80%;
