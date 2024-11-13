@@ -322,6 +322,73 @@
   align-items: center;
 }
 
+/*전송 목록 */
+#friend-list-section2 {
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+}
+
+/* 초대 목록 섹션 */
+.friends2-container {
+  margin-top: 20px;
+  -webkit-app-region: no-drag;
+}
+
+.friends2-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* 전송 목록 */
+#friends2 {
+  max-height: 150px;
+  /* 원하는 높이로 조정 가능 */
+  overflow-y: auto;
+  /* 세로 스크롤 가능 */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#friends2::-webkit-scrollbar {
+  width: 8px;
+  /* 스크롤바의 너비 */
+}
+
+#friends2::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  /* 스크롤바 배경 */
+}
+
+#friends2::-webkit-scrollbar-thumb {
+  background: #888;
+  /* 스크롤바의 색상 */
+  border-radius: 4px;
+  /* 스크롤바의 둥근 모서리 */
+}
+
+#friends2::-webkit-scrollbar-thumb:hover {
+  background: #555;
+  /* 마우스를 올렸을 때의 색상 */
+}
+
+#friends2 li:last-child {
+  border-bottom: none;
+}
+
+/* 친구 목록 항목 스타일 */
+.friend-item {
+  position: relative;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+}
+
 /* 버튼 기본 스타일 */
 .friend-action-button {
   display: none;
@@ -424,6 +491,33 @@
   /* 다른 요소 위에 표시 */
 }
 
+/* 전체 모달 배경 스타일 */
+#friend-modal {
+  display: none; /* 기본적으로 숨김 */
+  position: fixed; /* 화면에 고정 */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
+  z-index: 1000; /* 다른 요소 위에 표시 */
+}
+
+.friend-modal-content2 {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  width: 80%;
+  max-width: 500px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-app-region: no-drag;
+}
+
 /* 모달 콘텐츠 스타일 */
 .invite-modal-content {
   background-color: #fff;
@@ -438,6 +532,25 @@
   left: 50%;
   transform: translate(-50%, -50%);
   -webkit-app-region: no-drag;
+}
+
+/* 모달 닫기 버튼 (x) */
+#friend-modal-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: url('../media/close-icon.png') no-repeat center center;
+  background-size: 15px 15px;
+  width: 15px;
+  height: 15px;
+  border: none;
+  cursor: pointer;
+}
+
+/* 모달 닫기 버튼 호버시 */
+#friend-modal-close-button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  /* 배경색 추가 */
 }
 
 /* 모달 닫기 버튼 (x) */

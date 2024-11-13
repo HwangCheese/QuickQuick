@@ -46,8 +46,8 @@ let friendIDSets = [];
 let isFocused = false;
 let memo_ID;
 
-const friendListSection = document.getElementById('friend-list-section'); // 친구 목록 섹션
-const friendList = document.getElementById('friends'); // 친구 목록
+const friendListSection = document.getElementById('friend-list-section2'); // 친구 목록 섹션
+const friendList = document.getElementById('friends2'); // 친구 목록
 const inviteListSection = document.getElementById('invite-list-section'); // 초대 목록 섹션
 const inviteList = document.getElementById('invites'); // 초대 목록
 
