@@ -50,8 +50,8 @@ let friendIDSets = [];
 
 let tempPaths = []; 
 
-const friendListSection = document.getElementById('friend-list-section'); // 친구 목록 섹션
-const friendList = document.getElementById('friends'); // 친구 목록
+const friendListSection = document.getElementById('friend-list-section2'); // 친구 목록 섹션
+const friendList = document.getElementById('friends2'); // 친구 목록
 const inviteListSection = document.getElementById('invite-list-section'); // 초대 목록 섹션
 const inviteList = document.getElementById('invites'); // 초대 목록
 const loadingScreen = document.getElementById('loading-screen'); // 로딩 화면 요소
@@ -790,7 +790,7 @@ searchFriendNameInput.addEventListener('input', function () {
 // 전송할(체크된) 친구 ID를 가져오는 함수
 function getCheckedFriendsIDs() {
     const checkedFriendsIDs = [];
-    const friendCheckboxes = document.querySelectorAll('#friends .friend-checkbox');
+    const friendCheckboxes = document.querySelectorAll('#friends2 .friend-checkbox');
 
     friendCheckboxes.forEach(checkbox => {
         if (checkbox.checked) {

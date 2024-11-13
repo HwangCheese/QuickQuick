@@ -553,7 +553,7 @@ inviteBtn.addEventListener('click', async () => {
 // 체크된 친구 ID를 가져오는 함수
 function getCheckedFriendsIDs() {
     const checkedFriendsIDs = [];
-    const friendCheckboxes = document.querySelectorAll('#friends .friend-checkbox');
+    const friendCheckboxes = document.querySelectorAll('#friends2 .friend-checkbox');
 
     friendCheckboxes.forEach(checkbox => {
         if (checkbox.checked) {
