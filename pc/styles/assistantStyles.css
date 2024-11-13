@@ -1,5 +1,11 @@
+@font-face {
+    font-family: 'MyCustomFont';
+    src: url('../media/KakaoOTFRegular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
 body {
-    font-family: Arial, sans-serif;
+    font-family:'MyCustomFont', sans-serif;
     margin: 20px;
     /*background-color: #f5f5f5;*/
     background-color: #F4EEE7;
@@ -33,7 +39,7 @@ body {
     left: 20px; /* 왼쪽 간격 */
     font-size: 24px; /* 타이틀 글씨 크기 */
     font-weight: bold;
-    font-family: 'Inknut Antiqua', serif; /* 폰트 지정 */
+    font-family: 'MyCustomFont', serif; /* 폰트 지정 */
 }
 
 /* 상단의 취소, 확인 버튼*/
@@ -113,7 +119,7 @@ body {
     background: #FAFAFA;
     resize: none;
     overflow: auto;
-    font-family: Arial, sans-serif;
+    font-family: 'MyCustomFont', sans-serif;
     box-sizing: border-box;
 }
 
@@ -127,7 +133,7 @@ body {
     height: 100%;
     box-sizing: border-box;
     overflow: auto;
-    font-family: Arial, sans-serif;
+    font-family: 'MyCustomFont', sans-serif;
     margin-bottom: 5px;
     margin-top: 8px;
 }
@@ -146,6 +152,7 @@ textarea:focus {
 .file-list {
     max-height: 30%;
     font-size: 18px;
+    font-family:'MyCustomFont';
     overflow-y: auto;
     display: flex;
     flex-direction: column;
@@ -155,6 +162,7 @@ textarea:focus {
 .file-list-item {
     display: flex;
     align-items: center;
+    font-family:'MyCustomFont';
     font-size: 13px;
     gap: 5px;
     background-color: #E3E3E3;
