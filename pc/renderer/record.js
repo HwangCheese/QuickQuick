@@ -14,6 +14,7 @@ const loadingEl = document.getElementById('loading');
 const actionBtn = document.querySelector('.action-buttons');
 const downloadBtn = document.getElementById('download-btn');
 const exportBtn = document.getElementById('export-btn');
+const rerecordBtn = document.getElementById('rerecord-btn');
 
 let isRecording = false;
 
@@ -73,6 +74,10 @@ recordBtn.addEventListener('click', async () => {
                 audioPlayer.style.display = 'block';
                 recordedChunks = [];
                 analyzeAudio(); // 녹음 후 즉시 분석 함수 호출
+
+                // 중지 버튼을 다운로드 버튼으로 변경
+                recordBtn.style.display = 'none'; // 기존 녹음 버튼 숨기기
+                downloadBtn.style.display = 'block'; // 다운로드 버튼 보이게 하기
             };
 
             mediaRecorder.start();
@@ -81,9 +86,51 @@ recordBtn.addEventListener('click', async () => {
         } catch (error) {
             console.error('Error accessing media devices.', error);
         }
-    } else {
+    } 
+    else {
         mediaRecorder.stop();
-        recordBtn.style.backgroundImage = 'url(../media/re-record.png)';
+        // recordBtn.style.backgroundImage = 'url(../media/re-record.png)';
+        isRecording = false;
+    }
+});
+
+rerecordBtn.addEventListener('click', async () => {
+    if (!isRecording) {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            mediaRecorder = new MediaRecorder(stream);
+            audioPlayer.style.display = 'none';
+            transcriptionContainer.style.display = 'none'; // 결과 숨김
+            actionBtn.style.display = 'none'; // 버튼 숨김
+
+            mediaRecorder.ondataavailable = event => {
+                recordedChunks.push(event.data);
+            };
+
+            // 녹음 중지 시 자동 분석 진행
+            mediaRecorder.onstop = () => {
+                audioBlob = new Blob(recordedChunks, { type: 'audio/webm' });
+                const audioURL = URL.createObjectURL(audioBlob);
+                audioPlayer.src = audioURL;
+                audioPlayer.style.display = 'block';
+                recordedChunks = [];
+                analyzeAudio(); // 녹음 후 즉시 분석 함수 호출
+
+                // 중지 버튼을 다운로드 버튼으로 변경
+                recordBtn.style.display = 'none'; // 기존 녹음 버튼 숨기기
+                downloadBtn.style.display = 'block'; // 다운로드 버튼 보이게 하기
+            };
+
+            mediaRecorder.start();
+            recordBtn.style.backgroundImage = 'url(../media/pause.png)';
+            isRecording = true;
+        } catch (error) {
+            console.error('Error accessing media devices.', error);
+        }
+    } 
+    else {
+        mediaRecorder.stop();
+        // recordBtn.style.backgroundImage = 'url(../media/re-record.png)';
         isRecording = false;
     }
 });
