@@ -190,16 +190,12 @@
   margin-right: 8px;
   /* 이름과 동그라미 사이 간격 */
   vertical-align: middle;
+  background-color: #DDDDDD;
 }
 
 /* 접속 중일 때의 색상 */
-.friend-connection.online {
+.friend-connection:hover {
   background-color: #E48758;
-}
-
-/* 접속 중이 아닐 때의 색상 */
-.friend-connection.offline {
-  background-color: #DDDDDD;
 }
 
 #add-friend-button {
@@ -642,7 +638,8 @@
   background-color: #FAFAFA;
 }
 
-#new-friend-name {
+#new-friend-name,
+#search-friend-name {
   padding: 10px;
   margin-top: 10px;
   border: 1px solid #ccc;
