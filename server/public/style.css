@@ -263,6 +263,7 @@ video {
     z-index: 1;
     -webkit-backface-visibility: hidden;
     -moz-osx-font-smoothing: grayscale;
+    border-radius: 20px;
 }
 
 .button:focus {
@@ -272,6 +273,7 @@ video {
 .button--ujarak {
     -webkit-transition: border-color 0.4s, color 0.4s;
     transition: border-color 0.4s, color 0.4s;
+    border-radius: 20px;
 }
 
 .button--ujarak::before {
@@ -290,10 +292,7 @@ video {
     transition: transform 0.4s, opacity 0.4s;
     -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
     transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-}
-
-.button--ujarak.button--round-s::before {
-    border-radius: 2px;
+    border-radius: 20px;
 }
 
 .button--ujarak.button--inverted::before {
@@ -314,15 +313,13 @@ video {
 .button--ujarak.button--inverted:hover {
     color: #37474F;
     border-color: #fff;
+    border-radius: 20px;
 }
 
 .button--ujarak:hover::before {
     opacity: 1;
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
-}
-
-.button--ujarak:hover::after {
     border-radius: 20px;
 }
 
@@ -340,12 +337,19 @@ video {
     font-size: 20px;
     transition: all 0.3s ease;
     /* 부드러운 전환 효과 */
+    display: flex;
+    /* 플렉스 박스 사용 */
+    align-items: center;
+    /* 세로 중앙 정렬 */
+    justify-content: center;
+    /* 가로 중앙 정렬 */
+    text-align: center;
 }
 
 #start-conference-button:hover {
     background-color: #E48758;
     /* 내부 색상 채우기 */
-    color: #ffffff;
+    color: #FAFAFA;
     /* 글자 색을 흰색으로 변경 */
 }
 
