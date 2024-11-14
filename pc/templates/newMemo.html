@@ -249,7 +249,9 @@
             width: 100%;
             height: 100%;
             background-image: url('../media/loading.gif');
-            background-size: cover;
+            background-size: cover; /* 화면 크기에 맞게 이미지를 꽉 채움 */
+            background-position: center; /* 이미지를 왼쪽으로 조금 정렬 */
+            background-repeat: no-repeat; /* 이미지 반복 방지 */
             display: flex;
             flex-direction: column;
             justify-content: center;
