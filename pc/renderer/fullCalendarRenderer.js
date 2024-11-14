@@ -57,6 +57,14 @@ document.addEventListener('DOMContentLoaded', async function () { //페이지의
         }
       });
     },
+    eventContent: function (arg) {
+      return {
+        html: `<div id="event-content">
+                 <span id="event-circle"></span>
+                 ${arg.event.title}
+               </div>`
+      };
+    },
     // 이벤트 클릭 시 발생하는 이벤트
     eventClick: function (info) {
       const event = info.event;

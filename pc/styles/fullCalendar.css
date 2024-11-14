@@ -1,9 +1,17 @@
+@font-face {
+    font-family: 'MyCustomFont';
+    src: url('../media/KakaoOTFRegular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 /* 기본 스타일 */
 body {
     background-color: #FAFAFA;
     color: #6E6D6D;
     margin: 0;
     padding: 0;
+    font-family: 'MyCustomFont', sans-serif;
 }
 
 /* 드래그 가능한 영역 */
@@ -94,7 +102,7 @@ body {
 
 .fc-prev-button:hover,
 .fc-next-button:hover {
-    background-color: #FFD5C2 !important;
+    background-color: #f3af8e !important;
     /* 호버 시 더 진한 색상 */
 }
 
@@ -114,7 +122,7 @@ body {
 
 /* 오늘 버튼 호버 시 색상 변경 */
 .fc-today-button:hover {
-    background-color: #D46C3A !important;
+    background-color: #E48758 !important;
     /* 호버 시 더 진한 색상 */
 }
 
@@ -196,7 +204,7 @@ body {
     position: relative;
     z-index: 1;
     /* 숫자가 동그라미 위에 표시되도록 */
-    color: #D46C3A;
+    color: #E48758;
     /* 오늘 날짜 숫자 색상 */
 }
 
@@ -209,11 +217,26 @@ body {
     transform: translate(-50%, -50%);
     width: 28px;
     height: 28px;
-    border: 2px solid #D46C3A;
+    border: 2px solid #E48758;
     /* 동그라미 색상 */
     border-radius: 50%;
     z-index: -1;
     /* 숫자보다 뒤에 표시되도록 */
     pointer-events: none;
     /* 클릭 방지 */
+}
+
+#event-content {
+
+    display: flex;
+    align-items: center;
+}
+
+#event-circle {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: #E48758;
+    border-radius: 50%;
+    margin-right: 5px;
 }
