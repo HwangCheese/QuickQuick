@@ -1,8 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const button = document.getElementById('search-floating-button');
+    //const button = document.getElementById('search-floating-button');
     const input = document.getElementById('search-bar');
     let isLocked = false;
     //const currentUserId = window.electron.getUserId();
+    const closeButton = document.querySelector('.close-btn'); // 닫기 버튼 선택
 
     input.addEventListener('input', async () => {
         const searchTerm = input.value;
@@ -43,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function moveLeftButton() {
         input.style.left = "15px";
     }
-
+    /*
     button.addEventListener('mouseover', () => {
         if (!isLocked) {
             button.classList.add('hover');
@@ -76,8 +77,14 @@ document.addEventListener('DOMContentLoaded', () => {
             isLocked = true;
         }
     });
+    */
     // 입력 필드 클릭 시 버튼 클릭과 같은 동작을 방지
     input.addEventListener('click', (event) => {
         event.stopPropagation();
+    });
+    // 닫기 버튼 클릭 이벤트
+    closeButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        window.electron.closeSearchWindow();
     });
 });

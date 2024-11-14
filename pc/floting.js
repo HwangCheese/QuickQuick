@@ -4,6 +4,7 @@ const path = require('path');
 // 전역 변수 선언
 let floatingWindow;
 let memoListWindow;
+let searchWindow;
 let usersWindow;
 
 const floatingWindowOptions = {
@@ -120,7 +121,7 @@ const newWindow = new BrowserWindow({
     frame: false,
     transparent: true,
     alwaysOnTop: true,
-    resizable: false,
+    resizable: true,
     movable: true,
     show: false,
     webPreferences: {
@@ -186,6 +187,15 @@ ipcMain.handle('close-users-window', () => {
   }
 });
 
+ipcMain.handle('close-search-window',() =>{
+  if (memoListWindow && !memoListWindow.isDestroyed()) {
+    memoListWindow.close();
+  }
+  if (searchMemoWindow && !searchMemoWindow.isDestroyed()) {
+    searchMemoWindow.close();
+  }
+});
+
 // users Window(QR로그인, 친구추가 창) 크기조정
 ipcMain.handle('resize-users-window', (event, height) => {
   if (usersWindow) {
@@ -228,7 +238,7 @@ ipcMain.on('resize-window', (event, arg) => {
   if (usersWindow) {
     usersWindow.setSize(width, height);
   }
-})
+});
 
 ipcMain.on('search-memo', (event, searchTerm) => {
   console.log(searchTerm);

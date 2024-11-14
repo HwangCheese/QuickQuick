@@ -40,6 +40,9 @@ contextBridge.exposeInMainWorld('electron', {
 
     //onSummaryReceived: (callback) => ipcRenderer.on('summary', (event, summary) => callback(summary)), //define in mewMemo&ExistMemo.js...use in newMemoRenderer.js & existMemoRenderer.js,,, 
 
+    //검색 창 닫기
+    closeSearchWindow: () => ipcRenderer.invoke('close-search-window'),
+
     // Users관련 메서드
     openUsersWindow: () => ipcRenderer.invoke('open-users-window'),
     closeUsersWindow: () => ipcRenderer.invoke('close-users-window'),
