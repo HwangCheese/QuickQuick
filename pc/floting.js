@@ -85,7 +85,7 @@ function createMemoListWindow() {
     memoListWindow=null;
   }
   const newWindow = new BrowserWindow({
-    width: 345,
+    width: 320,
     height: 200,
     frame: false,
     transparent: true,
@@ -100,7 +100,7 @@ function createMemoListWindow() {
   newWindow.loadFile("templates/memoList.html");
 
   newWindow.once('ready-to-show', () => {
-    newWindow.setBounds({ x: 800, y: 200 });
+    newWindow.setBounds({ x: 640, y: 200 });
     newWindow.show();
   });
 
@@ -131,7 +131,7 @@ const newWindow = new BrowserWindow({
   newWindow.once('ready-to-show', () => {
     // 메모 리스트 창의 위에 위치시키기 위해 약간 위쪽에 오프셋 적용
     newWindow.setBounds({
-      x: 840, // 메모 리스트 창과 동일한 X 좌표
+      x: 680, // 메모 리스트 창과 동일한 X 좌표
       y: 138  // 메모 리스트 창보다 약간 위쪽
     });
     newWindow.show();
