@@ -6,9 +6,32 @@
     <title>Expandable Search Bar</title>
     <link rel="stylesheet" href="../styles/floatingStyles.css">
     <script src="../renderer/searchFbtn.js"></script>
+    <style>
+        /* X 버튼 스타일 */
+        .close-btn {
+            position: absolute;
+            right: 5px; /* 오른쪽으로 이동 */
+            top: 5px; /* 위로 올리기 */
+            cursor: pointer;
+            width: 20px; /* 이미지 크기 조정 */
+            height: 20px;
+        }
+
+        /* 검색바와 닫기 버튼을 포함하는 컨테이너 스타일 */
+        .search-container {
+            position: relative;
+            display: inline-block;
+        }
+
+
+    </style>
 </head>
 <body>
-    <!-- 버튼 없이 검색창 텍스트 입력 필드만 남겨둠 -->
-    <input id="search-bar" type="text" placeholder="Search...">
+    <div class="search-container">
+        <!-- 검색창 필드 -->
+        <input id="search-bar" type="text" placeholder="Search...">
+        <!-- 닫기 버튼 이미지 -->
+        <img src="../media/close-icon1.png" class="close-btn" onclick="document.getElementById('search-bar').value = ''" alt="Close">
+    </div>
 </body>
 </html>

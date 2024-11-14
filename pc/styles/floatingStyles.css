@@ -80,8 +80,8 @@ body {
 
 /* 검색 입력 필드 스타일 */
 #search-bar {
-  width: 365px;
-  height: 40px;
+  width: 260px;
+  height: 30px;
   padding: 0 10px;
   border: 2px solid #ccc;
   border-radius: 20px;

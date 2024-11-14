@@ -115,7 +115,7 @@ function createSearchMemoWindow() {
     return searchMemoWindow;
   }
 const newWindow = new BrowserWindow({
-    width: 310,
+    width: 280,
     height: 70,
     frame: false,
     transparent: true,
