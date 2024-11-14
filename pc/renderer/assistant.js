@@ -1,5 +1,6 @@
 const cancelButton = document.getElementById('cancelButton'); // 취소 버튼
 const confirmButton = document.getElementById('confirmButton'); // 확인 버튼
+const loadingScreen = document.getElementById('loading-screen'); // 로딩 화면 요소
 
 const modal = document.getElementById('modal'); // 모달
 const closeButton = document.getElementById('closeButton'); // 모달 닫기
@@ -17,6 +18,17 @@ let memoID = null;
 // 페이지 로드 시 분석 중 상태 표시 및 메모 렌더링
 window.onload = () => {
     console.log("로드됨");
+
+    setTimeout(() => {
+        // 로딩 화면을 숨기고 콘텐츠 표시
+        document.getElementById('loading-screen').style.display = 'none';
+        document.getElementById('content').style.display = 'block';
+        document.getElementById('memoContainer').style.display = 'block';
+        document.getElementById('modal').style.display = 'block';
+        
+        // 실제 데이터를 불러오는 함수 호출
+        loadMemos();
+    }, 2000);
 
     window.electron.ipcRenderer.on('original-memo-id', (event, memoId) => {
         memoID = memoId;
