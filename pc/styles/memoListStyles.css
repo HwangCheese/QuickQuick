@@ -24,9 +24,9 @@ body.loading::before {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 50px; /* 로딩 스피너 크기 */
-    height: 50px;
-    background-image: url('../media/loading-anime.gif'); /* 로딩 스피너 이미지 경로 */
+    width: 120px; /* 로딩 스피너 크기 */
+    height: 80px;
+    background-image: url('../media/loading1.gif'); /* 로딩 스피너 이미지 경로 */
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
