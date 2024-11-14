@@ -1,4 +1,5 @@
 const urlSummaryModal = document.getElementById('url-summary-modal'); // 전송 모달창
+const loadingScreen = document.getElementById('loading-screen'); 
 
 document.getElementById('editor').addEventListener('keydown', async (event) => {
     if (event.key === 'Enter') { // Enter 키 감지
@@ -16,17 +17,26 @@ document.getElementById('editor').addEventListener('keydown', async (event) => {
                 document.getElementById('confirm-url-summary-btn').addEventListener('click', () => {
                     resolve(true); // '예' 선택
                     closeUrlSummaryModal();
+                    cleanupListeners();
                 });
 
                 document.getElementById('cancel-url-summary-btn').addEventListener('click', () => {
                     resolve(false); // '아니오' 선택
                     closeUrlSummaryModal();
+                    cleanupListeners();
                 });
 
                 document.getElementById('url-summary-modal-close-button').addEventListener('click', () => {
                     resolve(false); // 모달 창 닫기(X) 클릭
                     closeUrlSummaryModal();
+                    cleanupListeners();
                 });
+
+                function cleanupListeners() {
+                    document.getElementById('confirm-url-summary-btn').removeEventListener('click', confirmHandler);
+                    document.getElementById('cancel-url-summary-btn').removeEventListener('click', cancelHandler);
+                    document.getElementById('url-summary-modal-close-button').removeEventListener('click', closeHandler);
+                }
             });
 
             const userUrlSummaryConfirmed = await userUrlConfirmedPromise;
