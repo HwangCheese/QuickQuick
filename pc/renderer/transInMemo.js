@@ -1,12 +1,10 @@
 const text = document.getElementById('editor').value;
-const summaryButton = document.getElementById('summary-button');
-const translateButton = document.getElementById('translate-button');
 const resultElement = document.getElementById('result'); // 번역/요약 결과를 출력할 영역
 
 let textToCheck = ""; // 요약 또는 번역할 텍스트
 
 // 선택된 텍스트 또는 커서가 위치한 문단을 추출해 자동으로 번역 또는 요약할만한 텍스트인지 판단함
-function checkText() { 
+function checkText() {
     const textarea = document.getElementById('editor');
 
     // textarea에서 선택된 텍스트를 추출
@@ -61,52 +59,70 @@ function checkText() {
 
     // 100자 이상인지 판단
     const isSummarizable = (sentence) => sentence.length >= 100;
-
-    // 번역 버튼 처리
-    if (isTranslatable(textToCheck)) {
-        translateButton.style.display = 'block';  // 번역 버튼 보이기
-    } else {
-        translateButton.style.display = 'none';  // 번역 버튼 숨기기
+    // 요약/번역 조건을 검사해 버튼을 생성하고 표시/숨김 처리하는 함수
+    function toggleButton(buttonId, iconClass, isVisible, clickHandler) {
+        const buttonsContainer = document.getElementById('buttons');
+        let button = document.getElementById(buttonId);
+    
+        if (isVisible) {
+            if (!button) { // 버튼이 존재하지 않으면 생성 후 추가
+                button = document.createElement('button');
+                button.classList.add('content-menu');
+                button.id = buttonId;
+                button.innerHTML = `<i class="${iconClass}"></i>`;
+                buttonsContainer.appendChild(button);
+                
+                // 클릭 이벤트 리스너 추가
+                button.addEventListener('click', clickHandler);
+            }
+            button.classList.add('bounce');  // 바운스 애니메이션 추가
+            button.classList.remove('hide'); // 숨기기 애니메이션 제거
+        } else if (button) { // 버튼이 존재하면 숨기기 애니메이션 후 제거
+            button.classList.add('hide'); // 숨기기 애니메이션 추가
+            setTimeout(() => {
+                button.remove();
+            }, 500); // 애니메이션 후 버튼 제거
+        }
     }
-
-    // 요약 버튼 처리
-    if (isSummarizable(textToCheck)) {
-        summaryButton.style.display = 'block';  // 요약 버튼 보이기
-    } else {
-        summaryButton.style.display = 'none';  // 요약 버튼 숨기기
-    }
-
+    
+    // 텍스트에 따른 버튼 표시 여부 설정
+    toggleButton(
+        'translate-button', 
+        'fas fa-language', 
+        isTranslatable(textToCheck), 
+        async () => {
+            try {
+                resultElement.innerText = "번역중...";  // 결과 분석 전, 로딩 안내 메시지 출력
+                const result = await window.electron.translateText(textToCheck, 'ko');
+                resultElement.innerText = result.data.translations[0].translatedText;
+                resultElement.style.border = "2px dashed #E48758";
+            } catch (error) {
+                console.error('Error translating text:', error);
+                resultElement.innerText = 'Error translating text: ' + error.message;
+            }
+        }
+    );
+    
+    toggleButton(
+        'summary-button', 
+        'fas fa-file-alt', 
+        isSummarizable(textToCheck), 
+        async () => {
+            try {
+                resultElement.innerText = "요약중..."; // 결과 분석 전, 로딩 안내 메시지 출력
+                const summaryResult = await window.electron.summarizeText(textToCheck);
+                resultElement.innerText = summaryResult;
+                resultElement.style.border = "2px dashed #E48758";
+            } catch (error) {
+                console.error('Error summarizing text:', error);
+                resultElement.innerText = 'Error summarizing text or generating title: ' + error.message;
+            }
+        }
+    );
+    
     // 선택한 텍스트가 없거나 요약/번역 조건에 맞지 않는 경우 결과 영역 숨기기
     if (!isTranslatable(textToCheck) || !isSummarizable(textToCheck)) {
         resultElement.innerText = "";
         resultElement.style.border = "none";
     }
-}
-
-// 요약 버튼
-summaryButton.addEventListener('click', async () => {
-    try {
-        resultElement.innerText = "요약중..." // 결과 분석 전, 로딩 안내 메시지 출력
-
-        const summaryResult = await window.electron.summarizeText(textToCheck);
-        resultElement.innerText = summaryResult;
-        resultElement.style.border = "2px dashed #ADDCFF";
-    } catch (error) {
-        console.error('Error summarizing text or generating title:', error);
-        resultElement.innerText = 'Error summarizing text or generating title: ' + error.message;
-    }
-});
-
-// 번역 버튼
-translateButton.addEventListener('click', async () => {
-    try {
-        resultElement.innerText = "번역중..."  // 결과 분석 전, 로딩 안내 메시지 출력
-
-        const result = await window.electron.translateText(textToCheck, 'ko');
-        resultElement.innerText = result.data.translations[0].translatedText;
-        resultElement.style.border = "2px dashed #ADDCFF"; 
-    } catch (error) {
-        console.error('Error translating text:', error);
-        resultElement.innerText = 'Error translating text: ' + error.message;
-    }
-});
+}    
