@@ -31,6 +31,16 @@
     <script src="../renderer/urlSummaryInMemo.js" defer></script>
     <script src="../renderer/mapInMemo.js" defer></script>
     <script src="../renderer/hoverbutton.js" defer></script>
+    <script>
+        /* 지도 관련 테스트 코드 */
+        function showMap() {
+            document.getElementById('map-url-zone').style.display = 'block';
+        }
+
+        function closeMap() {
+            document.getElementById('map-url-zone').style.display = 'none';
+        }
+    </script>
 
 </head>
 
@@ -52,27 +62,22 @@
         <textarea id="editor" spellcheck="false" placeholder="메모를 입력하세요..." oninput="checkText()"
             onmouseup="checkText()" onkeyup="checkText()"></textarea>
         <div id="map-url-zone"></div>
+                <!-- 지도 iframe -->
+
+                <iframe 
+                id="map-frame" 
+                src="https://maps.google.com/maps?q=Seoul&t=&z=13&ie=UTF8&iwloc=&output=embed" 
+                allowfullscreen>
+            </iframe>
+            <!-- 닫기 버튼 -->
+            <button id="close-map-btn" onclick="closeMap()">×</button>            
+            
         <div id="result"></div>
-        <div id="buttons" style="display: flex; gap: 10px;"><!--container내의 연잎 버튼들-->
-            <!--임의의 코드, 나중에 수정 필요. 원래는 상단에 있던 버튼임.-->
-            <div class="button-container" style="display: flex; justify-content: space-around; align-items: center;">
-                <input id="send-button" class="show" type="image" src="../media/send-btn.png" alt="전송" width="70"
-                    height="60" draggable="false"
-                    style="user-select: none; -webkit-app-region: no-drag; pointer-events: auto;">
-                <input id="recorder-button" class="show" type="image" src="../media/mic-btn.png" alt="녹음" width="70"
-                    height="60" draggable="false"
-                    style="user-select: none; -webkit-app-region: no-drag; pointer-events: auto;">
-                <input id="call-button" class="show" type="image" src="../media/cam-btn.png" alt="통신" width="70"
-                    height="60" draggable="false"
-                    style="user-select: none; -webkit-app-region: no-drag; pointer-events: auto;">
-            </div>
-            <!--임의의 코드, 나중에 수정 필요. 여기까지 원래는 상단에 있던 버튼임.-->
-            <input id="summary-button" class="hidden" type="image" src="../media/summarize-btn.png" alt="요약" width="60"
-                height="30" draggable="false" style="user-select: none;">
-            <input id="translate-button" class="hidden" type="image" src="../media/translate-btn.png" alt="번역"
-                width="60" height="30" draggable="false" style="user-select: none;">
-            <input id="analysis-button" class="hidden" type="image" src="../media/separate-btn.png" alt="분류" width="60"
-                height="30" draggable="false" style="user-select: none;">
+        <div id="buttons"><!--container내의 연잎 버튼들-->
+            <button class="defult-menu" id="send-button" style=" border: none;  background-color:transparent; font-size: 15px;"><i class="fas fa-microphone"></i></button>
+            <button class="defult-menu" id="recorder-button" style="border: none;background-color:transparent; font-size: 15px;"><i class="fas fa-video" ></i></button>
+            <button class="defult-menu" id="call-button" style="border: none; background-color:transparent; font-size: 15px;"><i class="fas fa-paper-plane" ></i></button>
+            <button class="content-menu" id="map-button" onclick="showMap()" id="map-button" ><i class="fas fa-location-dot"></i></button>
         </div>
     </div>
     <div class="background-div"></div>
@@ -154,6 +159,44 @@
         <!-- <p class="loading-text">Loading...</p> -->
     </div>
     <style>
+        /* 지도 관련 테스트 코드 */
+        #map-url-zone {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            margin: 20px auto;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+            display: none; /* 초기에는 숨겨둠 */
+        }
+
+        /* iframe 스타일 */
+        #map-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* 닫기 버튼 스타일 */
+        #close-map-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         /* #loading-screen {
             position: fixed;
             top: 0;
