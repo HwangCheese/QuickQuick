@@ -89,7 +89,7 @@ document.getElementById('toggle-friend-list').addEventListener('click', async fu
                     <span class="friend-connection"></span>
                     <span class="friend-name" contenteditable="false">${friendName}</span>
                     <button class="friend-action-button remove-friend-button">
-                        <img src='../media/trash.png' alt=''></img>
+                        <img src='../media/trash.png' alt='' style="user-select: none; pointer-events: auto; -webkit-user-drag: none;"></img>
                     </button>
                 `;
             friendList.appendChild(newFriendItem);

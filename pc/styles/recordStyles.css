@@ -1,5 +1,6 @@
 #recorder-button {
-    -webkit-app-region: no-drag; /* 버튼이 드래그 영역에 포함되지 않도록 설정 */
+    -webkit-app-region: no-drag;
+    /* 버튼이 드래그 영역에 포함되지 않도록 설정 */
 }
 
 /* 모달 스타일 */
@@ -12,38 +13,54 @@
     width: 100%;
     height: 100%;
     background-color: #F4EEE7;
-    justify-content: center; /* 중앙 정렬 */
-    align-items: center; /* 중앙 정렬 */
-    display: flex; /* flexbox로 변경하여 중앙 배치 */
+    justify-content: center;
+    /* 중앙 정렬 */
+    align-items: center;
+    /* 중앙 정렬 */
+    display: flex;
+    /* flexbox로 변경하여 중앙 배치 */
 }
 
 .recorder-modal-content {
     background-color: #F4EEE7;
     padding: 15px;
     border-radius: 20px;
-    width: 80%; /* 너비 조정 가능 */
-    max-width: 500px; /* 최대 너비 설정 */
+    width: 80%;
+    /* 너비 조정 가능 */
+    max-width: 500px;
+    /* 최대 너비 설정 */
     text-align: center;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    
-    position: fixed; /* 모달을 화면에 고정 */
-    top: 50%; /* 화면의 세로 중앙 */
-    left: 50%; /* 화면의 가로 중앙 */
-    transform: translate(-50%, -50%); /* 중앙으로부터 자신의 절반만큼 이동하여 완전 중앙 배치 */
-  
+
+    position: fixed;
+    /* 모달을 화면에 고정 */
+    top: 50%;
+    /* 화면의 세로 중앙 */
+    left: 50%;
+    /* 화면의 가로 중앙 */
+    transform: translate(-50%, -50%);
+    /* 중앙으로부터 자신의 절반만큼 이동하여 완전 중앙 배치 */
+
     -webkit-app-region: no-drag;
 }
 
 /* 닫기 버튼 */
 #recorder-modal-close-button {
     position: absolute;
+    top: 0px;
+    /* Distance from the top */
+    right: 10px;
+    /* Distance from the right */
     background: url('../media/close-icon1.png') no-repeat center center;
     background-size: 15px 15px;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     border: none;
     cursor: pointer;
+    z-index: 10;
+    /* Ensures it stays on top of other elements in the modal */
 }
+
 /* 닫기 버튼 호버시 */
 #recorder-modal-close-button:hover {
     background-color: rgba(0, 0, 0, 0.1);
@@ -64,7 +81,7 @@
     cursor: pointer;
     margin: 5px;
     position: relative;
-    outline: none; 
+    outline: none;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -83,7 +100,8 @@ button:disabled {
     height: 30px;
     border-radius: 5px;
     background-color: #F4EEE7;
-    box-sizing: border-box; /* padding과 border가 너비에 포함되도록 설정 */
+    box-sizing: border-box;
+    /* padding과 border가 너비에 포함되도록 설정 */
 }
 
 #transcriptionContainer {
@@ -110,11 +128,16 @@ button:disabled {
 /* action-buttons의 스타일 */
 .action-buttons {
     margin-top: 5px;
-    display: flex; /* flexbox로 버튼을 한 줄에 배치 */
-    justify-content: space-between; /* 버튼 간 간격을 균등하게 분배 */
-    gap: 10px; /* 버튼 간 간격을 고정 */
-    width: 100%; /* 부모 컨테이너의 너비 100% */
-    flex-wrap: nowrap; /* 버튼들이 한 줄에만 있도록 설정 */
+    display: flex;
+    /* flexbox로 버튼을 한 줄에 배치 */
+    justify-content: space-between;
+    /* 버튼 간 간격을 균등하게 분배 */
+    gap: 10px;
+    /* 버튼 간 간격을 고정 */
+    width: 100%;
+    /* 부모 컨테이너의 너비 100% */
+    flex-wrap: nowrap;
+    /* 버튼들이 한 줄에만 있도록 설정 */
 }
 
 /* 버튼의 스타일 */
@@ -128,9 +151,11 @@ button:disabled {
     padding: 5px 10px;
     cursor: pointer;
     width: 29%;
-    box-sizing: border-box; /* padding과 테두리를 포함한 너비 계산 */
+    box-sizing: border-box;
+    /* padding과 테두리를 포함한 너비 계산 */
     float: left;
-    margin: 2% /* margin을 0으로 설정하여 여백 문제를 없앰 */
+    margin: 2%
+        /* margin을 0으로 설정하여 여백 문제를 없앰 */
 }
 
 /* 버튼 호버 효과 */
@@ -141,14 +166,20 @@ button:disabled {
 /* 상단 중앙의 Quick Assistant 글자*/
 #title {
     position: absolute;
-    top: 10px; /* 위쪽 간격 */
-    left: 10px; /* 왼쪽 간격 */
-    font-size: 12px; /* 타이틀 글씨 크기 */
+    top: 10px;
+    /* 위쪽 간격 */
+    left: 10px;
+    /* 왼쪽 간격 */
+    font-size: 12px;
+    /* 타이틀 글씨 크기 */
     font-weight: bold;
-    font-family: 'MyCustomFont', serif; /* 폰트 지정 */
+    font-family: 'MyCustomFont', serif;
+    /* 폰트 지정 */
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column; /* 버튼을 세로로 정렬 */
-    gap: 10px; /* 버튼 간격 */
+    flex-direction: column;
+    /* 버튼을 세로로 정렬 */
+    gap: 10px;
+    /* 버튼 간격 */
 }
