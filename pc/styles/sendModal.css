@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'MyCustomFont';
+    src: url('../media/KakaoOTFRegular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 /* 모달 스타일 */
 .send-modal {
     display: none;
@@ -60,7 +67,7 @@
     color: #333;
     margin-bottom: 15px;
     line-height: 1.4; /* 줄 간격 조정 */
-    font-family: 'Arial', sans-serif; /* 깔끔한 폰트 적용 */
+    font-family: 'MyCustomFont', sans-serif; /* 깔끔한 폰트 적용 */
 }
 
 /* 버튼 컨테이너 */
