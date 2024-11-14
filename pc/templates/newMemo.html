@@ -61,22 +61,25 @@
         </div>
         <textarea id="editor" spellcheck="false" placeholder="메모를 입력하세요..." oninput="checkText()"
             onmouseup="checkText()" onkeyup="checkText()"></textarea>
-        <div id="map-url-zone"></div>
-                <!-- 지도 iframe -->
-
-                <iframe 
-                id="map-frame" 
-                src="https://maps.google.com/maps?q=Seoul&t=&z=13&ie=UTF8&iwloc=&output=embed" 
+        <div id="map-url-zone">
+            <!-- 지도 iframe -->
+            <iframe id="map-frame" src="https://maps.google.com/maps?q=Seoul&t=&z=13&ie=UTF8&iwloc=&output=embed"
                 allowfullscreen>
             </iframe>
             <!-- 닫기 버튼 -->
-            <button id="close-map-btn" onclick="closeMap()">×</button>            
-            
+            <button id="close-map-btn" onclick="closeMap()">×</button>
+        </div>
         <div id="result"></div>
         <div id="buttons"><!--container내의 연잎 버튼들-->
-            <button class="defult-menu" id="send-button" style=" border: none;  background-color:transparent; font-size: 15px;"><i class="fas fa-microphone"></i></button>
-            <button class="defult-menu" id="recorder-button" style="border: none;background-color:transparent; font-size: 15px;"><i class="fas fa-video" ></i></button>
-            <button class="defult-menu" id="call-button" style="border: none; background-color:transparent; font-size: 15px;"><i class="fas fa-paper-plane" ></i></button>
+            <button class="defult-menu" id="recorder-button"
+                style=" border: none;  background-color:transparent; font-size: 15px;"><i
+                    class="fas fa-microphone"></i></button>
+            <button class="defult-menu" id="call-button"
+                style="border: none;background-color:transparent; font-size: 15px;"><i
+                    class="fas fa-video"></i></button>
+            <button class="defult-menu" id="send-button"
+                style="border: none; background-color:transparent; font-size: 15px;"><i
+                    class="fas fa-paper-plane"></i></button>
             <button class="content-menu" id="map-button" onclick="showMap()" id="map-button" ><i class="fas fa-location-dot"></i></button>
         </div>
     </div>
@@ -115,7 +118,7 @@
                 </ul>
             </div>
             <button id="send-friends-button">전송</button>
-            
+
         </div>
     </div>
 
@@ -169,7 +172,8 @@
             border: 1px solid #ccc;
             border-radius: 8px;
             overflow: hidden;
-            display: none; /* 초기에는 숨겨둠 */
+            display: none;
+            /* 초기에는 숨겨둠 */
         }
 
         /* iframe 스타일 */
@@ -238,22 +242,21 @@
                 transform: rotate(360deg);
             }
         } */
-    #loading-screen {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-image: url('../media/loading.gif');
-        background-size: cover;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        z-index: 1000;
-        margin-bottom: 10px;
-    }
-
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('../media/loading.gif');
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            margin-bottom: 10px;
+        }
     </style>
 
     <!-- 캘린더 모달 -->
