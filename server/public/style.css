@@ -221,6 +221,7 @@ video {
     top: 50%;
     transform: translateY(-50%);
     padding: 10px;
+    color: #E48758;
 }
 
 #ai-analysis-header {

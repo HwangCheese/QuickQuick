@@ -1,3 +1,4 @@
+const googleApiKey = window.config.googleApiKey;
 const roomSelectionContainer = document.getElementById('room-selection-container');
 const roomInput = document.getElementById('room-input');
 
@@ -553,8 +554,7 @@ function stopRecording() {
 
 // Google Speech-to-Text로 오디오 파일 분석
 async function analyzeAudio(audioBlob) {
-    const apiKey = 'AIzaSyBNgGFJtwilxa44_RZVFKyM9L09Jcgy7xQ';
-    const url = `https://speech.googleapis.com/v1/speech:recognize?key=${apiKey}`;
+    const url = `https://speech.googleapis.com/v1/speech:recognize?key=${googleApiKey}`;
 
     try {
         const reader = new FileReader();
