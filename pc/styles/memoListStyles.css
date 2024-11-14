@@ -84,27 +84,41 @@ body.loading .container {
     background: #ebae6a;
 }
 
-/* 메모 아이템 카드 스타일 */
+/* slideDown 애니메이션 */
+@keyframes slideDown {
+    0% {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1; /* 마지막에 완전히 불투명하게 */
+    }
+}
 .memo-item {
     display: flex;
     flex-direction: column;
     padding: 15px;
-    margin: 0 0 10px 0; /* 아래쪽에만 여백 추가 */
+    margin: 0 0 10px 0;
     background: linear-gradient(135deg, #fff5ea, #efc698);
     border: 1px solid #dce7f5;
     border-radius: 24px;
     box-shadow: 0 6px 12px rgba(0, 123, 255, 0.1);
-    transition: transform 0.3s, opacity 0.3s, scale 0.3s;
+    transition: transform 0.3s, opacity 0.3s;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    transform: scale(0.9); /* 초기 크기 축소 */
+    transform: scale(0.9);
+    
+    /* 애니메이션 적용 */
+    animation: slideDown 0.4s ease-out forwards; /* forwards를 추가하여 애니메이션이 끝난 후 스타일 유지 */
+    opacity: 0; /* 초기 상태에서 투명도를 0으로 설정 */
 }
 
 /* 중앙에 있을 때의 스타일 */
 .memo-item.active {
-    opacity: 1; /* 중앙에 가까운 메모는 완전히 불투명 */
-    transform: scale(1); /* 중앙에 가까운 메모는 크기가 커짐 */
+    opacity: 1;
+    transform: scale(1);
 }
 
 /* 메모 아이템 카드 호버 효과 */

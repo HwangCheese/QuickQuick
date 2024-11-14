@@ -10,10 +10,10 @@
         /* X 버튼 스타일 */
         .close-btn {
             position: absolute;
-            right: 5px; /* 오른쪽으로 이동 */
-            top: 5px; /* 위로 올리기 */
+            right: 5px;
+            top: 5px;
             cursor: pointer;
-            width: 20px; /* 이미지 크기 조정 */
+            width: 20px;
             height: 20px;
         }
 
@@ -23,6 +23,29 @@
             display: inline-block;
         }
 
+        /* 검색창 확장 애니메이션 */
+        @keyframes slideAndGrow {
+            from {
+                width: 0; /* 초기 너비를 0으로 설정 */
+                transform: translateX(-20px); /* 왼쪽에서 시작 */
+                opacity: 0; /* 투명도 0에서 시작 */
+            }
+            to {
+                width: 200px; /* 원하는 최종 너비 */
+                transform: translateX(0); /* 제자리에서 끝 */
+                opacity: 1; /* 투명도 1로 끝 */
+            }
+        }
+
+        /* 검색창 필드 스타일 */
+        #search-bar {
+            animation: slideAndGrow 0.5s ease-out forwards; /* 애니메이션 적용 */
+            width: 0; /* 초기 너비 설정 */
+            padding: 5px; /* 입력 필드에 여백 추가 */
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
       
     </style>
 </head>
