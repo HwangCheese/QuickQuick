@@ -453,7 +453,7 @@ body {
 /* 초대 버튼 스타일 */
 #invite-friends-button {
 
-    background-color: #FAFAFA;
+    background-color: #E48758;
     /* 버튼 배경색 */
     color: #fff;
     /* 버튼 텍스트 색상 */
@@ -475,7 +475,7 @@ body {
 
 /* 전송 버튼 호버 효과 */
 #invite-friends-button {
-    background-color: #FAFAFA;
+    background-color: #E48758;
     /* 호버 시 버튼 배경색 */
 }
 
