@@ -18,7 +18,7 @@ const rerecordBtn = document.getElementById('rerecord-btn');
 
 let isRecording = false;
 
-function closeRecorderModal(){
+function closeRecorderModal() {
     // 녹음 중지
     if (isRecording && mediaRecorder) {
         mediaRecorder.stop();
@@ -32,17 +32,18 @@ function closeRecorderModal(){
 // "녹음" 버튼 클릭 시, 녹음 모달창
 recorderBtn.addEventListener('click', async () => {
     recorderModal.style.display = 'flex';
-    
+
     // 녹음 버튼 초기화
+    recordBtn.style.display = 'block';
     recordBtn.style.backgroundImage = 'url(../media/record.png)';
-    
+
     // UI 요소 초기화
     audioPlayer.style.display = 'none';
     transcriptionContainer.style.display = 'none'; // 결과 숨김
     actionBtn.style.display = 'none'; // 버튼 숨김
     loadingEl.style.display = 'none'; // 로딩 숨김
     transcriptionEl.value = ''; // 텍스트 필드 초기화
-    transcriptionEl.placeholder="결과를 수정하세요";
+    transcriptionEl.placeholder = "결과를 수정하세요";
     recordedChunks = []; // 녹음 데이터 초기화
     audioBlob = null; // 오디오 데이터 초기화
 });
@@ -86,7 +87,7 @@ recordBtn.addEventListener('click', async () => {
         } catch (error) {
             console.error('Error accessing media devices.', error);
         }
-    } 
+    }
     else {
         mediaRecorder.stop();
         // recordBtn.style.backgroundImage = 'url(../media/re-record.png)';
@@ -96,6 +97,7 @@ recordBtn.addEventListener('click', async () => {
 
 rerecordBtn.addEventListener('click', async () => {
     if (!isRecording) {
+        recordBtn.style.display = 'block';
         try {
             const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
             mediaRecorder = new MediaRecorder(stream);
@@ -127,7 +129,7 @@ rerecordBtn.addEventListener('click', async () => {
         } catch (error) {
             console.error('Error accessing media devices.', error);
         }
-    } 
+    }
     else {
         mediaRecorder.stop();
         // recordBtn.style.backgroundImage = 'url(../media/re-record.png)';
@@ -198,7 +200,7 @@ downloadBtn.addEventListener('click', () => {
     if (audioBlob) {
         // 오디오 파일 다운로드 처리
         const audioURL = URL.createObjectURL(audioBlob);
-        
+
         // 다운로드를 위한 링크 생성
         const downloadLink = document.createElement('a');
         downloadLink.href = audioURL;
@@ -210,7 +212,7 @@ downloadBtn.addEventListener('click', () => {
     } else {
         console.error('No audio file available for export.');
     }
-});    
+});
 
 exportBtn.addEventListener('click', () => {
     closeRecorderModal();
