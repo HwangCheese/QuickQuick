@@ -19,8 +19,7 @@ function updateTimer(startTime) {
     if (remaining === 0) {
         document.getElementById('timer').textContent = 'QR 코드의 유효 시간이 만료되었습니다.';
         document.getElementById('qrCodeContainer').style.display = 'none'; // QR 코드 숨김
-        // frame 크기 변경
-        window.electron.resizeUsersWindow(getProfileQrContainerSize());
+        requestWindowResizeHeight(300);
         return;
     }
 
@@ -60,8 +59,7 @@ document.getElementById('qr-link').addEventListener('click', async () => {
         updateTimer(qrGenerationTime); // 타이머 시작
         // QR 코드가 렌더링된 후 프레임 크기 변경
         setTimeout(() => {
-            const newSize = getProfileQrContainerSize();
-            window.electron.resizeUsersWindow(newSize);
+            requestWindowResizeHeight(450);
         }, 5); // 5ms 후에 크기 변경 시도
     } catch (error) {
         console.error('QR 코드 요청 실패:', error);

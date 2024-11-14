@@ -115,5 +115,6 @@ contextBridge.exposeInMainWorld('electron', {
     analyzeMemo: (memo, files, memoID) => ipcRenderer.invoke('analysis-memo', memo, files, memoID), // analysis.js (메모에서 분석 요청)
     closeAssistantWindow: () => ipcRenderer.invoke('close-assistant-window'), // use in assistant.js (메모 분석 결과 창)
 
-    resizeWindow: (width, height) => ipcRenderer.send('resize-window', { width, height })
+    resizeWidth: (width) => ipcRenderer.send('resize-width', { width }),
+    resizeHeight: (height) => ipcRenderer.send('resize-height', { height })
 });

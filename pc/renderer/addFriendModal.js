@@ -70,8 +70,12 @@ newFriendNameInput.addEventListener('keydown', function (event) {
     }
 });
 
-function requestWindowResize(width, height) {
-    window.electron.resizeWindow(width, height);
+function requestWindowResizeWidth(width) {
+    window.electron.resizeWidth(width);
+}
+
+function requestWindowResizeHeight(height) {
+    window.electron.resizeHeight(height);
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -98,9 +102,9 @@ document.addEventListener('DOMContentLoaded', function () {
         toggleRightColumn(friendListSection.classList.contains('active'));
 
         if (friendListSection.classList.contains('active')) {
-            requestWindowResize(550, 400);
+            requestWindowResizeWidth(550, 300);
         } else {
-            requestWindowResize(300, 400);
+            requestWindowResizeWidth(300, 300);
         }
     });
 
@@ -114,9 +118,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         toggleRightColumn(friendAddSection.classList.contains('active'));
         if (friendAddSection.classList.contains('active')) {
-            requestWindowResize(550, 400);
+            requestWindowResizeWidth(550, 300);
         } else {
-            requestWindowResize(300, 400);
+            requestWindowResizeWidth(300, 300);
         }
     });
 

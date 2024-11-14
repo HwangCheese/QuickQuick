@@ -82,7 +82,7 @@ function createFloatingWindow(fileName, xOffset, yOffset) {
 // memoList Window 생성
 function createMemoListWindow() {
   if (memoListWindow) {
-    memoListWindow=null;
+    memoListWindow = null;
   }
   const newWindow = new BrowserWindow({
     width: 320,
@@ -114,7 +114,7 @@ function createSearchMemoWindow() {
   if (searchMemoWindow) {
     return searchMemoWindow;
   }
-const newWindow = new BrowserWindow({
+  const newWindow = new BrowserWindow({
     width: 280,
     height: 70,
     frame: false,
@@ -139,11 +139,11 @@ const newWindow = new BrowserWindow({
 
   newWindow.on('closed', () => {
     searchMemoWindow = null;
-});
+  });
 
-searchMemoWindow = newWindow;
+  searchMemoWindow = newWindow;
 
-return searchMemoWindow;
+  return searchMemoWindow;
 
 }
 
@@ -186,7 +186,7 @@ ipcMain.handle('close-users-window', () => {
   }
 });
 
-ipcMain.handle('close-search-window',() =>{
+ipcMain.handle('close-search-window', () => {
   if (memoListWindow && !memoListWindow.isDestroyed()) {
     memoListWindow.close();
   }
@@ -211,7 +211,7 @@ function createUsersWindow() {
   }
   const newWindow = new BrowserWindow({
     width: 300,
-    height: 400,
+    height: 300,
     frame: false,
     transparent: true,
     resizable: true,
@@ -232,10 +232,17 @@ function createUsersWindow() {
   return usersWindow; // BrowserWindow 인스턴스를 반환
 }
 
-ipcMain.on('resize-window', (event, arg) => {
-  const { width, height } = arg;
+ipcMain.on('resize-width', (event, arg) => {
+  const { width } = arg;
   if (usersWindow) {
-    usersWindow.setSize(width, height);
+    usersWindow.setBounds({ width, height: usersWindow.getBounds().height });
+  }
+});
+
+ipcMain.on('resize-height', (event, arg) => {
+  const { height } = arg;
+  if (usersWindow) {
+    usersWindow.setBounds({ width: usersWindow.getBounds().width, height });
   }
 });
 
