@@ -78,7 +78,7 @@
 
 /* 예, 아니오 버튼 스타일 */
 #meeting-confirm-btn, #meeting-cancel-btn {
-    background-color: #8fccfb;
+    background-color: #E48758;
     color: white;
     border: none;
     border-radius: 25px;
@@ -94,7 +94,7 @@
 }
 
 #meeting-confirm-btn:hover, #meeting-cancel-btn:hover {
-    background-color: #54a6fd;
+    background-color: #E48758;
     transform: translateY(-2px);
 }
 

@@ -79,7 +79,7 @@
 
 /* 예, 아니오 버튼 스타일 */
 #send-confirm-btn, #send-cancel-btn {
-    background-color: #8fccfb;
+    background-color: #E48758;
     color: white;
     border: none;
     border-radius: 25px;
@@ -95,7 +95,7 @@
 }
 
 #send-confirm-btn:hover, #send-cancel-btn:hover {
-    background-color: #54a6fd;
+    background-color: #E48758;
     transform: translateY(-2px);
 }
 
