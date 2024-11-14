@@ -82,8 +82,7 @@ function createFloatingWindow(fileName, xOffset, yOffset) {
 // memoList Window 생성
 function createMemoListWindow() {
   if (memoListWindow) {
-    console.log('already opened search-window');
-    return memoListWindow;
+    memoListWindow=null;
   }
   const newWindow = new BrowserWindow({
     width: 345,
