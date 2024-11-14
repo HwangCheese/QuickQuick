@@ -69,6 +69,46 @@ body {
     color: darkred;
 }
 
+.fc-daygrid-day-frame {
+    height: 40px;
+    /* 날짜 셀 높이는 고정 */
+    display: flex;
+    flex-direction: column;
+}
+
+.fc-daygrid-day-events {
+    max-height: 40px;
+    /* 날짜 셀 내부 이벤트 목록의 최대 높이 지정 */
+    /* 내부 이벤트 목록의 최대 높이 설정 */
+    overflow-y: auto;
+    /* 세로 스크롤 활성화 */
+    padding-right: 5px;
+    /* 스크롤바가 겹치지 않도록 패딩 추가 */
+}
+
+/* 스크롤바 디자인 커스터마이즈 */
+.fc-daygrid-day-events::-webkit-scrollbar {
+    width: 6px;
+    /* 스크롤바 폭 조정 */
+}
+
+.fc-daygrid-day-events::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    /* 스크롤바 배경색 */
+}
+
+.fc-daygrid-day-events::-webkit-scrollbar-thumb {
+    background: #888;
+    /* 스크롤바 색상 */
+    border-radius: 4px;
+    /* 둥근 모서리 추가 */
+}
+
+.fc-daygrid-day-events::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    /* 스크롤바에 마우스 올렸을 때 색상 */
+}
+
 /* 이동 버튼 스타일 변경 */
 .fc-button {
     background-color: transparent !important;
@@ -227,7 +267,6 @@ body {
 }
 
 #event-content {
-
     display: flex;
     align-items: center;
 }
@@ -239,4 +278,55 @@ body {
     background-color: #E48758;
     border-radius: 50%;
     margin-right: 5px;
+}
+
+#event-time-for-calendar {
+    font-size: 12px;
+    /* 글씨 크기 작게 조정 */
+    color: #6E6D6D;
+    margin-top: 3px;
+    /* 약간 아래로 위치 조정 */
+    display: block;
+}
+
+/* 커스텀 모달 스타일 */
+.my-custom-modal {
+    font-family: 'MyCustomFont', sans-serif;
+    /* 커스텀 폰트 적용 */
+    padding: 20px;
+}
+
+.my-custom-modal .swal2-title {
+    color: #333;
+    /* 타이틀 색상 */
+    font-weight: bold;
+}
+
+.my-custom-modal .swal2-input {
+    font-family: 'MyCustomFont', sans-serif;
+    color: #333;
+    /* 타이틀 색상 */
+    font-weight: bold;
+}
+
+.my-custom-modal .swal2-html-container {
+    color: #555;
+    /* 본문 텍스트 색상 */
+}
+
+.my-custom-modal .swal2-confirm,
+.my-custom-modal .swal2-deny,
+.my-custom-modal .swal2-cancel {
+    font-family: 'MyCustomFont', sans-serif;
+    border: 1px solid #E48758;
+    border-radius: 20px;
+    background-color: transparent;
+    color: #E48758;
+    /* 확인 버튼 색상 */
+}
+
+.my-custom-modal .swal2-confirm:focus,
+.my-custom-modal .swal2-deny:focus,
+.my-custom-modal .swal2-cancel:focus {
+    outline: none;
 }

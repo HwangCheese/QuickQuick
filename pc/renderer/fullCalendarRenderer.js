@@ -30,6 +30,11 @@ document.addEventListener('DOMContentLoaded', async function () { //페이지의
         showCancelButton: true,
         confirmButtonText: '일정 추가',
         cancelButtonText: '취소',
+        background: '#FAFAFA', // 배경색 변경
+        //color: '#333', // 텍스트 색상 변경
+        customClass: {
+          popup: 'my-custom-modal' // 커스텀 클래스 추가
+        },
         preConfirm: () => {
           const description = document.getElementById('event-description').value;
           const time = document.getElementById('event-time').value;
@@ -58,11 +63,20 @@ document.addEventListener('DOMContentLoaded', async function () { //페이지의
       });
     },
     eventContent: function (arg) {
+      const eventTime = new Date(arg.event.start).toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false // 24시간 형식으로 설정
+      });
       return {
         html: `<div id="event-content">
-                 <span id="event-circle"></span>
-                 ${arg.event.title}
-               </div>`
+                  <span id="event-circle"></span>
+                  <div style="display: inline-block; vertical-align: top;">
+                    ${arg.event.title}
+                    <br>
+                    <span id="event-time-for-calendar">${eventTime}</span>
+                  </div>
+                </div>`
       };
     },
     // 이벤트 클릭 시 발생하는 이벤트
@@ -79,10 +93,13 @@ document.addEventListener('DOMContentLoaded', async function () { //페이지의
           `<input id="event-description" class="swal2-input" value="${event.title}" placeholder="일정 설명">` +
           `<input id="event-time" type="time" class="swal2-input" value="${localStart.toTimeString().substr(0, 5)}">`,
         showCancelButton: true,
-        showDenyButton: true, // 삭제 버튼 추가
+        showDenyButton: true,
         confirmButtonText: '수정하기',
         denyButtonText: '삭제하기',
         cancelButtonText: '취소',
+        customClass: {
+          popup: 'my-custom-modal'
+        },
         preConfirm: () => {
           const description = document.getElementById('event-description').value;
           const time = document.getElementById('event-time').value;
@@ -121,7 +138,10 @@ document.addEventListener('DOMContentLoaded', async function () { //페이지의
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: '삭제하기',
-            cancelButtonText: '취소'
+            cancelButtonText: '취소',
+            customClass: {
+              popup: 'my-custom-modal'
+            }
           }).then(async (confirmResult) => {
             if (confirmResult.isConfirmed) {
 
