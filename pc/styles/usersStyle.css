@@ -535,7 +535,7 @@
   font-size: 12px;
 }
 
-#remove-friend-button {
+.remove-friend-button {
   background-color: transparent;
   margin-left: auto;
   border: none;
@@ -543,14 +543,15 @@
   width: 15px;
   height: 15px;
   margin-right: 20px;
+  -webkit-app-region: no-drag;
 }
 
-#remove-friend-button img {
+.remove-friend-button img {
   width: 15px;
   height: 15px;
 }
 
-#remove-friend-button img:hover {
+.remove-friend-button img:hover {
   content: url("../media/trash-hover.png");
 }
 
