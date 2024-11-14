@@ -8,3 +8,4 @@ pc/kor.traineddata
 pc/config.js
 pc/renderer/config.js
 server/public/config.js
+.env
