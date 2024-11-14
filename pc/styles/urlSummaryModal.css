@@ -25,7 +25,7 @@
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
-    height: 30%; /* 화면의 반만 차지하도록 설정 */
+    height: 50%; /* 화면의 반만 차지하도록 설정 */
     max-width: 600px; /* 최대 너비 */
     text-align: center;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
@@ -33,7 +33,7 @@
     position: relative;
     top: 50%;
     left: 50%;
-    font-family: 'MyCustomFont';
+    font-family: 'Helvetica', Arial, sans-serif;
     -webkit-app-region: no-drag;
 }
 
