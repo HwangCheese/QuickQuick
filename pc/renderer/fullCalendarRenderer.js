@@ -151,7 +151,15 @@ document.addEventListener('DOMContentLoaded', async function () { //페이지의
 
               // FullCalendar에서 이벤트 삭제
               event.remove();
-              Swal.fire('삭제 완료', '이벤트가 삭제되었습니다.', 'success');
+              Swal.fire({
+                title: '삭제 완료',
+                text: '이벤트가 삭제되었습니다.',
+                icon: 'success',
+                confirmButtonText: '확인',
+                customClass: {
+                  popup: 'my-custom-modal'
+                }
+              });
             }
           });
         }
