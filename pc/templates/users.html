@@ -52,21 +52,29 @@
             </div>
             <div id="qrCodeContainer"></div>
             <p id="timer" style="display: none;"></p>
-<br>
+            <br>
             <!-- 친구 목록 및 검색 버튼 -->
             <div class="friends-container">
                 <div class="friends-header">
-                    <a href="#" id="add-friend-button">
-                        <img src="../media/search.png" alt="친구 추가" style="width: 38px; height: 38px;">
+                    <a href="#" id="add-friend-button" draggable="false">
+                        <img src="../media/search.png" alt="친구 추가"
+                            style="width: 38px; height: 38px; user-select: none; pointer-events: auto; -webkit-user-drag: none;">
                     </a>
-                    <a href="#" id="toggle-friend-list">
-                        <img src="../media/phonebook.png" alt="친구 목록" style="width: 38px; height: 38px;">
+                    <a href="#" id="toggle-friend-list" draggable="false">
+                        <img src="../media/phonebook.png" alt="친구 목록"
+                            style="width: 38px; height: 38px; user-select: none; pointer-events: auto; -webkit-user-drag: none;">
                     </a>
                 </div>
             </div>
         </div>
     </div>
 
+    <script>
+        // 모든 a 태그와 img 태그에서 드래그 방지
+        document.querySelectorAll('a, img').forEach(element => {
+            element.addEventListener('dragstart', event => event.preventDefault());
+        });
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="../renderer/config.js"></script>
     <script src="../renderer/getFriendList.js"></script>
