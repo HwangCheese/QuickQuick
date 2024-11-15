@@ -115,6 +115,16 @@
             left: 45px;
             z-index: 10;
         }
+
+        .reflection {
+            width: 8px;
+            height: 8px;
+            background-color: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 5px; /* 반사광 위치 */
+            left: 5px;
+        }
     </style>
 </head>
 
@@ -122,10 +132,14 @@
     <div id="button-container">
         <div id="center-btn">
             <div class="eye">
-                <div class="pupil" id="left-pupil"></div>
+                <div class="pupil" id="left-pupil">
+                    <div class="reflection"></div>
+                </div>
             </div>
             <div class="eye">
-                <div class="pupil" id="right-pupil"></div>
+                <div class="pupil" id="right-pupil">
+                    <div class="reflection"></div>
+                </div>
             </div>
         </div>
 
