@@ -91,4 +91,9 @@ body {
   opacity: 1;
   transition: width 0.3s ease, opacity 0.3s ease;
   background-color: white;
+
+  /* 스크롤 바 방지 */
+  overflow: hidden;
+  white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+  text-overflow: ellipsis; /* 텍스트가 넘칠 경우 말줄임 표시 */
 }
