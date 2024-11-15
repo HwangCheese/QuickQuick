@@ -602,3 +602,10 @@ body {
     text-decoration: underline;
     /* 호버 시 밑줄 추가 */
 }
+
+@font-face {
+    font-family: 'KakaoOTFRegular';
+    src: url('../media/KakaoOTFRegular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}

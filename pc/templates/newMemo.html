@@ -31,17 +31,6 @@
     <script src="../renderer/urlSummaryInMemo.js" defer></script>
     <script src="../renderer/mapInMemo.js" defer></script>
     <script src="../renderer/hoverbutton.js" defer></script>
-    <script>
-        /* 지도 관련 테스트 코드 */
-        function showMap() {
-            document.getElementById('map-url-zone').style.display = 'block';
-        }
-
-        function closeMap() {
-            document.getElementById('map-url-zone').style.display = 'none';
-        }
-    </script>
-
 </head>
 
 <body>
@@ -61,16 +50,9 @@
         </div>
         <textarea id="editor" spellcheck="false" placeholder="메모를 입력하세요..." oninput="checkText()"
             onmouseup="checkText()" onkeyup="checkText()"></textarea>
-        <div id="map-url-zone">
-            <!-- 지도 iframe -->
-            <iframe id="map-frame" src="https://maps.google.com/maps?q=Seoul&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                allowfullscreen>
-            </iframe>
-            <!-- 닫기 버튼 -->
-            <button id="close-map-btn" onclick="closeMap()">×</button>
-        </div>
+        <div id="map-frame" style="height: 50%; width: 100%; display: none;"></div>
         <div id="result"></div>
-        <div id="buttons"><!--container내의 연잎 버튼들-->
+        <div id="buttons"><!--메모 아래 떠오르는 메뉴 버튼들 -->
             <button class="defult-menu" id="recorder-button"
                 style=" border: none;  background-color:transparent; font-size: 15px;"><i
                     class="fas fa-microphone"></i></button>
@@ -80,7 +62,7 @@
             <button class="defult-menu" id="send-button"
                 style="border: none; background-color:transparent; font-size: 15px;"><i
                     class="fas fa-paper-plane"></i></button>
-            <button class="content-menu" id="map-button" onclick="showMap()" id="map-button" ><i class="fas fa-location-dot"></i></button>
+            <!-- 이 곳에 "content-menu" 라는 클래스 이름을 가지는 content aware 메뉴가 동적으로 생겨나고 사라짐  -->
         </div>
     </div>
     <div class="background-div"></div>
@@ -161,46 +143,8 @@
         <div class="loader"></div>
         <!-- <p class="loading-text">Loading...</p> -->
     </div>
+
     <style>
-        /* 지도 관련 테스트 코드 */
-        #map-url-zone {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-            height: 400px;
-            margin: 20px auto;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            overflow: hidden;
-            display: none;
-            /* 초기에는 숨겨둠 */
-        }
-
-        /* iframe 스타일 */
-        #map-frame {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        /* 닫기 버튼 스타일 */
-        #close-map-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: #333;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            cursor: pointer;
-            font-size: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
         /* #loading-screen {
             position: fixed;
             top: 0;
@@ -249,9 +193,12 @@
             width: 100%;
             height: 100%;
             background-image: url('../media/loading.gif');
-            background-size: cover; /* 화면 크기에 맞게 이미지를 꽉 채움 */
-            background-position: center; /* 이미지를 왼쪽으로 조금 정렬 */
-            background-repeat: no-repeat; /* 이미지 반복 방지 */
+            background-size: cover;
+            /* 화면 크기에 맞게 이미지를 꽉 채움 */
+            background-position: center;
+            /* 이미지를 왼쪽으로 조금 정렬 */
+            background-repeat: no-repeat;
+            /* 이미지 반복 방지 */
             display: flex;
             flex-direction: column;
             justify-content: center;
