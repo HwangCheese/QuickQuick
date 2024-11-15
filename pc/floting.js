@@ -63,6 +63,19 @@ function createfloatingWindow() {
   floatingWindow.on('closed', () => {
     floatingWindow = null;
   });
+
+  // 전체 화면의 마우스 위치를 주기적으로 브라우저에 전송
+  setInterval(() => {
+    const mousePosition = screen.getCursorScreenPoint();
+    const windowBounds = floatingWindow.getBounds(); // 현재 창의 위치 및 크기
+
+    // 마우스 좌표를 창 내부 기준으로 변환
+    const relativeX = mousePosition.x - windowBounds.x;
+    const relativeY = mousePosition.y - windowBounds.y;
+
+    // 브라우저에 변환된 마우스 좌표 전송
+    floatingWindow.webContents.send('mouse-position', { x: relativeX, y: relativeY });
+  }, 16); // 60fps를 위해 16ms마다 업데이트
 }
 
 // 플로팅 메뉴 생성

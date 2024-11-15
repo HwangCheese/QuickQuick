@@ -16,6 +16,7 @@
             /* background-color: transparent; */
             background-color: transparent;
             /* 투명 배경 설정 */
+            overflow: hidden;
         }
 
         #button-container {
@@ -36,7 +37,8 @@
             font-size: 20px;
             cursor: pointer;
             transition: background-color 0.6s, transform 0.6s ease, opacity 0.6s ease;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* 그림자 추가 */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+            /* 그림자 추가 */
         }
 
         .toggle-visible {
@@ -71,17 +73,38 @@
         #center-btn {
             top: 45px;
             left: 45px;
-            display: block;
+            display: flex;
+            /* 가로 정렬을 위해 flexbox 사용 */
+            justify-content: center;
+            /* 가로 정렬 */
+            align-items: center;
+            /* 세로 정렬 */
+            gap: 5px;
+            /* 두 눈 사이의 간격 조정 */
             z-index: 20;
-            transition: transform 0.6s ease, background-color 0.6s, color 0.6s;  /* 색상 변화 애니메이션 추가 */
-            /* background-image: url('C:/Users/user/Desktop/background.gif'); GIF 이미지 추가 */
-
-            /* 회전 시 부드러운 애니메이션 추가 */
+            background-color: transparent;
         }
 
-        .rotate {
-            transform: rotate(45deg);
-            /* 45도 회전 */
+
+        .eye {
+            width: 50px;
+            height: 50px;
+            border: 3px solid black;
+            border-radius: 50%;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+        }
+
+        .pupil {
+            width: 27px;
+            height: 27px;
+            background-color: black;
+            border-radius: 50%;
+            position: absolute;
+            transform: translate(0px, 0px);
         }
 
         #top-btn,
@@ -97,9 +120,14 @@
 
 <body>
     <div id="button-container">
-        <button id="center-btn">
-            <i class="fa-solid fa-plus"></i>
-        </button>
+        <div id="center-btn">
+            <div class="eye">
+                <div class="pupil" id="left-pupil"></div>
+            </div>
+            <div class="eye">
+                <div class="pupil" id="right-pupil"></div>
+            </div>
+        </div>
 
         <button id="top-btn" class="toggle-visible">
             <i class="fa-solid fa-plus"></i>
@@ -115,6 +143,7 @@
         </button>
     </div>
     <script src="../renderer/floating.js"></script>
+    <script src="../renderer/moveEyes.js"></script>
 </body>
 
 </html>

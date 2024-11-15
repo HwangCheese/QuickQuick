@@ -12,16 +12,16 @@ document.addEventListener('DOMContentLoaded', () => {
     buttons.forEach((button) => {
       button.classList.toggle('show', !isShow); // 버튼의 show 클래스를 토글
     });
-  
+
     // centerButton 색상 토글: 'isShow'에 따라 색상 변경
-    if (isShow) {
-      centerButton.style.backgroundColor = '#E48758'; // 초기 상태
-      centerButton.style.color = 'white';
-    } else {
-      centerButton.style.backgroundColor = 'white'; // 토글된 상태
-      centerButton.style.color = '#E48758';
-    }
-  
+    // if (isShow) {
+    //   //centerButton.style.backgroundColor = '#E48758'; // 초기 상태
+    //   centerButton.style.color = 'white';
+    // } else {
+    //   centerButton.style.backgroundColor = 'white'; // 토글된 상태
+    //   centerButton.style.color = '#E48758';
+    // }
+
     isShow = !isShow;
     centerButton.classList.toggle('rotate'); // 회전 애니메이션
   }
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   centerButton.addEventListener('mousedown', (e) => {
     if (e.button === 0) {
-      if(isShow) toggleButtons();
+      if (isShow) toggleButtons();
       isDragging = true;
       offsetX = e.clientX;
       offsetY = e.clientY;

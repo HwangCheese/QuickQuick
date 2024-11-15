@@ -116,5 +116,7 @@ contextBridge.exposeInMainWorld('electron', {
     closeAssistantWindow: () => ipcRenderer.invoke('close-assistant-window'), // use in assistant.js (메모 분석 결과 창)
 
     resizeWidth: (width) => ipcRenderer.send('resize-width', { width }),
-    resizeHeight: (height) => ipcRenderer.send('resize-height', { height })
+    resizeHeight: (height) => ipcRenderer.send('resize-height', { height }),
+
+    sendMousePositionToMoveEyes: (callback) => ipcRenderer.on('mouse-position', callback),
 });
