@@ -51,15 +51,19 @@
         </div>
         <textarea id="editor" spellcheck="false" placeholder="메모를 입력하세요..." oninput="checkText()"
             onmouseup="checkText()" onkeyup="checkText()"></textarea>
+        <div id="map-frame" style="height: 50%; width: 100%; display: none;"></div>
         <div id="result"></div>
-        <div id="map-url-zone"></div>
-        <div id="buttons" style="display: flex; gap: 10px;"><!--container내의 연잎 버튼들-->
-            <input id="summary-button" class="hidden" type="image" src="../media/summarize-btn.png" alt="요약" width="60"
-                height="30">
-            <input id="translate-button" class="hidden" type="image" src="../media/translate-btn.png" alt="번역"
-                width="60" height="30">
-            <input id="analysis-button" class="hidden" type="image" src="../media/separate-btn.png" alt="분류" width="60"
-                height="30" draggable="false" style="user-select: none;">
+        <div id="buttons"><!--메모 아래 떠오르는 메뉴 버튼들 -->
+            <button class="defult-menu" id="recorder-button"
+                style=" border: none;  background-color:transparent; font-size: 15px;"><i
+                    class="fas fa-microphone"></i></button>
+            <button class="defult-menu" id="call-button"
+                style="border: none;background-color:transparent; font-size: 15px;"><i
+                    class="fas fa-video"></i></button>
+            <button class="defult-menu" id="send-button"
+                style="border: none; background-color:transparent; font-size: 15px;"><i
+                    class="fas fa-paper-plane"></i></button>
+            <!-- 이 곳에 "content-menu" 라는 클래스 이름을 가지는 content aware 메뉴가 동적으로 생겨나고 사라짐  -->
         </div>
     </div>
     <div class="background-div"></div>
@@ -117,6 +121,7 @@
     <!--녹음 및 텍스트 모달 -->
     <div id="recorder-modal" class="modal">
         <div class="recorder-modal-content">
+            <span id="title">QuickQuick</span>
             <button id="recorder-modal-close-button" aria-label="모달 닫기"></button>
             <div class="button-container">
                 <button id="record-btn"></button>
@@ -127,8 +132,9 @@
                 <textarea id="transcription" placeholder="결과를 수정하세요"></textarea>
             </div>
             <div class="action-buttons">
+                <button id="rerecord-btn">재녹음</button>
+                <button id="export-btn">사용</button>
                 <button id="download-btn">다운로드</button>
-                <button id="export-btn">확인</button>
             </div>
         </div>
     </div>
@@ -189,9 +195,12 @@
             width: 100%;
             height: 100%;
             background-image: url('../media/loading.gif');
-            background-size: cover; /* 화면 크기에 맞게 이미지를 꽉 채움 */
-            background-position: center; /* 이미지를 왼쪽으로 조금 정렬 */
-            background-repeat: no-repeat; /* 이미지 반복 방지 */
+            background-size: cover;
+            /* 화면 크기에 맞게 이미지를 꽉 채움 */
+            background-position: center;
+            /* 이미지를 왼쪽으로 조금 정렬 */
+            background-repeat: no-repeat;
+            /* 이미지 반복 방지 */
             display: flex;
             flex-direction: column;
             justify-content: center;
