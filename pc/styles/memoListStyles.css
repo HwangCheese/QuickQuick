@@ -96,14 +96,13 @@ body.loading .container {
     }
 }
 .memo-item {
+    width: 150px;
     display: flex;
     flex-direction: column;
     padding: 15px;
     margin: 0 0 10px 0;
-    background: linear-gradient(135deg, #fff5ea, #efc698);
-    border: 1px solid #dce7f5;
+    background: #F4EEE7;
     border-radius: 24px;
-    box-shadow: 0 6px 12px rgba(0, 123, 255, 0.1);
     transition: transform 0.3s, opacity 0.3s;
     overflow: hidden;
     white-space: nowrap;
