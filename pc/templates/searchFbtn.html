@@ -21,6 +21,9 @@
         .search-container {
             position: relative;
             display: inline-block;
+            overflow: hidden; /* 스크롤바 제거 */
+            max-width: 100%; /* 최대 크기 제한 */
+            max-height: 100%; /* 최대 높이 제한 */
         }
 
         /* 검색창 확장 애니메이션 */
@@ -49,18 +52,7 @@
             padding: 6px;
             margin-top:5px;
             margin-bottom: 30px;
-
-            /* 스크롤 바 방지 */
-            box-sizing: border-box; /* 패딩과 테두리를 높이/너비에 포함 */
-            overflow: hidden; /* 내용 오버플로우 숨김 */
-            white-space: nowrap; /* 텍스트 줄바꿈 방지 */
-            text-overflow: ellipsis; /* 텍스트가 넘칠 경우 말줄임 표시 */
-            }
-
-            /* 웹킷 브라우저의 스크롤 바 제거 (크롬, 사파리 등) */
-            #search-bar::-webkit-scrollbar {
-                display: none;
-            }
+        }
       
     </style>
 </head>
