@@ -6,7 +6,7 @@
 }
 
 body {
-    margin: 0;
+    margin: 20px;
     font-family: 'MyCustomFont', sans-serif;
     overflow: hidden;
     position: relative;
@@ -15,7 +15,7 @@ body {
     height: 90vh;
     border-radius: 10px;
     /* 모서리를 둥글게 설정 */
-    box-shadow: 0 4px 20px rgba(99, 63, 0, 0.777); /* 그림자 추가 */
+    box-shadow: 0 4px 15px rgba(71, 72, 71, 0.897); /* 그림자 추가 */
 }
 
 /*TextArea & ImageDropZone & FileDropZone을 모두 포괄하는 contentsContainer*/
