@@ -5,29 +5,40 @@ document.addEventListener('DOMContentLoaded', () => {
   const newMemoButton = document.getElementById('top-btn');
   const searchButton = document.getElementById('left-btn');
   const calendarButton = document.getElementById('bottom-btn');
+  const closeButton = document.getElementById('close-btn'); // close-btn 추가
 
   let isShow = false; // 플로팅 열기/닫기 flag
 
   function toggleButtons() {
-    buttons.forEach((button) => {
-      button.classList.toggle('show', !isShow); // 버튼의 show 클래스를 토글
-    });
+    if (!isShow) {
+      // 열릴 때는 먼저 창 크기를 변경하고 나서 버튼을 애니메이션으로 열기
+      const newHeight = 250; // 메뉴가 열릴 때의 높이
+      window.electron.resizeHeightMenu(newHeight);
 
-    // centerButton 색상 토글: 'isShow'에 따라 색상 변경
-    // if (isShow) {
-    //   //centerButton.style.backgroundColor = '#E48758'; // 초기 상태
-    //   centerButton.style.color = 'white';
-    // } else {
-    //   centerButton.style.backgroundColor = 'white'; // 토글된 상태
-    //   centerButton.style.color = '#E48758';
-    // }
+      // 창 크기가 변경된 후 버튼을 보여줍니다 (약간의 지연 시간 후 실행)
+      setTimeout(() => {
+        buttons.forEach((button) => {
+          button.classList.add('show');
+        });
+        isShow = true;
+      }, 300); // 창 크기 조절 후 지연 시간
+    } else {
+      // 닫을 때는 버튼 애니메이션을 먼저 하고, 그 후 창 크기를 줄이기
+      buttons.forEach((button) => {
+        button.classList.remove('show');
+      });
 
-    isShow = !isShow;
-    centerButton.classList.toggle('rotate'); // 회전 애니메이션
+      // 버튼 애니메이션이 끝난 후 창 크기 줄이기
+      setTimeout(() => {
+        const newHeight = 100; // 메뉴가 닫힐 때의 높이
+        window.electron.resizeHeightMenu(newHeight);
+        isShow = false;
+      }, 600); // 600ms는 CSS transition 시간과 일치해야 함
+    }
   }
 
   centerButton.addEventListener('contextmenu', (e) => {
-    e.preventDefault();  // 우클릭 시 기본동작을 실행하지 못하게 한다
+    e.preventDefault(); // 우클릭 시 기본동작을 실행하지 못하게 한다
     toggleButtons(); // 버튼을 토글
   });
 
@@ -100,4 +111,10 @@ document.addEventListener('DOMContentLoaded', () => {
     window.electron.openSearchMemoWindow();
   });
 
+  // close-btn에 클릭 이벤트 리스너 추가
+  closeButton.addEventListener('click', () => {
+    if (isShow) {
+      toggleButtons(); // 메뉴를 닫기
+    }
+  });
 });

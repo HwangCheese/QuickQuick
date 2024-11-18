@@ -117,6 +117,7 @@ contextBridge.exposeInMainWorld('electron', {
 
     resizeWidth: (width) => ipcRenderer.send('resize-width', { width }),
     resizeHeight: (height) => ipcRenderer.send('resize-height', { height }),
+    resizeHeightMenu: (height) => ipcRenderer.send('resize-height-menu', {height}),
 
     sendMousePositionToMoveEyes: (callback) => ipcRenderer.on('mouse-position', callback),
 });

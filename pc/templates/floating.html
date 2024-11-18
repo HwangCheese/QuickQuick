@@ -77,7 +77,7 @@
             /* 가로 정렬을 위해 flexbox 사용 */
             justify-content: center;
             /* 가로 정렬 */
-            align-items: center;
+            /* align-items: center; */
             /* 세로 정렬 */
             gap: 5px;
             /* 두 눈 사이의 간격 조정 */
@@ -85,23 +85,38 @@
             background-color: transparent;
         }
 
+        #close-btn {
+            top: 70px;
+            left: 45px;
+            color: #E48758;
+            background-color: white;
+        }
 
         .eye {
+            top: 20px;
             width: 50px;
             height: 50px;
-            border: 3px solid black;
+            border: 2px solid #E48758;
             border-radius: 50%;
-            position: relative;
+            position: fixed;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: white;
+            background-color: #FAFAFA;
+        }
+
+        #left-eye {
+            left: 17px;
+        }
+
+        #right-eye {
+            left: 77px;
         }
 
         .pupil {
             width: 27px;
             height: 27px;
-            background-color: black;
+            background-color: #E48758;
             border-radius: 50%;
             position: absolute;
             transform: translate(0px, 0px);
@@ -111,7 +126,7 @@
         #bottom-btn,
         #left-btn,
         #right-btn {
-            top: 45px;
+            top: 70px;
             left: 45px;
             z-index: 10;
         }
@@ -131,17 +146,21 @@
 <body>
     <div id="button-container">
         <div id="center-btn">
-            <div class="eye">
+            <div class="eye" id="left-eye">
                 <div class="pupil" id="left-pupil">
                     <div class="reflection"></div>
                 </div>
             </div>
-            <div class="eye">
+            <div class="eye" id="right-eye">
                 <div class="pupil" id="right-pupil">
                     <div class="reflection"></div>
                 </div>
             </div>
         </div>
+
+        <button id="close-btn" class="toggle-visible">
+            <i class="fa-solid fa-close"></i>
+        </button>
 
         <button id="top-btn" class="toggle-visible">
             <i class="fa-solid fa-plus"></i>

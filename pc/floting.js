@@ -9,7 +9,7 @@ let usersWindow;
 
 const floatingWindowOptions = {
   width: 150,
-  height: 150,
+  height: 100,
   frame: false,
   transparent: true,
   alwaysOnTop: true,
@@ -256,6 +256,13 @@ ipcMain.on('resize-height', (event, arg) => {
   const { height } = arg;
   if (usersWindow) {
     usersWindow.setBounds({ width: usersWindow.getBounds().width, height });
+  }
+});
+
+ipcMain.on('resize-height-menu', (event, arg) => {
+  const { height } = arg;
+  if (floatingWindow) {
+    floatingWindow.setBounds({ width: floatingWindow.getBounds().width, height });
   }
 });
 
