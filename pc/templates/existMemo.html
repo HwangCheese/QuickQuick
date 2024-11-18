@@ -54,13 +54,16 @@
         <div id="map-frame" style="height: 50%; width: 100%; display: none;"></div>
         <div id="result"></div>
         <div id="buttons"><!--메모 아래 떠오르는 메뉴 버튼들 -->
-            <button class="defult-menu" id="recorder-button"
+            <button id="toggle-default-menu-button">
+                <i class="fa-solid fa-caret-right"></i>
+            </button>
+            <button class="default-menu" id="recorder-button"
                 style=" border: none;  background-color:transparent; font-size: 15px;"><i
                     class="fas fa-microphone"></i></button>
-            <button class="defult-menu" id="call-button"
+            <button class="default-menu" id="call-button"
                 style="border: none;background-color:transparent; font-size: 15px;"><i
                     class="fas fa-video"></i></button>
-            <button class="defult-menu" id="send-button"
+            <button class="default-menu" id="send-button"
                 style="border: none; background-color:transparent; font-size: 15px;"><i
                     class="fas fa-paper-plane"></i></button>
             <!-- 이 곳에 "content-menu" 라는 클래스 이름을 가지는 content aware 메뉴가 동적으로 생겨나고 사라짐  -->

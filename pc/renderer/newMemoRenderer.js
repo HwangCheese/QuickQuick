@@ -11,6 +11,73 @@ const memoAddBtn = document.getElementById('add-btn'); //메모 내의 메모 �
 const memoDeleteBtn = document.getElementById('delete-btn'); //메모 내의 메뉴 삭제 버튼(휴지통)
 const memoCloseBtn = document.getElementById('close-btn'); //메모 내의 메모 닫기 버튼(X)
 
+// 요소 선택
+const toggleDefaultMenuButton = document.getElementById('toggle-default-menu-button');
+const buttons = document.querySelectorAll('.default-menu'); // 'default-menu' 클래스를 가진 모든 버튼 선택
+// let isFlipped = false; // 버튼이 반전되었는지 추적하는 변수
+
+// // 이벤트 리스너 추가
+// toggleDefaultMenuButton.addEventListener('click', () => {
+//     // 버튼 반전 상태 토글
+//     if (isFlipped) {
+//         toggleDefaultMenuButton.style.transform = 'scaleY(1)'; // 원래 상태로 돌아옴 (반전 제거)
+//     } else {
+//         toggleDefaultMenuButton.style.transform = 'scaleY(-1)'; // 반전 효과 (좌우 대칭)
+//     }
+//     // 회전 상태 변경
+//     isFlipped = !isFlipped;
+
+//     console.log("클릭됨");
+//     buttons.forEach((button) => {
+//         if (button.style.display === 'none' || button.style.display === '') {
+//             // 버튼이 보이지 않으면 나타내기
+//             button.style.display = 'block'; // 보이게 설정
+//             button.classList.remove('hide'); // 사라지는 애니메이션 제거
+//             button.classList.add('show'); // 왼쪽에서 오른쪽으로 나타나는 애니메이션 추가
+//         } else {
+//             // 버튼이 보이면 숨기기
+//             button.classList.remove('show'); // 왼쪽에서 오른쪽으로 나타나는 애니메이션 제거
+//             button.classList.add('hide'); // 오른쪽으로 사라지는 애니메이션 추가
+//             setTimeout(() => {
+//                 button.style.display = 'none'; // 애니메이션 후 숨기기
+//             }, 500); // 0.5초 후에 display: none 적용
+//         }
+//     });
+// });
+
+let isFlipped = false; // 버튼이 반전되었는지 추적하는 변수
+
+// 이벤트 리스너 추가
+toggleDefaultMenuButton.addEventListener('click', () => {
+    // 버튼 반전 상태 토글
+    if (isFlipped) {
+        toggleDefaultMenuButton.style.transform = 'scaleX(1)'; // 원래 상태로 돌아옴 (반전 제거)
+    } else {
+        toggleDefaultMenuButton.style.transform = 'scaleX(-1)'; // 반전 효과 (좌우 대칭)
+    }
+   
+    // 반전 상태 변경
+    isFlipped = !isFlipped;
+
+    console.log("클릭됨");
+    buttons.forEach((button) => {
+        if (button.style.display === 'none' || button.style.display === '') {
+            // 버튼이 보이지 않으면 나타내기
+            button.style.display = 'block'; // 보이게 설정
+            button.classList.remove('hide-default-menu'); // 사라지는 애니메이션 제거
+            button.classList.add('show-default-menu'); // 왼쪽에서 오른쪽으로 나타나는 애니메이션 추가
+        } else {
+            // 버튼이 보이면 숨기기
+            button.classList.remove('show-default-menu'); // 왼쪽에서 오른쪽으로 나타나는 애니메이션 제거
+            button.classList.add('hide-default-menu'); // 오른쪽으로 사라지는 애니메이션 추가
+            setTimeout(() => {
+                button.style.display = 'none'; // 애니메이션 후 숨기기
+            }, 500); // 0.5초 후에 display: none 적용
+        }
+    });
+});
+
+
 // 모달 창과 닫기 버튼 선택
 const modal = document.getElementById('media-modal');
 const modalContent = document.getElementById('media-viewer');
@@ -340,7 +407,7 @@ container.addEventListener('drop', (event) => { // container 영역에 드롭했
                 const endTime = performance.now(); // 끝 시간 기록
                 const uploadTime = endTime - startTime; // 업로드 시간 계산
                 console.log(`파일 업로드 시간: ${uploadTime.toFixed(2)} ms`); // 업로드 시간 출력
-                
+
                 loadedFiles.forEach(({ result, file }) => {
                     const fileContainer = document.createElement('div'); // 파일 정보를 담을 div 요소를 생성
                     fileContainer.classList.add('file-container'); // file-container 클래스를 추가
@@ -461,8 +528,8 @@ async function saveAndClose(memo_ID) {
     const frameY = window.screenY;
     const textData = editor.value; // textarea의 텍스트 가져오기
     let filesData = imagePathString + ';' + filePathString; // 드롭된 파일의 경로 합본
-    if(filesData===';'){
-        filesData=' ';
+    if (filesData === ';') {
+        filesData = ' ';
     }
     const textAndFilesData = textData + ' ' + filesData; // 텍스트와 파일 경로를 합칩니다
     const title = await window.electron.generateTitle(textAndFilesData); // 제목 요약 API 호출
