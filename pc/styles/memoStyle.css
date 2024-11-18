@@ -364,6 +364,13 @@ body {
 }
 
 /*메모 생성 및 닫기 버튼 위에 마우스 올라갔을 때 스타일*/
+/* 아이콘에 마우스를 올리면 위로 5px 올라가는 효과와 색상 변경 */
+.menu button:hover i {
+    transform: translateY(-5px);
+    /* 아이콘을 위로 5px 이동 */
+    color: #E48758;
+    /* 마우스를 올렸을 때 색상 변경 */
+}
 
 /*메모 생성 및 닫기 버튼의 이미지*/
 .menu img {
@@ -376,7 +383,7 @@ body {
 /* 버튼 컨테이너 스타일 */
 #buttons {
     display: flex;
-    column-gap: 5px;
+    column-gap: 4px;
     margin-top: 10px;
     transition: all 0.3s ease;
     /* 레이아웃 변경 시 부드럽게 움직이도록 transition 추가 */
@@ -404,9 +411,13 @@ body {
     /* 마우스를 올렸을 때 색상 변경 */
 }
 
-/* 토글 버튼 호버 스타일을 따로 지정하지 않음 */
+/* 토글 버튼스타일 */
 #toggle-default-menu-button:hover i {
     color: #E48758; /* 색상만 변경 */
+}
+
+#toggle-default-menu-button i {
+    color: #707070; /* 색상만 변경 */
 }
 
 #buttons button i {
