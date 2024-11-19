@@ -1,9 +1,21 @@
 document.addEventListener('DOMContentLoaded', () => {
     //const button = document.getElementById('search-floating-button');
     const input = document.getElementById('search-bar');
-    let isLocked = false;
+    // let isLocked = false;
     //const currentUserId = window.electron.getUserId();
     const closeButton = document.querySelector('.close-btn'); // 닫기 버튼 선택
+    input.focus();
+
+    // 입력 필드 클릭 시 버튼 클릭과 같은 동작을 방지
+    input.addEventListener('click', (event) => {
+        event.stopPropagation();
+    });
+
+    // 닫기 버튼 클릭 이벤트
+    closeButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        window.electron.closeSearchWindow();
+    });
 
     input.addEventListener('input', async () => {
         const searchTerm = input.value;
@@ -13,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     input.addEventListener('keydown', async (event) => {
         if (event.key === 'Enter') {
             const searchTerm = input.value.trim();
-            if (searchTerm !== "") {  
+            if (searchTerm !== "") {
                 try {
                     window.electron.ipcRenderer.send('loading-start');
                     const response = await window.electron.searchMemo(searchTerm);
@@ -22,28 +34,28 @@ document.addEventListener('DOMContentLoaded', () => {
                     window.electron.ipcRenderer.send('filter-memo', memoIds);
                 } catch (error) {
                     console.error("검색 오류:", error);
-                } 
+                }
             }
         }
     });
 
-    window.electron.ipcRenderer.on('expand-floating-window', (event, message) => {
-        console.log(message); 
-        if (message == "left") { moveLeftButton(); }
-        else { moveRightButton(); }
-    });
+    // window.electron.ipcRenderer.on('expand-floating-window', (event, message) => {
+    //     console.log(message); 
+    //     if (message == "left") { moveLeftButton(); }
+    //     else { moveRightButton(); }
+    // });
 
-    function moveRightButton() {
-        button.style.left = "1px";
-        button.style.right = "";
-        button.style.backgroundPosition = "center left 8px";
-      
-        input.style.right = "15px";
-    }
+    // function moveRightButton() {
+    //     button.style.left = "1px";
+    //     button.style.right = "";
+    //     button.style.backgroundPosition = "center left 8px";
 
-    function moveLeftButton() {
-        input.style.left = "15px";
-    }
+    //     input.style.right = "15px";
+    // }
+
+    // function moveLeftButton() {
+    //     input.style.left = "15px";
+    // }
     /*
     button.addEventListener('mouseover', () => {
         if (!isLocked) {
@@ -78,13 +90,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     */
-    // 입력 필드 클릭 시 버튼 클릭과 같은 동작을 방지
-    input.addEventListener('click', (event) => {
-        event.stopPropagation();
-    });
-    // 닫기 버튼 클릭 이벤트
-    closeButton.addEventListener('click', (event) => {
-        event.stopPropagation();
-        window.electron.closeSearchWindow();
-    });
 });
