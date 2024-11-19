@@ -359,11 +359,14 @@ body {
     color: #333;
     /* 타이틀 색상 */
     font-weight: bold;
+    box-shadow: none !important; /* 기본 파란색 그림자 제거 */
+    border: 1px solid #E48758 !important;
 }
 
 .my-custom-modal .swal2-html-container {
     color: #555;
     /* 본문 텍스트 색상 */
+    box-shadow: none !important; /* 기본 파란색 그림자 제거 */
 }
 
 .my-custom-modal .swal2-confirm,
@@ -380,6 +383,7 @@ body {
     -webkit-transition: border-color 0.4s, color 0.4s;
     -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
     transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+    box-shadow: none !important; /* 기본 파란색 그림자 제거 */
 }
 
 .my-custom-modal .swal2-confirm::before,
@@ -403,6 +407,7 @@ body {
     z-index: -1;
     -webkit-transform: scale3d(0.7, 1, 1);
     transform: scale3d(0.7, 1, 1);
+    box-shadow: none !important; /* 기본 파란색 그림자 제거 */
 }
 
 .my-custom-modal .swal2-confirm:hover::before,
@@ -411,16 +416,22 @@ body {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
     opacity: 1;
+    border: 2px solid #E48758 !important; /* 강제 적용 */
+    box-shadow: none !important; /* 기본 파란색 그림자 제거 */
 }
 
 .my-custom-modal .swal2-confirm:hover,
 .my-custom-modal .swal2-deny:hover,
 .my-custom-modal .swal2-cancel:hover {
     color: #FAFAFA;
+    border: 2px solid #E48758 !important; /* 강제 적용 */
+    box-shadow: none !important; /* 기본 파란색 그림자 제거 */
 }
 
 .my-custom-modal .swal2-confirm:focus,
 .my-custom-modal .swal2-deny:focus,
 .my-custom-modal .swal2-cancel:focus {
     outline: none;
+    border: 2px solid #E48758 !important; /* 강제 적용 */
+    box-shadow: none !important; /* 기본 파란색 그림자 제거 */
 }
