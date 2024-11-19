@@ -23,8 +23,8 @@ const createExistMemoWindow = async (memo_id) => {
   console.log('메모정보:'+memo[0]);
 
   const win = new BrowserWindow({
-    width: memo[0].width || 270,
-    height: memo[0].height || 295,
+    width: memo[0].width || 310,
+    height: memo[0].height || 320,
     x: memo[0].posX,
     y: memo[0].posY,
     frame: false,
