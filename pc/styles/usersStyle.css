@@ -67,6 +67,7 @@
   right: 15px;
   cursor: pointer;
   -webkit-app-region: no-drag;
+  z-index: 100000000;
 }
 
 #close-user-button:hover {
