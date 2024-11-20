@@ -15,10 +15,32 @@ let filePaths = []; // 기타 파일 경로를 저장할 배열
 let memoData = [];
 let memoID = null;
 
+// 로딩 화면 표시 함수
+function showLoadingScreen() {
+    const loadingContainer = document.getElementById('loading-container');
+    if (loadingContainer) {
+        loadingContainer.style.display = 'flex'; // 로딩창 보이기
+    }
+}
+
+// 로딩 화면 숨기기 함수
+function hideLoadingScreen() {
+    const loadingContainer = document.getElementById('loading-container');
+    if (loadingContainer) {
+        loadingContainer.style.display = 'none'; // 로딩창 숨기기
+        document.getElementById('cancelButton').style.display = 'block';
+        document.getElementById('confirmButton').style.display = 'block';
+    }
+}
+
 // 페이지 로드 시 분석 중 상태 표시 및 메모 렌더링
 window.onload = () => {
     console.log("로드됨");
 
+    showLoadingScreen();
+
+    // 기존의 setTimeout 제거
+    /*
     setTimeout(() => {
         // 로딩 화면을 숨기고 콘텐츠 표시
         document.getElementById('loading-screen').style.display = 'none';
@@ -29,6 +51,7 @@ window.onload = () => {
         // 실제 데이터를 불러오는 함수 호출
         loadMemos();
     }, 2000);
+    */
 
     window.electron.ipcRenderer.on('original-memo-id', (event, memoId) => {
         memoID = memoId;
@@ -50,6 +73,7 @@ window.onload = () => {
                 memoData = parsedData;
                 // showLoading(false); // 분석 완료 상태 표시
                 renderMemos(); // 메모 렌더링
+                hideLoadingScreen(); // 분석 완료 후 로딩 화면 숨기기
             } else {
                 console.error('Parsed data is not an array:', parsedData);
             }
@@ -86,14 +110,6 @@ function addMemo() {
 function deleteMemo(index) {
     memoData = memoData.filter(memo => memo.index !== index);
     renderMemos(); // 화면 업데이트
-}
-
-// 로딩 화면 숨기기
-function hideLoadingScreen() {
-    loadingScreen = document.getElementById('loading-container'); // 로딩창의 ID
-    if (loadingScreen) {
-        loadingScreen.style.display = 'none'; // 로딩창을 숨김
-    }
 }
 
 // 텍스트 영역 크기 조정 함수
@@ -256,9 +272,9 @@ function renderMemos() {
     // addMemoBox.appendChild(addButton);
     container.appendChild(addMemoBox);
 
-    hideLoadingScreen();  // 로딩창을 숨기는 함수 호출
+    // 로딩 화면 숨기기 제거
+    // hideLoadingScreen();  // 이 부분을 제거
 }
-
 
 // 분석된 메모 생성
 async function createMemos() {
