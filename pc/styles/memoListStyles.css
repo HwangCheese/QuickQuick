@@ -16,15 +16,14 @@ body {
     overflow: hidden;
 }
 
-/* 로딩 애니메이션 중앙 위치 */
 body.loading::before {
     content: "";
     position: fixed; /* 전체 페이지 중앙에 위치 */
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 30%; /* 로딩 스피너 크기 */
-    height: 30%;
+    width: 150%; /* 로딩 스피너 크기 */
+    height: 150%;
     background-image: url('../media/loading1.gif'); /* 로딩 스피너 이미지 경로 */
     background-repeat: no-repeat;
     background-position: center;
