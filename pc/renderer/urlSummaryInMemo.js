@@ -39,7 +39,7 @@ document.getElementById('editor').addEventListener('keydown', async (event) => {
                 }
             });
 
-            const userUrlSummaryConfirmed = await userUrlConfirmedPromise;
+            userUrlSummaryConfirmed = await userUrlConfirmedPromise;
 
             if (userUrlSummaryConfirmed) { // 예를 선택했을 때 발생하는 이벤트 처리
                 loadingScreen.style.display = 'flex'; // 로딩 화면 표시
