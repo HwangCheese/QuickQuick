@@ -126,11 +126,11 @@ function createSearchMemoWindow() {
     newWindow.show();
   });
   // 윈도우가 포커스를 잃을 때
-  // newWindow.on('blur', () => {
-  //   // 포커스를 잃으면 윈도우를 닫음
-  //   newWindow.hide();
-  //   searchMemoWindow = null;
-  // });
+  newWindow.on('blur', () => {
+    // 포커스를 잃으면 윈도우를 닫음
+    newWindow.hide();
+    searchMemoWindow = null;
+  });
   newWindow.on('closed', () => {
     searchMemoWindow = null;
   });
