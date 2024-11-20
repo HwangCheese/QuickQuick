@@ -90,7 +90,7 @@ function deleteMemo(index) {
 
 // 로딩 화면 숨기기
 function hideLoadingScreen() {
-    const loadingScreen = document.getElementById('loading-container'); // 로딩창의 ID
+    loadingScreen = document.getElementById('loading-container'); // 로딩창의 ID
     if (loadingScreen) {
         loadingScreen.style.display = 'none'; // 로딩창을 숨김
     }

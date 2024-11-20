@@ -1,5 +1,4 @@
 const urlSummaryModal = document.getElementById('url-summary-modal'); // 전송 모달창
-const loadingScreen = document.getElementById('loading-screen'); 
 
 document.getElementById('editor').addEventListener('keydown', async (event) => {
     if (event.key === 'Enter') { // Enter 키 감지
@@ -39,7 +38,7 @@ document.getElementById('editor').addEventListener('keydown', async (event) => {
                 }
             });
 
-            userUrlSummaryConfirmed = await userUrlConfirmedPromise;
+            const userUrlSummaryConfirmed = await userUrlConfirmedPromise;
 
             if (userUrlSummaryConfirmed) { // 예를 선택했을 때 발생하는 이벤트 처리
                 loadingScreen.style.display = 'flex'; // 로딩 화면 표시
