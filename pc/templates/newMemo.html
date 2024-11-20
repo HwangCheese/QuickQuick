@@ -191,12 +191,14 @@
         } */
         #loading-screen {
             position: fixed;
-            top: 0;
-            left: 0;
+            top: 50%;
+            left: 50%;
             width: 100%;
             height: 100%;
+            transform: translate(-50%, -50%);
+            background-color: black;
             background-image: url('../media/loading.gif');
-            background-size: cover;
+            background-size: 200px auto;
             /* 화면 크기에 맞게 이미지를 꽉 채움 */
             background-position: center;
             /* 이미지를 왼쪽으로 조금 정렬 */
