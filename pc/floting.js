@@ -268,8 +268,8 @@ ipcMain.on('filter-memo', (event, memoIds) => {
 
 ipcMain.on('loading-start', (event) => {
   console.log('로딩시작');
-  if (memoListWindow) {
-    memoListWindow.webContents.send('on-loading');
+  if (searchMemoWindow) {
+    searchMemoWindow.webContents.send('on-loading');
   } else {
     console.log('Memo list window is not open.');
   }
@@ -277,8 +277,8 @@ ipcMain.on('loading-start', (event) => {
 
 ipcMain.on('loading-end', (event) => {
   console.log('로딩끝');
-  if (memoListWindow) {
-    memoListWindow.webContents.send('loading-end');
+  if (searchMemoWindow) {
+    searchMemoWindow.webContents.send('loading-end');
   } else {
     console.log('Memo list window is not open.');
   }
