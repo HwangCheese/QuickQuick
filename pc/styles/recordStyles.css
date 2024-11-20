@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'MyCustomFont';
+    src: url('../media/KakaoOTFRegular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 #recorder-button {
     -webkit-app-region: no-drag;
     /* 버튼이 드래그 영역에 포함되지 않도록 설정 */
@@ -22,7 +29,7 @@
 }
 
 .recorder-modal-content {
-    background-color: #F4EEE7;
+    background-color: #FAFAFA;
     padding: 15px;
     border-radius: 20px;
     width: 80%;
@@ -116,6 +123,7 @@ button:disabled {
     border-radius: 12px;
     padding: 10px;
     resize: none;
+    font-family: 'MyCustomFont', sans-serif;
 }
 
 #loading {
@@ -143,9 +151,10 @@ button:disabled {
 /* 버튼의 스타일 */
 .action-buttons button {
     margin-left: 30px;
-    background-color: #FAFAFA;
+    background-color: #E48758;
+    font-family: 'MyCustomFont', sans-serif;
+    color: white;
     font-size: 11px;
-    color: black;
     border: none;
     border-radius: 15px;
     padding: 5px 10px;
@@ -156,11 +165,6 @@ button:disabled {
     float: left;
     margin: 2%
         /* margin을 0으로 설정하여 여백 문제를 없앰 */
-}
-
-/* 버튼 호버 효과 */
-.action-buttons button:hover {
-    background-color: #FAFAFA;
 }
 
 /* 상단 중앙의 Quick Assistant 글자*/
