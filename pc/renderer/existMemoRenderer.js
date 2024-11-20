@@ -642,6 +642,7 @@ memoAddBtn.addEventListener('click', async () => {
 // 메모를 저장하고 메모 창을 닫는 함수 - 창을 닫을 때, 전송 버튼을 누를때 실행됨.
 // 호출 직전에 memo_ID 생성해서 매개변수로 전달해줘야함.
 async function saveAndClose(memo_ID) {
+    loadingScreen.style.display = 'flex'; // 로딩 화면 표시
     //이미지 파일 경로 저장
     imagePaths.splice(0, imagePaths.length); //경로 배열 초기화
     for (const file of imageFiles) { // 이미지 파일 목록 순회
@@ -705,6 +706,7 @@ async function saveAndClose(memo_ID) {
         memo_id: memo_ID
     });
     //window.electron.closeMemoWindow();
+    loadingScreen.style.display = 'none';
 }
 
 // 아래는 전송과 관련된 코드
