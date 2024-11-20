@@ -1,5 +1,5 @@
 const { io } = require('socket.io-client');
-const { Notification,ipcMain } = require('electron'); // Electron의 Notification API 사용
+const { BrowserWindow, Notification,ipcMain } = require('electron'); // Electron의 Notification API 사용
 const path = require('path');
 const Speaker = require('speaker');
 const fs = require('fs');
@@ -119,12 +119,28 @@ function showInvite(title, body, inviteUrl) { // inviteUrl 매개변수 추가
         notification.show();
         playSound();
         notification.on('click', () => {
-            shell.openExternal(inviteUrl); // 클릭 시 URL 열기
+            createConferenceWindowByInvite(inviteUrl); // 클릭 시 URL 열기
         });
     } catch (error) {
         console.error('알림 생성 중 오류:', error);
     }
 }
+
+// 화상회의 초대 받고 들어가기
+const createConferenceWindowByInvite = (inviteUrl) => {
+    const win = new BrowserWindow({
+        width: 650,
+        height: 700,
+        frame: false,  // 본 타이틀바 제거
+        webPreferences: {
+            preload: path.join(__dirname, 'preload.js'),
+            contextIsolation: true,
+            enableRemoteModule: false,
+            nodeIntegration: false
+        }
+    });
+    win.loadURL(inviteUrl);
+};
 
 // 비동기 소리 재생 함수
 function playSound() {
