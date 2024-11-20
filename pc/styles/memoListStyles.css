@@ -15,7 +15,7 @@ body {
     align-items: flex-start;
     justify-content: center;
     overflow: hidden;
-    border-radius: 10px;
+    border-radius: 30px;
 }
 
 /* 로딩 애니메이션 중앙 위치 */
