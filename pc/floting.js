@@ -102,7 +102,7 @@ function createSearchMemoWindow() {
     width: 320,
     height: 270,
     frame: false,
-    transparent: false,
+    transparent: true,
     alwaysOnTop: true,
     resizable: true,
     movable: true,
