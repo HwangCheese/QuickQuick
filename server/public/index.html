@@ -32,15 +32,18 @@
     </div>
 
     <div id="video-chat-container" style="display:none;">
+        
         <div class="local-video-wrapper">
             <div class="video-wrapper">
                 <video id="local-video" autoplay playsinline muted></video>
-                <div class="video-nickname" id="local-nickname">Your Name</div> <!-- 사용자 닉네임 표시 -->
+                <div class="video-nickname" id="local-nickname">Your Name</div>
             </div>
         </div>
 
         <div class="remoteVideo" id="remote-video"></div>
     </div>
+
+    <div id="meeting-timer" style="display:none;">00:00:00</div>
 
     <button id="invite-button" style="display:none;">
         <img src="./images/add-friend.png" alt="">
@@ -86,12 +89,12 @@
             <img id="cam-img" src="./images/cam-on.png" alt="Camera Toggle">
         </button>
 
-        <button id="microphone-toggle-button" class="control-button">
-            <img id="mic-img" src="./images/mic-on.png" alt="Microphone Toggle">
-        </button>
-
         <button id="end-call-button" class="control-button">
             <img src="./images/call_end.png" alt="End Call">
+        </button>
+
+        <button id="microphone-toggle-button" class="control-button">
+            <img id="mic-img" src="./images/mic-on.png" alt="Microphone Toggle">
         </button>
     </div>
 

@@ -18,7 +18,7 @@ body {
     background-color: #FAFAFA;
 }
 
-#video-chat-container {
+/* #video-chat-container {
     display: grid;
     gap: 10px;
     width: 100%;
@@ -26,14 +26,38 @@ body {
     justify-items: center;
     align-items: center;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+} */
+
+#meeting-timer {
+    position: absolute;
+    top: 30px;
+    left: 20px;
+    background-color: #DDDDDD;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-family: 'MyCustomFont', sans-serif;
+    z-index: 10; /* 다른 요소들 위에 표시되도록 설정 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#video-chat-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; 
+    align-items: center;     
+    gap: 20px;          
+    width: 100%;
+    height: 80%;
+    margin: 0 auto;          
 }
 
 video {
-    width: 300px;
-    height: 200px;
+    width: 400px;
+    height: 300px;
     /* border: 1px solid #777777; */
     border-radius: 15px;
-    background-color: #DDDDDD;
 }
 
 #invite-button {
@@ -296,25 +320,14 @@ video {
 }
 
 #microphone-toggle-button {
-    width: 100px;
-    height: 100px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    position: fixed;
+    order: 3;
     bottom: 20px;
-    left: calc(50% + 90px);
 }
 
 #camera-toggle-button {
-    width: 100px;
-    height: 100px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    position: fixed;
+    order: 1;
+    left: 100px;
     bottom: 20px;
-    left: calc(50% - 200px);
 }
 
 #cam-img,
@@ -324,21 +337,15 @@ video {
 }
 
 #end-call-button {
-    width: 100px;
-    height: 100px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    position: fixed;
+    order: 2;
     bottom: 20px;
-    left: calc(50% - 50px);
 }
 
 #end-call-button img {
-    width: 100%;
-    height: 100%;
+    width: 100px;
+    height: 100px;
 }
-
+/* 
 #cam-off,
 #mic-off {
     width: 70px;
@@ -357,7 +364,7 @@ video {
 
 #mic-off {
     left: calc(50% + 103px);
-}
+} */
 
 #preparation-container {
     font-family: 'MyCustomFont', sans-serif;
@@ -384,7 +391,6 @@ video {
     min-width: 150px;
     max-width: 250px;
     display: block;
-    margin: 1em;
     padding: 1em 2em;
     border: none;
     background: none;
@@ -499,8 +505,34 @@ video {
     transition: all 0.3s ease;
 }
 
-#toggle-buttons .control-button {
-    margin: 0 5px;
+.control-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+    gap: 50px;
+}
+
+.control-button img {
+    width: 80px;
+    height: 80px;
+    transition: all 0.3s ease;
+}
+
+.control-button:hover img {
+    transform: scale(1.1);
+}
+
+#control-buttons-container {
+    position: relative;
+    display: flex;
+    flex-direction: row !important; 
+    align-items: center;
+    justify-content: center;
+    gap: 20px; 
+    z-index: 100; 
 }
 
 #prep-camera-toggle-button,
@@ -523,20 +555,45 @@ video {
     /* 비디오들을 가운데 정렬 */
     gap: 10px;
     /* 비디오 간 간격 설정 */
+    align-items: flex-start;
 }
 
-.video-wrapper {
+/* .video-wrapper {
     width: 300px;
-    /* 비디오 요소의 너비 설정 */
     height: 200px;
-    /* 비디오 요소의 높이 설정 */
     position: relative;
+    transition: transform 0.8s ease, border 0.8s ease;
+    border-radius: 15px;
+} */
+
+.video-wrapper {
+    width: 400px;
+    height: 300px;
+    position: relative;
+    transition: transform 0.5s ease, width 0.5s ease, height 0.5s ease; /* 지속 시간과 이징 조절 가능 */
+    border-radius: 15px;
+    flex: 0 0 auto;
+}
+
+.video-wrapper.speaking {
+    border: 5px solid #E48758;
+    transform: scale(1.1);
+    transform-origin: center;
+}
+
+.mic-status-icon {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 24px;
+    height: 24px;
+    z-index: 2;
 }
 
 /* 닉네임 스타일 */
 .video-nickname {
     position: absolute;
-    bottom: 10px;
+    bottom: 40px;
     left: 10px;
     background-color: rgba(0, 0, 0, 0.5);
     /* 반투명 배경 */

@@ -112,6 +112,7 @@ async function initializeLocalStream() {
     try {
         localStream = await navigator.mediaDevices.getUserMedia(mediaConstraints);
         localVideoComponent.srcObject = localStream;
+        //setupLocalAudioAnalyzer();
         showVideoConference();
     } catch (error) {
         console.error('Error accessing local stream:', error);
@@ -119,12 +120,65 @@ async function initializeLocalStream() {
     }
 }
 
+// function setupLocalAudioAnalyzer() {
+//     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+//     const analyser = audioContext.createAnalyser();
+//     const source = audioContext.createMediaStreamSource(localStream);
+
+//     source.connect(analyser);
+//     analyser.fftSize = 512;
+
+//     const dataArray = new Uint8Array(analyser.frequencyBinCount);
+
+//     let isSpeaking = false;
+//     let scale = 1;
+//     const maxScale = 1.5; // 최대 확대 배율
+//     const scaleIncrement = 0.1; // 확대 속도
+//     const scaleDecrement = 0.1; // 축소 속도
+
+//     function analyzeAudio() {
+//         analyser.getByteFrequencyData(dataArray);
+//         const maxVolume = Math.max(...dataArray);
+
+//         const videoWrapper = document.querySelector('.local-video-wrapper .video-wrapper');
+//         if (videoWrapper) {
+//             if (maxVolume > 30) {
+//                 isSpeaking = true;
+//             } else {
+//                 isSpeaking = false;
+//             }
+
+//             if (isSpeaking) {
+//                 if (scale < maxScale) {
+//                     scale += scaleIncrement;
+//                     if (scale > maxScale) scale = maxScale;
+//                     videoWrapper.style.transform = `scale(${scale})`;
+//                 }
+//             } else {
+//                 if (scale > 1) {
+//                     scale -= scaleDecrement;
+//                     if (scale < 1) scale = 1;
+//                     videoWrapper.style.transform = `scale(${scale})`;
+//                 }
+//             }
+//         }
+
+//         requestAnimationFrame(analyzeAudio);
+//     }
+
+//     analyzeAudio();
+// }
+
 function showVideoConference() {
     videoChatContainer.style.display = 'flex';
 
     document.getElementById('invite-button').style.display = 'block';
     document.getElementById('chat-button').style.display = 'block';
+    document.getElementById('meeting-timer').style.display = 'block';
     document.getElementById('control-buttons-container').style.display = 'block';
+
+    // 타이머 시작
+    startTimer();
 }
 
 // 방 입장 후 이름과 함께 서버에 전송
@@ -138,6 +192,60 @@ async function joinRoom(room, username) {
 
     startRecording();
 }
+
+// function setupRemoteAudioAnalyzer(remoteAudioTrack, clientId) {
+//     const audioContext = new AudioContext();
+//     const analyser = audioContext.createAnalyser();
+//     const source = audioContext.createMediaStreamSource(new MediaStream([remoteAudioTrack]));
+
+//     source.connect(analyser);
+//     analyser.fftSize = 1024;
+
+//     const dataArray = new Uint8Array(analyser.frequencyBinCount);
+
+//     let isSpeaking = false;
+//     let scale = 1;
+//     const maxScale = 1.5; // 최대 확대 배율
+//     const scaleIncrement = 0.01; // 확대 속도
+//     const scaleDecrement = 0.01; // 축소 속도
+
+//     function analyzeAudio() {
+//         analyser.getByteTimeDomainData(dataArray);
+//         let sum = 0;
+//         for (let i = 0; i < dataArray.length; i++) {
+//             sum += Math.abs(dataArray[i] - 128);
+//         }
+//         const volume = sum / dataArray.length;
+
+//         const videoWrapper = document.getElementById(`video-wrapper-${clientId}`);
+//         if (videoWrapper) {
+//             if (volume > 1) { // 임계값 조정 가능
+//                 isSpeaking = true;
+//             } else {
+//                 isSpeaking = false;
+//             }
+
+//             if (isSpeaking) {
+//                 if (scale < maxScale) {
+//                     scale += scaleIncrement;
+//                     if (scale > maxScale) scale = maxScale;
+//                     videoWrapper.style.transform = `scale(${scale})`;
+//                 }
+//             } else {
+//                 if (scale > 1) {
+//                     scale -= scaleDecrement;
+//                     if (scale < 1) scale = 1;
+//                     videoWrapper.style.transform = `scale(${scale})`;
+//                 }
+//             }
+//         }
+
+//         requestAnimationFrame(analyzeAudio);
+//     }
+
+//     analyzeAudio();
+// }
+
 
 async function createPeerConnection(clientId) {
     if (peerConnections[clientId]) {
@@ -162,6 +270,10 @@ async function createPeerConnection(clientId) {
     // track 이벤트 핸들러 - 원격 비디오 스트림을 처리
     peerConnection.ontrack = (event) => {
         handleTrack(event, clientId);
+        
+        // if (event.track.kind === 'audio') {
+        //     setupRemoteAudioAnalyzer(event.track, clientId);
+        // }
     };
 
     // ICE connection 상태 변화 처리
@@ -209,7 +321,7 @@ function handleTrack(event, clientId) {
         nicknameElement.className = 'video-nickname';
         nicknameElement.textContent = username;
 
-        // 비디오와 닉네임을 wrapper에 추가
+        // 비디오와 닉네임, 마이크 아이콘을 wrapper에 추가
         videoWrapper.appendChild(videoElement);
         videoWrapper.appendChild(nicknameElement);
 
@@ -386,6 +498,7 @@ document.getElementById('microphone-toggle-button').addEventListener('click', ()
     mic.src = audioTrackEnabled ? "./images/mic-on.png" : './images/mic-off.png';
 });
 
+
 function addMessageToChat(sender, message) {
     const chatMessages = document.getElementById('chat-messages');
     const messageElement = document.createElement('div');
@@ -399,42 +512,6 @@ const prepCamImg = document.getElementById('prep-cam-img');
 const prepMicImg = document.getElementById('prep-mic-img');
 const camImg = document.getElementById('cam-img');
 const micImg = document.getElementById('mic-img');
-
-// 준비 화면에서 카메라 이미지 hover 시
-prepCamImg.addEventListener('mouseover', () => {
-    prepCamImg.src = isVideoEnabled ? './images/cam-on-hover.png' : './images/cam-off-hover.png';
-});
-
-prepCamImg.addEventListener('mouseout', () => {
-    prepCamImg.src = isVideoEnabled ? './images/cam-on.png' : './images/cam-off.png';
-});
-
-// 준비 화면에서 마이크 이미지 hover 시
-prepMicImg.addEventListener('mouseover', () => {
-    prepMicImg.src = isAudioEnabled ? './images/mic-on-hover.png' : './images/mic-off-hover.png';
-});
-
-prepMicImg.addEventListener('mouseout', () => {
-    prepMicImg.src = isAudioEnabled ? './images/mic-on.png' : './images/mic-off.png';
-});
-
-// 카메라 이미지 hover 시
-camImg.addEventListener('mouseover', () => {
-    camImg.src = videoTrackEnabled ? './images/cam-on-hover.png' : './images/cam-off-hover.png';
-});
-
-camImg.addEventListener('mouseout', () => {
-    camImg.src = videoTrackEnabled ? './images/cam-on.png' : './images/cam-off.png';
-});
-
-// 마이크 이미지 hover 시
-micImg.addEventListener('mouseover', () => {
-    micImg.src = audioTrackEnabled ? './images/mic-on-hover.png' : './images/mic-off-hover.png';
-});
-
-micImg.addEventListener('mouseout', () => {
-    micImg.src = audioTrackEnabled ? './images/mic-on.png' : './images/mic-off.png';
-});
 
 // 종료 버튼 이벤트 리스너 추가
 document.getElementById('end-call-button').addEventListener('click', () => {
@@ -473,6 +550,9 @@ async function leaveRoom() {
     // 비디오 채팅 UI를 숨기고, 방 선택 UI를 다시 표시
     videoChatContainer.style.display = 'none';
     roomSelectionContainer.style.display = 'flex';
+
+    // 타이머 정지
+    stopTimer();
 }
 
 socket.on('client_left', (clientId) => {
@@ -634,3 +714,30 @@ document.getElementById('ai-tab-button').addEventListener('click', () => {
     document.getElementById('ai-tab-button').style.color = '#E48758';
     document.getElementById('chat-tab-button').style.color = '#DDDDDD';
 });
+
+let timerInterval = null;
+let elapsedSeconds = 0;
+
+const meetingTimer = document.getElementById('meeting-timer');
+
+function startTimer() {
+    elapsedSeconds = 0;
+    updateTimerDisplay();
+    timerInterval = setInterval(() => {
+        elapsedSeconds++;
+        updateTimerDisplay();
+    }, 1000);
+}
+
+function stopTimer() {
+    clearInterval(timerInterval);
+    meetingTimer.textContent = '00:00:00'; // 초기화
+}
+
+function updateTimerDisplay() {
+    const hours = String(Math.floor(elapsedSeconds / 3600)).padStart(2, '0');
+    const minutes = String(Math.floor((elapsedSeconds % 3600) / 60)).padStart(2, '0');
+    const seconds = String(elapsedSeconds % 60).padStart(2, '0');
+    meetingTimer.textContent = `${hours}:${minutes}:${seconds}`;
+}
+
