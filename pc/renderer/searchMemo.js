@@ -60,22 +60,27 @@ document.addEventListener('DOMContentLoaded', async () => {
           window.electron.ipcRenderer.send('search-memo', searchTerm); // 검색어를 searchMemo.js로 전송
       });
   
-      input.addEventListener('keydown', async (event) => {
-          if (event.key === 'Enter') {
-              const searchTerm = input.value.trim();
-              if (searchTerm !== "") {
-                  try {
-                      window.electron.ipcRenderer.send('loading-start');
-                      const response = await window.electron.searchMemo(searchTerm);
-                      const memoIds = response.data;
-                      console.log("검색된 메모 ID들:", memoIds);
-                      window.electron.ipcRenderer.send('filter-memo', memoIds);
-                  } catch (error) {
-                      console.error("검색 오류:", error);
-                  }
-              }
-          }
-      });
+      let isProcessing2 = false; // 요청 중인지 여부를 추적하는 플래그
+
+    input.addEventListener('keydown', async (event) => {
+        if (event.key === 'Enter') {
+            const searchTerm = input.value.trim();
+            if (searchTerm !== "" && !isProcessing2) {
+                isProcessing2 = true; // 요청 시작
+                try {
+                    window.electron.ipcRenderer.send('loading-start');
+                    const response = await window.electron.searchMemo(searchTerm);
+                    const memoIds = response.data;
+                    console.log("검색된 메모 ID들:", memoIds);
+                    window.electron.ipcRenderer.send('filter-memo', memoIds);
+                } catch (error) {
+                    console.error("검색 오류:", error);
+                } finally {
+                    isProcessing2 = false; // 요청 완료 후 플래그 해제
+                }
+            }
+        }
+    });
       
     try {
         // 사용자 아이디와 메모 데이터를 불러옴
