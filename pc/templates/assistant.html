@@ -16,7 +16,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('../media/loading.gif');
+            background-image: url('../media/classify-loading.gif');
             background-size: cover; /* 화면 크기에 맞게 이미지를 꽉 채움 */
             background-position: center; /* 이미지를 왼쪽으로 조금 정렬 */
             background-repeat: no-repeat; /* 이미지 반복 방지 */
@@ -24,7 +24,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 1000;
+            z-index: 100000000;
             margin-bottom: 10px;
         }
 </style>
@@ -33,13 +33,13 @@
     <div class="title-button-container">
         <span id="title">Quick Assistant</span>
         <div id="buttonContainer"> <!-- 버튼들을 감싸는 컨테이너 -->
-        <button id="cancelButton">취소</button>
-        <button id="confirmButton">모두 저장</button>
+        <button id="cancelButton" style="display: none;">취소</button>
+        <button id="confirmButton" style="display: none;">모두 저장</button>
         </div>
     </div>
-    <<div id="loading-container" style="display: flex;">
+    <div id="loading-container" style="display: flex;">
         <div id="loading-screen">
-            <img src="../media/loading.gif" alt="Loading...">
+            <img src="../media/classify-loading.gif" alt="Loading...">
             <!-- <p class="loading-text">Loading...</p> -->
         </div>
     </div>

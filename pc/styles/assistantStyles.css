@@ -47,20 +47,16 @@ body {
 #confirmButton {
     width: 120px; /* 버튼 너비 */
     height: 50px; /* 버튼 높이 */
-    background-color: #FAFAFA; /* 버튼 배경색 */
-    color: #000000; /* 버튼 텍스트 색상 */
+    background-color: #E48758; /* 버튼 배경색 */
+    color: white; /* 버튼 텍스트 색상 */
     border: none;
-    border-radius: 20px; /* 타원형 */
+    border-radius: 4px; /* 타원형 */
     font-size: 15px; /* 텍스트 크기 */
     cursor: pointer; /* 커서 모양 */
     transition: background-color 0.3s ease; /* 배경색 변화 애니메이션 */
     -webkit-app-region: no-drag;
-}
-
-#confirmButton:hover,
-#cancelButton:hover {
-    background-color: #E3E3E3;
-    /* 마우스 호버 시 색상 변경 */
+    z-index: 1000;
+    font-family: 'MyCustomFont', sans-serif;
 }
 
 /* 분류한 메모들을 나열할 컨테이너 */
