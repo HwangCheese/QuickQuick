@@ -143,7 +143,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
-// 메모들을 화면에 렌더링하는 함수
 function renderMemos(memosToRender) {
     memoList.innerHTML = ''; // 기존 메모 항목을 초기화
 
@@ -157,8 +156,15 @@ function renderMemos(memosToRender) {
             memoItem.classList.add('unread-memo'); // CSS에서 정의된 애니메이션 클래스
         }
 
+        // <p> 태그 생성
+        const memoText = document.createElement('p');
+        memoText.textContent = memo.title;
+        memoText.setAttribute('contenteditable', 'false'); // 텍스트 수정 방지
+        memoText.style.userSelect = 'none'; // 텍스트 선택 방지
+        memoText.style.cursor = 'default'; // 기본 화살표 포인터 설정
+
         // 메모 클릭 시 처리
-        memoItem.innerHTML = `<p>${memo.title}</p>`;
+        memoItem.appendChild(memoText);
         memoItem.addEventListener('click', async () => {
             try {
                 memoList.style.display = 'none';  // 메모를 열 때 memoList 숨기기
