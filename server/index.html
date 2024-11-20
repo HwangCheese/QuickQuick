@@ -6,9 +6,10 @@
     <title>Socket.IO Client</title>
     <!-- socket.io 클라이언트 스크립트를 로드 -->
     <script src="/socket.io/socket.io.js"></script>
+    <script src="/config.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const socket = io('http://192.168.75.69:3000'); // 서버와 연결
+            const socket = io(config.SERVER_URL); // 서버와 연결
       });
     </script>
 </head>
