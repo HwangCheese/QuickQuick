@@ -71,6 +71,7 @@
 
 /* 예, 아니오 버튼 스타일 */
 #confirm-btn, #cancel-btn {
+    font-family: 'MyCustomFont', sans-serif;
     background-color: #E48758;
     color: white;
     border: none;

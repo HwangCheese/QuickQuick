@@ -4,6 +4,7 @@
     font-weight: normal;
     font-style: normal;
 }
+
 /* 모달 스타일 */
 .meeting-modal {
     display: none;
@@ -87,6 +88,7 @@
     cursor: pointer;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
     transition: background-color 0.3s ease, transform 0.2s ease;
+    font-family: 'MyCustomFont', sans-serif;
 }
 
 #meeting-cancel-btn {
