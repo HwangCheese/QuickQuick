@@ -580,7 +580,7 @@
 }
 
 .friend-modal-content2 {
-  background-color: #F4EEE7;
+  background-color: #FAFAFA;
   padding: 20px;
   border-radius: 5px;
   width: 80%;
@@ -702,20 +702,6 @@
   /* 다른 요소 위에 표시 */
 }
 
-.friend-modal-content2 {
-  background-color: #F4EEE7;
-  padding: 20px;
-  border-radius: 10px;
-  width: 80%;
-  max-width: 500px;
-  text-align: center;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-app-region: no-drag;
-}
 
 /* 모달 콘텐츠 스타일 */
 .invite-modal-content {
