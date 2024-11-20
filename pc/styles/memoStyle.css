@@ -564,13 +564,13 @@ body {
 /* 전송 버튼 스타일 */
 #send-friends-button,
 #friend-close-button {
-    background-color: #FAFAFA;
+    background-color: #E48758;
     /* 버튼 배경색 */
-    color: black;
+    color: rgb(255, 255, 255);
     /* 버튼 텍스트 색상 */
     border: none;
     /* 버튼 경계선 제거 */
-    border-radius: 15px;
+    border-radius: 4px;
     /* 버튼 모서리 둥글기 */
     padding: 5px 20px;
     /* 버튼 내부 여백 */
@@ -587,13 +587,6 @@ body {
 #send-button {
     -webkit-app-region: no-drag;
     /* 버튼이 드래그 영역에 포함되지 않도록 설정 */
-}
-
-/* 전송 버튼 호버 효과 */
-#send-friends-button,
-#friend-close-button {
-    background-color: #FAFAFA;
-    /* 호버 시 버튼 배경색 */
 }
 
 #friend-search {
