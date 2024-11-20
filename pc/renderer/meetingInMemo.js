@@ -1,9 +1,13 @@
 const meetingModal = document.getElementById('meeting-modal'); // 화상회의 초대 모달창
 const meetingQuestion = document.getElementById('meeting-question'); // 화상회의 질문 텍스트
+let processing2=false;
 
 // 메모 작성 시, 캘린더 일정 자동 삽입 및 화상회의 초대 관련 이벤트
 document.getElementById('editor').addEventListener('keydown', async (event) => {
     if (event.key === 'Enter') { // Enter 키 감지
+        if (processing2) return; // 이미 처리 중이면 중복 실행 방지
+        processing2 = true; // 처리 시작
+
         const text = document.getElementById('editor').value.trim().split('\n').pop(); // textArea의 마지막 줄 가져오기
 
         // 문장에 'meeting' 또는 '화상회의' 단어 감지
@@ -15,7 +19,7 @@ document.getElementById('editor').addEventListener('keydown', async (event) => {
 
             // 문장에서 모든 단어 추출
             const words = text.trim().split(/\s+/); // 공백으로 단어 분리
-            const candidatesToCheck = words.filter(word => word !== 'meeting' && word !== '화상회의'&& word !== '미팅'&& word !== '회의'&& word !== '통화');
+            const candidatesToCheck = words.filter(word => word !== 'meeting' && word !== '화상회의' && word !== '미팅' && word !== '회의' && word !== '통화');
 
             const confirmedFriends = []; // 실제 친구로 확인된 이름들을 저장할 배열
 
@@ -72,8 +76,10 @@ document.getElementById('editor').addEventListener('keydown', async (event) => {
 
         // textArea에 포커스 주기
         document.getElementById('editor').focus();
+        processing2 = false; // 처리 완료
     }
 });
+
 
 // 모달 닫기
 function closeMeetingModal() {
