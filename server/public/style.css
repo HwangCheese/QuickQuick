@@ -332,8 +332,8 @@ video {
 
 #cam-img,
 #mic-img {
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
 }
 
 #end-call-button {
@@ -342,8 +342,8 @@ video {
 }
 
 #end-call-button img {
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 90px;
 }
 /* 
 #cam-off,
@@ -532,7 +532,6 @@ video {
     align-items: center;
     justify-content: center;
     gap: 20px; 
-    z-index: 100; 
 }
 
 #prep-camera-toggle-button,
