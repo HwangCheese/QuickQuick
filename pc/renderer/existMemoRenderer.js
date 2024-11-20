@@ -61,7 +61,7 @@ let memo_ID;
 async function createFileObject(filePath) {
     const startTime = performance.now(); // 시작 시간 기록
     try {
-        loadingScreen.style.display = 'flex'; // 로딩 화면 표시
+        //loadingScreen.style.display = 'flex'; // 로딩 화면 표시
         const fileData = await window.electron.getFileObjByPath(filePath);
 
         // Blob으로 File 객체 생성
@@ -81,7 +81,7 @@ async function createFileObject(filePath) {
         return null; // 오류 발생 시 null 반환
     }
     finally {
-        loadingScreen.style.display = 'none'; // 파일 불러오기 후 로딩 화면 제거
+        //loadingScreen.style.display = 'none'; // 파일 불러오기 후 로딩 화면 제거
         const endTime = performance.now(); // 끝 시간 기록
         const uploadTime = endTime - startTime; // 업로드 시간 계산
         console.log(`파일 업로드 시간: ${uploadTime.toFixed(2)} ms`); // 업로드 시간 출력
