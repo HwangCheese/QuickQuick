@@ -11,7 +11,6 @@
     <script src="../renderer/searchMemo.js"></script>
 
     <style>
-
         /* X 버튼 스타일 */
         .close-btn {
             /* position: absolute; */
@@ -29,7 +28,8 @@
             animation: slideAndGrow 0.5s ease-out forwards;
             width: 0;
             max-height: 250px;
-            background-color: rgba(224, 224, 224, 0.5); /* 투명도 조정 (0.5는 50% 투명) */
+            background-color: rgba(224, 224, 224, 0.5);
+            /* 투명도 조정 (0.5는 50% 투명) */
             border-radius: 10px;
             padding-top: 10px;
             padding-bottom: 10px;
@@ -110,13 +110,21 @@
             padding-top: 5px;
             padding-bottom: 5px;*/
         }
+
+        /* 플레이스홀더 색상 지정 */
+        #search-bar::placeholder {
+            color: black;
+            /* 하얀색 지정 */
+            opacity: 1;
+            /* 투명도 조정 (기본값: 0.5) */
+        }
     </style>
 </head>
 
 <body>
     <div class="search-container">
         <!-- 검색창 필드 -->
-        <i class="fa-solid fa-magnifying-glass"></i>
+        <i class="fa-solid fa-magnifying-glass"style="color: #E48758;"></i>
         <input id="search-bar" type="text" placeholder="퀵퀵 내에서 검색..">
         <!-- 닫기 버튼 이미지 -->
         <i class="fa-solid fa-xmark close-btn" onclick="document.getElementById('search-bar').value = ''"
