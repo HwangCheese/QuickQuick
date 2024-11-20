@@ -111,7 +111,7 @@ function createSearchMemoWindow() {
       preload: path.join(__dirname, 'preload.js')
     }
   });
-  newWindow.loadFile("templates/searchFbtn.html");
+  newWindow.loadFile("templates/searchMemo.html");
   newWindow.once('ready-to-show', () => {
     const { width, height } = screen.getPrimaryDisplay().workAreaSize;
 

@@ -12,9 +12,9 @@ body {
     padding: 0;
     background: transparent; 
     display: flex;
-    align-items: flex-start; /* 컨텐츠가 상단에 위치하게 조정 */
+    align-items: flex-start;
     justify-content: center;
-    height: 100vh;
+    overflow: hidden;
 }
 
 /* 로딩 애니메이션 중앙 위치 */
@@ -31,6 +31,7 @@ body.loading::before {
     background-position: center;
     background-size: cover;
     z-index: 1000; /* 상단 레이어 */
+    overflow: hidden;
 }
 
 /* 로딩 중일 때 메모 리스트 내용 흐리게 */
@@ -41,47 +42,49 @@ body.loading .container {
 
 
 /* 메모리스트 컨테이너 스타일 */
-.container {
-    width: 700px; /* 너비를 넓게 변경 */
+/* .container {
+    width: 700px; 
     padding: 20px;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
     border-radius: 16px;
     overflow: hidden;
     background-color: #ffffff;
     backdrop-filter: blur(8px);
-}
+} */
 
 /* 메모 리스트 섹션 */
 .memo-list {
-    max-height: 450px; /* 기본 최대 높이 */
+    max-height: 210px; /* 기본 최대 높이 */
     overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: #007bff #f0f4ff;
-    padding: 0; /* 패딩 제거 */
-    margin: 0; /* 마진 제거 */
-    display: flex;
-    flex-direction: column;
+    overflow-x: hidden;
+    
+    /* margin-bottom: 5px; */
+    padding-right: 5px; /* 스크롤바와 컨텐츠 간격 */
+    /* display: flex;
+    flex-direction: column; */
     transition: max-height 0.3s ease-out, padding 0.3s ease-out;
 }
 
 /* 스크롤바 스타일 */
-::-webkit-scrollbar {
-    width: 8px;
+.memo-list::-webkit-scrollbar {
+    width:5px;
 }
 
-::-webkit-scrollbar-track {
-    background: #fcf5f1;
-    border-radius: 10px;
+/*스크롤 트랙(배경) 스타일*/
+.memo-list::-webkit-scrollbar-track {
+    background: #ddccba;
+    border-radius: 8px;
 }
 
-::-webkit-scrollbar-thumb {
+/*스크롤 핸들(Thumb) 스타일*/
+.memo-list::-webkit-scrollbar-thumb {
     background: #ebae6a;
     border-radius: 10px;
-    border: 2px solid #ffeae1;
 }
 
-::-webkit-scrollbar-thumb:hover {
-    background: #ebae6a;
+/*스크롤 핸들 호버 효과*/
+.memo-list::-webkit-scrollbar-thumb:hover {
+    background: #e19d59; /* 호버 시 핸들 색상 */
 }
 
 /* slideDown 애니메이션 */
@@ -96,35 +99,35 @@ body.loading .container {
     }
 }
 .memo-item {
-    width: 150px;
+    max-width: 90%;
     display: flex;
     flex-direction: column;
-    padding: 15px;
-    margin: 0 0 10px 0;
+    padding: 14px;
+    margin-bottom: 8px;
     background: #F4EEE7;
-    border-radius: 24px;
-    transition: transform 0.3s, opacity 0.3s;
-    overflow: hidden;
+    border-radius: 10px;
+    /* transition: transform 0.3s, opacity 0.3s; */
+    /* overflow: hidden;
     white-space: nowrap;
-    text-overflow: ellipsis;
-    transform: scale(0.9);
+    text-overflow: ellipsis; */
+    /* transform: scale(0.9); */
     
     /* 애니메이션 적용 */
-    animation: slideDown 0.4s ease-out forwards; /* forwards를 추가하여 애니메이션이 끝난 후 스타일 유지 */
-    opacity: 0; /* 초기 상태에서 투명도를 0으로 설정 */
+    /* animation: slideDown 0.4s ease-out forwards; forwards를 추가하여 애니메이션이 끝난 후 스타일 유지 */
+    /* opacity: 1; 초기 상태에서 투명도를 0으로 설정 */
 }
 
-/* 중앙에 있을 때의 스타일 */
+/* 중앙에 있을 때의 스타일
 .memo-item.active {
     opacity: 1;
     transform: scale(1);
 }
 
-/* 메모 아이템 카드 호버 효과 */
+메모 아이템 카드 호버 효과
 .memo-item:hover {
     transform: translateY(-3px);
     box-shadow: 0 12px 20px rgba(0, 123, 255, 0.2);
-}
+} */
 
 /* 메모 제목과 본문 */
 .memo-item h2 {

@@ -78,7 +78,7 @@ contextBridge.exposeInMainWorld('electron', {
 
     // 사용자 정보 관련 메서드
     getUserName: () => ipcRenderer.invoke('get-user-name'),
-    getUserId: () => ipcRenderer.invoke('get-user-id'), //use in memoList.js
+    getUserId: () => ipcRenderer.invoke('get-user-id'), //use in searchMemo.js
     getUserIdByName: (friendName) => ipcRenderer.invoke('get-user-id-By-Name', { friendNameSet: friendName }),  //친구관계 테이블에서 friend_user_id를 user_name과 friend_name_set으로 검색 
 
     // 데이터 삽입 관련 메서드
@@ -86,8 +86,8 @@ contextBridge.exposeInMainWorld('electron', {
     createMemoId: () => ipcRenderer.invoke('create-memo-id'),
 
     // 데이터 불러오기 관련 메서드
-    getMemo: (userId) => ipcRenderer.invoke('get-memo', userId), //use in memoList.js
-    getDatas: (memoId) => ipcRenderer.invoke('fetch-data-ids-for-memo', memoId), //use in existMemoRenderer.js, memoList.js
+    getMemo: (userId) => ipcRenderer.invoke('get-memo', userId), //use in searchMemo.js
+    getDatas: (memoId) => ipcRenderer.invoke('fetch-data-ids-for-memo', memoId), //use in existMemoRenderer.js, searchMemo.js
     getFile: (dataId, filename) => ipcRenderer.invoke('fetch-file-for-data', dataId, filename), //use in existMemoRenderer.js
 
     // 메모리스트 관련 메서드
