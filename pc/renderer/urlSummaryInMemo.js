@@ -49,16 +49,30 @@ document.getElementById('editor').addEventListener('keydown', async (event) => {
             });
 
             if (userUrlSummaryConfirmed) { // 예를 선택했을 때 발생하는 이벤트 처리
-                const loadingScreen = document.getElementById('loading-screen'); // 로딩 화면
-                loadingScreen.style.display = 'flex'; // 로딩 화면 표시
+                const editor = document.getElementById('editor');
+                const loadingMessage = "\n[요약 중...]\n"; // 로딩 중 메시지
+
+                // const loadingScreen = document.getElementById('loading-screen'); // 로딩 화면
+                // loadingScreen.style.display = 'flex'; // 로딩 화면 표시
                 try {
+                    // 에디터에 로딩 메시지 추가
+                    editor.value += loadingMessage;
+                    
                     const summary = await window.electron.summarizeUrlInRenderer(urlText); // summarizeUrl ipc 호출
                     console.log('Summary:', summary);
-                    document.getElementById('editor').value += `\n요약:\n${summary}\n\n`; // 기존 내용에 요약된 내용을 추가
+
+                    // 로딩 메시지를 제거하고 요약된 내용을 추가
+                    editor.value = editor.value.replace(loadingMessage, ''); 
+                    editor.value += `\n요약:\n${summary}\n\n`; 
+
                 } catch (error) {
                     console.error('Error summarizing URL:', error);
+
+                    // 로딩 메시지를 제거하고 오류 메시지 추가
+                    editor.value = editor.value.replace(loadingMessage, '');
+                    editor.value += "\n[요약 생성 중 오류 발생]\n\n";
                 } finally {
-                    loadingScreen.style.display = 'none'; // 로딩 화면 제거
+                    // loadingScreen.style.display = 'none'; // 로딩 화면 제거
                 }
             } else {
                 console.log('User canceled the URL summary.');
