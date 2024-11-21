@@ -3,7 +3,7 @@ function toggleAnalysisButton(text, fileCount) {
   const buttonsContainer = document.getElementById('buttons');
   let analysisBtn = document.getElementById('analysis-button'); // 기존 버튼이 있는지 확인
 
-  if ((text.length > 300) || (text.length > 100 && fileCount >= 2)) {
+  if ((text.length > 1500) || (text.length > 100 && fileCount >= 2)) {
     // 버튼이 없으면 생성하여 추가
     if (!analysisBtn) {
       analysisBtn = document.createElement('button');
