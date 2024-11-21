@@ -183,8 +183,8 @@ textarea:focus {
 
 /* 파일 삭제 버튼 스타일 */
 #delete-file-btn {
-    background: url('./media/delete.png') no-repeat center center;
-    background-size: 12px 12px;
+    background: url('../media/close-icon.png') no-repeat center center;
+    background-size: 10px 10px;
     /* 버튼 크기 조정 */
     margin-top: 3px;
     border: none;
@@ -201,7 +201,7 @@ textarea:focus {
 
 /* 파일 다운로드 버튼 스타일 */
 #download-btn {
-    background: url('./media/download-icon.png') no-repeat center center;
+    background: url('../media/download-icon.png') no-repeat center center;
     background-size: 15px 15px;
     /* 버튼 크기 조정 */
     margin-top: 3px;
