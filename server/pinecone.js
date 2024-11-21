@@ -93,7 +93,7 @@ async function searchInPinecone(userId, queryText) {
         const response = await retryRequestWithBackoff(url, data, 5, 1000, headers);
         console.log(response);
         // score가 0.8 이상인 match 필터링
-        const filteredMatches = response.matches.filter(match => match.score >= 0.78)
+        const filteredMatches = response.matches.filter(match => match.score >= 0.80)
         // 필터링된 결과에서 id만 추출
         const ids = filteredMatches.map(match => match.id);
         return ids;  // id 배열만 반환
