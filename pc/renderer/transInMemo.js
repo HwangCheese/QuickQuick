@@ -95,7 +95,7 @@ function checkText() {
                 resultElement.innerText = "번역중...";  // 결과 분석 전, 로딩 안내 메시지 출력
                 const result = await window.electron.translateText(textToCheck, 'ko');
                 resultElement.innerText = result.data.translations[0].translatedText;
-                resultElement.style.border = "2px dashed #E48758";
+                resultElement.style.border = "1.5px dashed #E48758";
             } catch (error) {
                 console.error('Error translating text:', error);
                 resultElement.innerText = 'Error translating text: ' + error.message;
@@ -112,7 +112,7 @@ function checkText() {
                 resultElement.innerText = "요약중..."; // 결과 분석 전, 로딩 안내 메시지 출력
                 const summaryResult = await window.electron.summarizeText(textToCheck);
                 resultElement.innerText = summaryResult;
-                resultElement.style.border = "2px dashed #E48758";
+                resultElement.style.border = "1.5px dashed #E48758";
             } catch (error) {
                 console.error('Error summarizing text:', error);
                 resultElement.innerText = 'Error summarizing text or generating title: ' + error.message;
