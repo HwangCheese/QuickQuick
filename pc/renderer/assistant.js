@@ -318,8 +318,8 @@ async function saveMemo(memo) {
     await window.electron.pushData({
         posX: frameX,
         posY: frameY,
-        width: frameWidth,
-        height: frameHeight,
+        width: 310,
+        height: 320,
         dataTxt: textData,
         filesToUpload: filesData,
         title: title,

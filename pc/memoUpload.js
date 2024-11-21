@@ -30,15 +30,11 @@ async function insertMemoWithData(data) {
             is_read: 'true',   // 기본값: true
             sender_user_id: user_Id // 보낸 사람은 본인 ID
         };
-
-        console.log(memoData);
-
         // memoData 객체의 모든 키-값 쌍을 FormData 객체에 추가
         const formData = new FormData();
         for (const [key, value] of Object.entries(memoData)) {
             formData.append(key, value);
         }
-
         const filePaths = filesToUpload
             ? filesToUpload.split(';').map(filePath => filePath.trim()).filter(Boolean)
             : [];
