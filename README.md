@@ -26,7 +26,7 @@
 - **Operating System**: Windows, macOS
 - **IDE** : Visual Studio Code, Android Studio
 - **Framework** : Electron(32.0.1), Flutter(3.22.2)
-- **Database** : MySQL(8.0)
+- **Database** : MySQL(8.0), Pinecone
 - **Server**: express(4.19.2)
 - **Package Manager**: pub, npm(10.2.3)
 - **Runtime Environment**: `nodejs v20.15.1` `Dart v3.4.3`
@@ -54,8 +54,3 @@
 ![image](https://github.com/user-attachments/assets/c9f6041a-b4a4-4a19-87ec-ef63d6f25a3c)
 
 <br>
-
-[은비]://okkkkkkkay
-[여린]: //gooooooooooo
-[단비]: //ok
-[아린]: //ㅇㅋ
