@@ -41,6 +41,8 @@ document.getElementById('editor').addEventListener('keydown', async (event) => {
 
             console.log('Detected Dates:', dates);
             console.log('Text without Dates:', textWithoutDates);
+            let calendarContent = document.getElementById('calendar-content'); 
+            calendarContent.innerHTML = textWithoutDates;
 
             // 문장에 날짜가 있을 때만 서버로 일정 추가
             if (dates && dates.length > 0) {

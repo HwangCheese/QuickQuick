@@ -539,9 +539,8 @@ app.post('/memo', upload.array('files', 10), async (req, res) => {
             }
         }
         console.log(`내용:${data_txt}, id:${memoId}`);
-        await saveMemoToPinecone(userId, data_txt, memoId);  // Pinecone 저장
         await insertDataToDB(res, insertData);
-
+        await saveMemoToPinecone(userId, data_txt, memoId);  // Pinecone 저장
     } catch (err) {
         console.error('서버 오류:', err.message);
         if (!res.headersSent) {
