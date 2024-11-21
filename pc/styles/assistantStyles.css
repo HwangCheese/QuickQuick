@@ -61,6 +61,7 @@ body {
 
 /* 분류한 메모들을 나열할 컨테이너 */
 .memo-container {
+    height: 360px;
     display: flex;
     flex-wrap: wrap;
     /* 여러 줄로 배치 */
