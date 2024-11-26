@@ -55,7 +55,7 @@ body {
     cursor: pointer; /* 커서 모양 */
     transition: background-color 0.3s ease; /* 배경색 변화 애니메이션 */
     -webkit-app-region: no-drag;
-    z-index: 1000;
+    z-index: 999;
     font-family: 'MyCustomFont', sans-serif;
 }
 
