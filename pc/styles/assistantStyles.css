@@ -67,7 +67,7 @@ body {
     /* 여러 줄로 배치 */
     gap: 20px;
     overflow: auto;
-    margin-top: 70px;
+    margin-top: 30px;
 }
 
 /*메모*/
