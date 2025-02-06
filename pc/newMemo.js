@@ -22,8 +22,8 @@ const createMemoWindow = () => {
     }
 
     win = new BrowserWindow({
-        width: 310,
-        height: 320,
+        width: 410,
+        height: 420,
         x: centerX, // 증가된 x 좌표
         y: centerY, // 증가된 y 좌표
         frame: false,  // 본 타이틀바 제거

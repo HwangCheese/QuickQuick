@@ -96,6 +96,9 @@ async function searchInPinecone(userId, queryText) {
         const filteredMatches = response.matches.filter(match => match.score >= 0.80)
         // 필터링된 결과에서 id만 추출
         const ids = filteredMatches.map(match => match.id);
+        filteredMatches.forEach(match => {
+            console.log(`ID: ${match.id}, 유사도: ${match.score}`);
+        });
         return ids;  // id 배열만 반환
     } catch (error) {
         console.error(`Pinecone 검색 오류: ${error.message}`);

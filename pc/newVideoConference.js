@@ -7,8 +7,8 @@ const createConferenceWindow = () => {
     const roomId = generateRoomId(); // 방 ID 생성
     const url = `https://vervet-sacred-needlessly.ngrok-free.app/roomId?roomId=${roomId}`; // URL에 방 ID 추가
     const win = new BrowserWindow({
-        width: 650,
-        height: 700,
+        width: 1200,
+        height: 800,
         frame: false,  // 본 타이틀바 제거
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
