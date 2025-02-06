@@ -129,8 +129,8 @@ function showInvite(title, body, inviteUrl) { // inviteUrl 매개변수 추가
 // 화상회의 초대 받고 들어가기
 const createConferenceWindowByInvite = (inviteUrl) => {
     const win = new BrowserWindow({
-        width: 650,
-        height: 700,
+        width: 1200,
+        height: 800,
         frame: false,  // 본 타이틀바 제거
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
