@@ -85,6 +85,36 @@ Vector DB를 통해 메모 텍스트의 의미 기반 검색을 수행한다.
 
 <br>
 
+## 👀 기대 효과
+<details>
+    <summary><b>메모 및 공유 과정의 효율성 향상</b></summary> 
+    <div> &nbsp;QuickQuick은 메모 작성, 저장, 공유 과정을 하나의 흐름으로 통합하여 사용자가 여러 애플리케이션을 오가며 수행하던 반복 작업을 제거한다. 이를 통해 메모 처리에 소요되는 시간과 사용자의 인지 부담을 효과적으로 줄일 수 있다. </div> 
+</details> 
+<details> 
+    <summary><b>사용자 동선 최소화를 통한 사용 경험 개선</b></summary> 
+    <div> &nbsp;Content-Aware 기능을 통해 메모 내용을 자동으로 분석하고 사용자의 의도에 부합하는 기능을 즉시 제안함으로써 메뉴 탐색 과정에서 발생하는 불필요한 사용자 동선을 최소화한다. </div> 
+</details> 
+<details> 
+    <summary><b>의미 기반 검색을 통한 정보 탐색 효율 증대</b></summary> 
+    <div> &nbsp;Vector DB 기반의 의미 중심 연관 검색을 제공하여 정확한 키워드를 기억하지 못하더라도 관련 메모를 효과적으로 탐색할 수 있다. 이를 통해 메모 검색의 정확성과 접근성을 동시에 향상시킨다. </div> 
+</details> 
+<details> 
+    <summary><b>다중 주제 메모 자동 분할을 통한 관리 편의성 강화</b></summary> 
+    <div> &nbsp;하나의 메모에 여러 주제가 포함된 경우, AI 기반 자동 분할 기능을 통해 의미 단위로 메모를 재구성하고 첨부 파일을 함께 정리함으로써 메모 관리의 체계성과 가독성을 높인다. </div> 
+</details> 
+<details> 
+    <summary><b>PC·모바일 연동을 통한 일관된 사용자 경험 제공</b></summary> 
+    <div> &nbsp;PC와 모바일 간 실시간 동기화를 지원하여 기기 환경에 관계없이 동일한 메모 데이터와 기능을 사용할 수 있으며, 언제 어디서나 연속적인 작업 환경을 제공한다. </div> 
+</details> 
+<details> 
+    <summary><b>플랫폼 독립적 시스템을 통한 높은 활용 가능성</b></summary> 
+    <div> &nbsp;QuickQuick은 다양한 운영체제와 기기를 지원하는 플랫폼 독립적 구조로 구현되어 개인 사용자부터 협업 환경까지 폭넓은 활용 가능성을 제공한다. </div> 
+</details>
+
+<br>
+
+## 👍 활용 분야
+
 ## 🧑‍🤝‍🧑 멤버구성
  - [김은비](https://github.com/ssilverrain) - PC 앱 구현
  - [윤단비](https://github.com/yoondanbi) - PC 앱 구현
