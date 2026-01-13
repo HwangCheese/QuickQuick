@@ -165,20 +165,28 @@ Vector DB를 통해 메모 텍스트의 의미 기반 검색을 수행한다.
 
 ## 💝 주요 기능
 ### 메모 화면 예시
-<img src="https://github.com/user-attachments/assets/d612f314-9f15-4f8a-a061-c6c8d0e0f135" width="50%" height="50%">
+본 화면은 QuickQuick의 기본 메모 화면으로, 텍스트 입력뿐만 아니라 이미지, 파일, 음성 등 다양한 형태의 데이터를 하나의 메모 단위로 통합 관리할 수 있음을 보여준다. <br>
+메모는 별도의 저장 동작 없이 자동으로 저장되며, 이후 검색·공유·추가 기능과 자연스럽게 연계된다.<br>
+<img src="https://github.com/user-attachments/assets/d612f314-9f15-4f8a-a061-c6c8d0e0f135" width="40%" height="40%">
+
+<br>
 
 ### Easy Come
+QuickQuick은 최초 실행 시 자동 회원가입 및 로그인을 수행하여 사용자가 즉시 서비스를 이용할 수 있도록 한다. <br>
+PC와 모바일 간 연동은 QR 코드 기반 커플링 방식으로 이루어지며, QR 코드 스캔만으로 동일한 사용자 환경을 손쉽게 구성할 수 있다.<br><br>
+<img src="https://github.com/user-attachments/assets/ed9063dd-79f3-4b16-8150-f59e956e5742" width="40%" height="40%">
 
-<img src="https://github.com/user-attachments/assets/ed9063dd-79f3-4b16-8150-f59e956e5742" width="50%" height="50%">
+<br>
 
 ### Easy Use
-<br>
+메모 내용은 AI 기반 Content-Aware 기능을 통해 자동으로 분석되며, 일정 추가, 위치 표시, 요약, 번역, 분할 등 사용자의 의도에 맞는 기능이 자동으로 제안된다. <br>
+이를 통해 사용자는 메뉴 탐색 없이 직관적으로 메모를 활용할 수 있다.<br><br>
+<img src="https://github.com/user-attachments/assets/8c6bef93-2ab3-4fd2-aca1-ff37010ee016" width="40%" height="40%">
 
-<img src="https://github.com/user-attachments/assets/8c6bef93-2ab3-4fd2-aca1-ff37010ee016" width="50%" height="50%">
+<br>
 
 ### Easy Share
-<br>
-
-<img src="https://github.com/user-attachments/assets/69bc5f51-b5dd-4d81-b6e5-5957a788340b" width="50%" height="50%">
+QuickQuick은 메모 공유 과정을 단순화하여 친구 등록부터 메모 전송, 화상 통신까지 하나의 시스템 안에서 수행할 수 있도록 구성하였다.<br><br>
+<img src="https://github.com/user-attachments/assets/69bc5f51-b5dd-4d81-b6e5-5957a788340b" width="40%" height="40%">
 
 <br>
