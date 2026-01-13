@@ -165,20 +165,20 @@ Vector DB를 통해 메모 텍스트의 의미 기반 검색을 수행한다.
 
 ## 💝 주요 기능
 ### 메모 화면 예시
-<img src="https://github.com/user-attachments/assets/d612f314-9f15-4f8a-a061-c6c8d0e0f135" width="25%" height="25%">
+<img src="https://github.com/user-attachments/assets/d612f314-9f15-4f8a-a061-c6c8d0e0f135" width="50%" height="50%">
 
 ### Easy Come
 
-<img src="https://github.com/user-attachments/assets/ed9063dd-79f3-4b16-8150-f59e956e5742" width="25%" height="25%">
+<img src="https://github.com/user-attachments/assets/ed9063dd-79f3-4b16-8150-f59e956e5742" width="50%" height="50%">
 
 ### Easy Use
 <br>
 
-<img src="https://github.com/user-attachments/assets/8c6bef93-2ab3-4fd2-aca1-ff37010ee016" width="25%" height="25%">
+<img src="https://github.com/user-attachments/assets/8c6bef93-2ab3-4fd2-aca1-ff37010ee016" width="50%" height="50%">
 
 ### Easy Share
 <br>
 
-<img src="https://github.com/user-attachments/assets/69bc5f51-b5dd-4d81-b6e5-5957a788340b" width="25%" height="25%">
+<img src="https://github.com/user-attachments/assets/69bc5f51-b5dd-4d81-b6e5-5957a788340b" width="50%" height="50%">
 
 <br>
