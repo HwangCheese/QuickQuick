@@ -1,6 +1,6 @@
 <br>
 
-![soft](https://capsule-render.vercel.app/api?type=egg&height=197&color=gradient&text=Quick%20Quick&section=header&reversal=true)
+![soft](https://capsule-render.vercel.app/api?type=egg&height=197&color=gradient&text=QuickQuick&section=header&reversal=true)
 
 <br>
 
